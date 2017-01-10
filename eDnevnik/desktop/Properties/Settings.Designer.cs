@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace desktop.Properties
+namespace Desktop.Properties
 {
 
 

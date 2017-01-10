@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{86915462-64FD-4A4B-818C-B2A4B5BC2CF9}</ProjectGuid>
+    <ProjectGuid>{DE7CD231-C09C-43FC-96EC-6BDCD4007DCC}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>desktop</RootNamespace>
-    <AssemblyName>desktop</AssemblyName>
+    <RootNamespace>Desktop</RootNamespace>
+    <AssemblyName>Desktop</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

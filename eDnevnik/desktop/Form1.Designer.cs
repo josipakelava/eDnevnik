@@ -1,4 +1,4 @@
-﻿namespace desktop
+﻿namespace Desktop
 {
     partial class Form1
     {
