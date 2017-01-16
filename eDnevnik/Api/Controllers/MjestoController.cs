@@ -5,13 +5,17 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace Api.Controllers
+namespace Api.Models
 {
     public class MjestoController : ApiController
     {
-        public string Get()
+        public List<Osoba> Get()
         {
-            return "RADI RUTA";
+            eDnevnik context = new eDnevnik();
+
+            List<Osoba> osoba = context.Osoba.ToList();
+
+            return osoba;
         }
     }
 }
