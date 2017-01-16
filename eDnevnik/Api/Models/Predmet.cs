@@ -12,26 +12,20 @@ namespace Api.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Osoba
+    public partial class Predmet
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Osoba()
+        public Predmet()
         {
             this.imaBiljesku = new HashSet<imaBiljesku>();
             this.imaIzostanak = new HashSet<imaIzostanak>();
             this.imaOcjenu = new HashSet<imaOcjenu>();
             this.Predaje = new HashSet<Predaje>();
+            this.Kategorija = new HashSet<Kategorija>();
         }
     
-        public int idOsoba { get; set; }
-        public string ime { get; set; }
-        public string prezime { get; set; }
-        public System.DateTime datumRodjenja { get; set; }
-        public string adresa { get; set; }
-        public int idMjesto { get; set; }
-        public string OIB { get; set; }
-        public string email { get; set; }
-        public string password { get; set; }
+        public int idPredmet { get; set; }
+        public string naziv { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<imaBiljesku> imaBiljesku { get; set; }
@@ -39,10 +33,9 @@ namespace Api.Models
         public virtual ICollection<imaIzostanak> imaIzostanak { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<imaOcjenu> imaOcjenu { get; set; }
-        public virtual Mjesto Mjesto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Predaje> Predaje { get; set; }
-        public virtual Profesor Profesor { get; set; }
-        public virtual Razred Razred { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Kategorija> Kategorija { get; set; }
     }
 }

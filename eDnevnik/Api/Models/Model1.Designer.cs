@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\Tea\Faks\7. semestar\OO\eDnevnik\eDnevnik\Api\Models\DatabaseModel.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\Tea\Faks\7. semestar\OO\eDnevnik\eDnevnik\Api\Models\Model1.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

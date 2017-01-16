@@ -25,7 +25,16 @@ namespace Api.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<imaBiljesku> imaBiljesku { get; set; }
+        public virtual DbSet<imaIzostanak> imaIzostanak { get; set; }
+        public virtual DbSet<imaOcjenu> imaOcjenu { get; set; }
+        public virtual DbSet<Kategorija> Kategorija { get; set; }
         public virtual DbSet<Mjesto> Mjesto { get; set; }
         public virtual DbSet<Osoba> Osoba { get; set; }
+        public virtual DbSet<Predaje> Predaje { get; set; }
+        public virtual DbSet<Predmet> Predmet { get; set; }
+        public virtual DbSet<Profesor> Profesor { get; set; }
+        public virtual DbSet<Razred> Razred { get; set; }
+        public virtual DbSet<Skola> Skola { get; set; }
     }
 }

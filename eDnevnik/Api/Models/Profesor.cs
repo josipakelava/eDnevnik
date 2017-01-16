@@ -12,18 +12,22 @@ namespace Api.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Mjesto
+    public partial class Profesor
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Mjesto()
+        public Profesor()
         {
-            this.Osoba = new HashSet<Osoba>();
+            this.Razred = new HashSet<Razred>();
         }
     
-        public int IdMjesto { get; set; }
-        public string ime { get; set; }
+        public int idOsoba { get; set; }
+        public int idSkola { get; set; }
+        public System.DateTime radiOd { get; set; }
+        public Nullable<System.DateTime> radiDo { get; set; }
     
+        public virtual Osoba Osoba { get; set; }
+        public virtual Skola Skola { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Osoba> Osoba { get; set; }
+        public virtual ICollection<Razred> Razred { get; set; }
     }
 }
