@@ -1,0 +1,206 @@
+﻿html, body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.loginContainer{
+    background-color: #0D4F8B;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.panelDiv{
+    background-color: white;
+    width: 65%;
+    height: 70%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
+    padding-bottom: 2%;
+    color: black;
+    text-align: center;
+}
+
+.loginFlow{
+    width: 70%;
+    text-align: left;
+}
+
+.loginSubtitle {
+    font-weight: 500;
+}
+
+.formInput {
+    height: 35px;
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 12px 20px;
+    outline-color: #cccccc;
+}
+
+.formButton {
+    background-color: #52da52;
+    float: right;
+    border: none;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    outline: none;
+}
+
+.formButton:hover{
+    opacity: 0.85;
+}
+
+.logo{
+    font-family:'Gochi Hand', cursive;
+    font-size: 50px;
+    color: orange;
+}
+
+.logoNav{
+    font-family:'Gochi Hand', cursive;
+    font-size: 30px !important;
+    color: orange !important;
+}
+
+.navCostum{
+    background-color: #0D4F8B !important;
+    color: white !important;
+    border-color: #0D4F8B !important;
+    border-radius: 0px !important;
+}
+
+.navItem{
+    color: white !important;
+}
+
+.navItem:hover{
+    background-color: #076ecb !important;
+}
+
+.icon-bar{
+    background-color: white!important;;
+}
+
+.navbar-default .navbar-toggle:hover {
+    background-color: #0D4F8B !important;
+}
+
+.card {
+    position: relative;
+    width: 80%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+
+.card-block {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+
+.card-header:first-child {
+    border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+}
+.card-header {
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: #e0ecf6;
+    border-bottom: 1px solid #e0ecf6 !important;
+}
+
+.subjectRow:hover{
+    text-decoration: none!important;
+}
+.subjectRow:focus{
+    text-decoration: none!important;
+}
+
+.positionAccordion{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.tableInput{
+    border: none;
+    width: 100%;
+    height: 100%;
+    outline: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.thCard{
+    background-color: whitesmoke;
+}
+
+.absanceTable{
+    width: 80% !important;
+    margin-left: 10%;
+}
+
+.profilData{
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 3%;
+}
+
+.classContainer{
+    width: 60%;
+    margin-left: 20%;
+    padding-top: 5%;
+}
+
+.classItem{
+    background-color: #0D4F8B;
+    color: white;
+    border-radius: 20px;
+    padding: 1%;
+    font-size: 30px;
+    text-align: center;
+}
+
+.classItem:hover{
+    background-color: #076ecb;
+}
