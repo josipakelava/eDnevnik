@@ -7,26 +7,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Api.Models
+namespace Api
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Kategorija
+    public partial class Razred
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Kategorija()
+        public Razred()
         {
-            this.imaOcjenu = new HashSet<imaOcjenu>();
-            this.Predmet = new HashSet<Predmet>();
+            this.Predaje = new HashSet<Predaje>();
+            this.Ucenik = new HashSet<Ucenik>();
         }
     
-        public int IdKategorija { get; set; }
+        public int idRazred { get; set; }
+        public int idSkola { get; set; }
+        public int idRazrednik { get; set; }
         public string naziv { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<imaOcjenu> imaOcjenu { get; set; }
+        public virtual ICollection<Predaje> Predaje { get; set; }
+        public virtual Profesor Profesor { get; set; }
+        public virtual Skola Skola { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Predmet> Predmet { get; set; }
+        public virtual ICollection<Ucenik> Ucenik { get; set; }
     }
 }

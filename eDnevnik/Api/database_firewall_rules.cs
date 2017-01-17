@@ -7,20 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Api.Models
+namespace Api
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class imaBiljesku
+    public partial class database_firewall_rules
     {
         public int id { get; set; }
-        public int idUcenik { get; set; }
-        public int idPredmet { get; set; }
-        public System.DateTime datum { get; set; }
-        public string biljeska { get; set; }
-    
-        public virtual Osoba Osoba { get; set; }
-        public virtual Predmet Predmet { get; set; }
+        public string name { get; set; }
+        public string start_ip_address { get; set; }
+        public string end_ip_address { get; set; }
+        public System.DateTime create_date { get; set; }
+        public System.DateTime modify_date { get; set; }
     }
 }

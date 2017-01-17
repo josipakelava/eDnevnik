@@ -11,11 +11,11 @@ namespace Api.Models
     {
         public List<Osoba> Get()
         {
-            eDnevnik context = new eDnevnik();
+            eDnevnikEntities context = new eDnevnikEntities();
 
-            List<Osoba> osoba = context.Osoba.ToList();
+            List<Osoba> osobe = context.Osoba.ToList();
 
-            return osoba;
+            return osobe;
         }
     }
 }

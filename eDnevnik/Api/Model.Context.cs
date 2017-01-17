@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Api.Models
+namespace Api
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class eDnevnik : DbContext
+    public partial class eDnevnikEntities : DbContext
     {
-        public eDnevnik()
-            : base("name=eDnevnik")
+        public eDnevnikEntities()
+            : base("name=eDnevnikEntities")
         {
         }
     
@@ -36,5 +36,7 @@ namespace Api.Models
         public virtual DbSet<Profesor> Profesor { get; set; }
         public virtual DbSet<Razred> Razred { get; set; }
         public virtual DbSet<Skola> Skola { get; set; }
+        public virtual DbSet<Ucenik> Ucenik { get; set; }
+        public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
     }
 }

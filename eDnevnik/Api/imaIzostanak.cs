@@ -7,19 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Api.Models
+namespace Api
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Predaje
+    public partial class imaIzostanak
     {
-        public int idProfesor { get; set; }
-        public int idRazred { get; set; }
+        public int id { get; set; }
+        public int idUcenik { get; set; }
         public int idPredmet { get; set; }
+        public System.DateTime datum { get; set; }
+        public string razlog { get; set; }
+        public bool opravdanost { get; set; }
     
-        public virtual Osoba Osoba { get; set; }
         public virtual Predmet Predmet { get; set; }
-        public virtual Razred Razred { get; set; }
+        public virtual Ucenik Ucenik { get; set; }
     }
 }
