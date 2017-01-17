@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Api.Models
+namespace Api
 {
     using System;
     using System.Collections.Generic;
@@ -22,7 +22,7 @@ namespace Api.Models
         public int ocjena { get; set; }
     
         public virtual Kategorija Kategorija { get; set; }
-        public virtual Osoba Osoba { get; set; }
         public virtual Predmet Predmet { get; set; }
+        public virtual Ucenik Ucenik { get; set; }
     }
 }

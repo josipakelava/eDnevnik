@@ -1,0 +1,121 @@
+REATE TABLE [dbo].[Osoba] (
+    [idOsoba]       INT         NOT NULL,
+    [ime]           NCHAR (20)  NOT NULL,
+    [prezime]       NCHAR (20)  NOT NULL,
+    [datumRodjenja] DATE        NOT NULL,
+    [adresa]        NCHAR (100) NOT NULL,
+    [idMjesto]      INT         NOT NULL,
+    [OIB]           NCHAR (14)  NOT NULL,
+    [email]         NCHAR (50)  NOT NULL,
+    [password]      NCHAR (10)  NOT NULL,
+    PRIMARY KEY CLUSTERED ([idOsoba] ASC),
+    CONSTRAINT [FK_Osoba_Mjesto] FOREIGN KEY ([idMjesto]) REFERENCES [dbo].[Mjesto] ([IdMjesto])
+);
+
+CREATE TABLE [dbo].[Mjesto] (
+    [IdMjesto] INT        NOT NULL,
+    [ime]      NCHAR (15) NOT NULL,
+    PRIMARY KEY CLUSTERED ([IdMjesto] ASC)
+);
+
+CREATE TABLE [dbo].[Profesor] (
+    [idOsoba] INT  NOT NULL,
+    [idSkola] INT  NOT NULL,
+    [radiOd]  DATE NOT NULL,
+    [radiDo]  DATE NULL,
+    PRIMARY KEY CLUSTERED ([idOsoba] ASC),
+    CONSTRAINT [FK_Profesor_Skola] FOREIGN KEY ([idSkola]) REFERENCES [dbo].[Skola] ([idSkola]),
+    CONSTRAINT [FK_Profesor_Osoba] FOREIGN KEY ([idOsoba]) REFERENCES [dbo].[Osoba] ([idOsoba])
+);
+
+CREATE TABLE [dbo].[Predaje] (
+    [idProfesor] INT NOT NULL,
+    [idRazred]   INT NOT NULL,
+    [idPredmet]  INT NOT NULL,
+    PRIMARY KEY CLUSTERED ([idPredmet] ASC, [idRazred] ASC),
+    CONSTRAINT [FK_Predaje_Predmet] FOREIGN KEY ([idPredmet]) REFERENCES [dbo].[Predmet] ([idPredmet]),
+    CONSTRAINT [FK_Predaje_Razred] FOREIGN KEY ([idRazred]) REFERENCES [dbo].[Razred] ([idRazred]),
+    CONSTRAINT [FK_Predaje_Profesor] FOREIGN KEY ([idProfesor]) REFERENCES [dbo].[Osoba] ([idOsoba])
+);
+
+CREATE TABLE [dbo].[Razred] (
+    [idRazred]    INT        NOT NULL,
+    [idSkola]     INT        NOT NULL,
+    [idRazrednik] INT        NOT NULL,
+    [naziv]       NCHAR (50) NOT NULL,
+    PRIMARY KEY CLUSTERED ([idRazred] ASC),
+    CONSTRAINT [FK_Razred_Profesor] FOREIGN KEY ([idRazrednik]) REFERENCES [dbo].[Profesor] ([idOsoba]),
+    CONSTRAINT [FK_Razred_Skola] FOREIGN KEY ([idSkola]) REFERENCES [dbo].[Skola] ([idSkola])
+);
+
+CREATE TABLE [dbo].[Skola] (
+    [idSkola] INT        NOT NULL,
+    [naziv]   NCHAR (50) NOT NULL,
+    PRIMARY KEY CLUSTERED ([idSkola] ASC)
+);
+
+CREATE TABLE [dbo].[Predmet] (
+    [idPredmet] INT        NOT NULL,
+    [naziv]     NCHAR (50) NOT NULL,
+    PRIMARY KEY CLUSTERED ([idPredmet] ASC)
+);
+
+CREATE TABLE [dbo].[Kategorija] (
+    [IdKategorija] INT        NOT NULL,
+    [naziv]        NCHAR (50) NOT NULL,
+    PRIMARY KEY CLUSTERED ([IdKategorija] ASC)
+);
+
+CREATE TABLE [dbo].[SadrziKategoriju] (
+    [idPredmet]    INT NOT NULL,
+    [idKategorija] INT NOT NULL,
+    PRIMARY KEY CLUSTERED ([idKategorija] ASC, [idPredmet] ASC),
+    CONSTRAINT [FK_SadrziKategoriju_Predmet] FOREIGN KEY ([idPredmet]) REFERENCES [dbo].[Predmet] ([idPredmet]),
+    CONSTRAINT [FK_SadrziKategoriju_Kategorija] FOREIGN KEY ([idKategorija]) REFERENCES [dbo].[Kategorija] ([IdKategorija])
+);
+
+CREATE TABLE [dbo].[Ucenik] (
+    [IdOsoba]  INT NOT NULL,
+    [idRazred] INT NOT NULL,
+    PRIMARY KEY CLUSTERED ([IdOsoba] ASC),
+    CONSTRAINT [FK_Ucenik_Osoba] FOREIGN KEY ([IdOsoba]) REFERENCES [dbo].[Osoba] ([idOsoba]),
+    CONSTRAINT [FK_Ucenik_Razred] FOREIGN KEY ([idRazred]) REFERENCES [dbo].[Razred] ([idRazred])
+);
+
+CREATE TABLE [dbo].[imaOcjenu] (
+    [id]           INT  NOT NULL,
+    [idUcenik]     INT  NOT NULL,
+    [idPredmet]    INT  NOT NULL,
+    [idKategorija] INT  NOT NULL,
+    [datum]        DATE NOT NULL,
+    [ocjena]       INT  NOT NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC),
+    CONSTRAINT [FK_imaOcjenu_Osoba] FOREIGN KEY ([idUcenik]) REFERENCES [dbo].[Osoba] ([idOsoba]),
+    CONSTRAINT [FK_imaOcjenu_Predmet] FOREIGN KEY ([idPredmet]) REFERENCES [dbo].[Predmet] ([idPredmet]),
+    CONSTRAINT [FK_imaOcjenu_Kategorija] FOREIGN KEY ([idKategorija]) REFERENCES [dbo].[Kategorija] ([IdKategorija])
+);
+
+CREATE TABLE [dbo].[imaBiljesku] (
+    [id]        INT        NOT NULL,
+    [idUcenik]  INT        NOT NULL,
+    [idPredmet] INT        NOT NULL,
+    [datum]     DATE       NOT NULL,
+    [biljeska]  NCHAR (50) NOT NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC),
+    CONSTRAINT [FK_imaBiljesku_Osoba] FOREIGN KEY ([idUcenik]) REFERENCES [dbo].[Osoba] ([idOsoba]),
+    CONSTRAINT [FK_imaBiljesku_Predmet] FOREIGN KEY ([idPredmet]) REFERENCES [dbo].[Predmet] ([idPredmet])
+);
+
+CREATE TABLE [dbo].[imaIzostanak] (
+    [id]          INT         NOT NULL,
+    [idUcenik]    INT         NOT NULL,
+    [idPredmet]   INT         NOT NULL,
+    [datum]       DATE        NOT NULL,
+    [razlog]      NCHAR (200) NOT NULL,
+    [opravdanost] BIT         DEFAULT ((0)) NOT NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC),
+    CONSTRAINT [FK_imaIzostanak_Osoba] FOREIGN KEY ([idUcenik]) REFERENCES [dbo].[Osoba] ([idOsoba]),
+    CONSTRAINT [FK_imaIzostanak_Predmet] FOREIGN KEY ([idPredmet]) REFERENCES [dbo].[Predmet] ([idPredmet])
+);
+
+

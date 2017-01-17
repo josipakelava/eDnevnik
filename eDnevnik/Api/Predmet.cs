@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Api.Models
+namespace Api
 {
     using System;
     using System.Collections.Generic;
