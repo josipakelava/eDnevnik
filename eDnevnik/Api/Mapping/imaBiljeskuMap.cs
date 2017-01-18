@@ -1,5 +1,7 @@
 namespace Api.Mapping
 {
+    using FluentNHibernate.Mapping;
+    using Models;
     using System;
 
     public class imaBiljeskuMap : ClassMap<imaBiljesku>

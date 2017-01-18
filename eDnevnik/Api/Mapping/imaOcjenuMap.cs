@@ -1,7 +1,8 @@
 namespace Api.Mapping
 {
-    using System;
-    
+    using FluentNHibernate.Mapping;
+    using Models;
+
     public class imaOcjenuMap : ClassMap<imaOcjenu>
     {
         public imaOcjenuMap()

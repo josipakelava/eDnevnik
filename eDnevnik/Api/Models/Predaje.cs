@@ -7,16 +7,4 @@ namespace Api.Models
         public virtual Razred razred { get; set; }
     }
 
-    public class PredajeMapa : ClassMap<Predaje>
-    {
-        public PredajeMapa()
-        {
-
-            References(x => x.predmet).Column("idProfesor");
-            References(x => x.predmet).Column("idRazred");
-            References(x => x.predmet).Column("idPredmet");
-
-            Table("Predaje");
-        }
-    }
 }

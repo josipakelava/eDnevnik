@@ -1,7 +1,7 @@
 namespace Api.Mapping
 {
-    using System;
-
+    using FluentNHibernate.Mapping;
+    using Models;
 
     public class OsobaMap : ClassMap<Osoba>
     {
@@ -15,7 +15,7 @@ namespace Api.Mapping
             Map(x => x.adresa);
             Map(x => x.OIB);
             Map(x => x.email);
-            Map(x => x.passwod);
+            Map(x => x.password);
             References(x => x.mjesto).Column("idMjesto");
 
             Table("Osoba");

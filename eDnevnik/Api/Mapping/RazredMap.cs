@@ -1,5 +1,8 @@
 namespace Api.Mapping
 {
+    using FluentNHibernate.Mapping;
+    using Models;
+
     public class RazredMap : ClassMap<Razred>
     {
         public RazredMap()

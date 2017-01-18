@@ -12,19 +12,4 @@ namespace Api.Models
         public virtual Ucenik ucenik{ get; set; }
     }
 
-    public class imaOcjenuMapa : ClassMap<imaOcjenu>
-    {
-        public imaOcjenuMapa()
-        {
-
-            Id(x => x.id);
-            Map(x => x.datum);
-            Map(x => x.ocjena);
-            References(x => x.kategorija).Column("idKategorija");
-            References(x => x.predmet).Column("idPredmet");
-            References(x => x.ucenik).Column("idUcenik");
-
-            Table("imaOcjenu");
-        }
-    }
 }

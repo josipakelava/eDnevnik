@@ -11,18 +11,4 @@ namespace Api.Models
         public virtual Ucenik ucenik { get; set; }
     }
 
-    public class imaBiljeskuMapa : ClassMap<imaBiljesku>
-    {
-        public imaBiljeskuMapa()
-        {
-
-            Id(x => x.id);
-            Map(x => x.datum);
-            Map(x => x.biljeska);
-            References(x => x.predmet).Column("idPredmet");
-            References(x => x.ucenik).Column("idUcenik");
-
-            Table("imaBiljesku");
-        }
-    }
 }

@@ -1,5 +1,8 @@
 namespace Api.Mapping
 {
+    using FluentNHibernate.Mapping;
+    using Models;
+
 
     public class ProfesorMap : ClassMap<Profesor>
     {
@@ -7,7 +10,7 @@ namespace Api.Mapping
         {
             
             Map(x => x.radiOd);
-            Map(x => x.radiDi);
+            Map(x => x.radiDo);
             References(x => x.osoba).Column("idOsoba");
             References(x => x.skola).Column("idSkola");
             HasMany(x => x.predaje).Cascade.SaveUpdate();

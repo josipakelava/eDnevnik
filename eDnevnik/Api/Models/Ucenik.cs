@@ -18,21 +18,5 @@ namespace Api.Models
         public virtual Osoba osoba { get; set; }
         public virtual Razred razred { get; set; }
     }
-    public class UcenikMapa : ClassMap<Ucenik>
-    {
-        public UcenikMapa()
-        {
 
-            References(x => x.osoba).Column("idOsoba");
-            References(x => x.razred).Column("idRazred");
-            HasMany(x => x.biljeske).Cascade.SaveUpdate();
-
-            HasMany(x => x.izostanci).Cascade.SaveUpdate();
-
-            HasMany(x => x.ocjene).Cascade.SaveUpdate();
-
-
-            Table("UCenici");
-        }
-    }
 }

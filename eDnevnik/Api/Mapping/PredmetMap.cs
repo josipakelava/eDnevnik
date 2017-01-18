@@ -1,7 +1,9 @@
 namespace Api.Mapping
 {
     using System.Collections.Generic;
-    
+    using FluentNHibernate.Mapping;
+    using Models;
+
 
     public class PredmetMap : ClassMap<Predmet>
     {

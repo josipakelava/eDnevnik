@@ -1,3 +1,6 @@
+using Api.Models;
+using FluentNHibernate.Mapping;
+
 namespace Api.Mapping
 {
     public class imaIzostanakMap : ClassMap<imaIzostanak>
