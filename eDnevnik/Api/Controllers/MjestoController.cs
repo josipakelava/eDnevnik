@@ -11,11 +11,7 @@ namespace Api.Models
     {
         public List<Osoba> Get()
         {
-            eDnevnikEntities context = new eDnevnikEntities();
-
-            List<Osoba> osobe = context.Osoba.ToList();
-
-            return osobe;
+            return null;
         }
     }
 }
