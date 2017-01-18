@@ -352,6 +352,7 @@
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Student\Izostanci.cshtml" />
     <Content Include="Views\Student\Predmeti.cshtml" />
+    <Content Include="Views\Shared\_StudentNavPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
