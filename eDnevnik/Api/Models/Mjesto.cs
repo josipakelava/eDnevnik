@@ -5,4 +5,16 @@ namespace Api.Models
         public virtual int idMjesto { get; set; }
         public virtual string ime { get; set; }
     }
+
+    public class MjestoMapa : ClassMap<Mjesto>
+    {
+        public MjestoMapa()
+        {
+
+            Id(x => x.idMjesto);
+            Map(x => x.ime);
+
+            Table("Mjesto");
+        }
+    }
 }

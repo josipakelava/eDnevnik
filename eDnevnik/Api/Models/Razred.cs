@@ -19,4 +19,19 @@ namespace Api.Models
         public virtual Skola skola { get; set; }
         public virtual ICollection<Ucenik> ucenici { get; set; }
     }
+    public class RazredMapa : ClassMap<Razred>
+    {
+        public RazredMapa()
+        {
+            Id(x => x.idRazred);
+            Map(x => x.naziv);
+            References(x => x.razrednik).Column("idRazrednik");
+            References(x => x.skola).Column("idSkola");
+            HasMany(x => x.evidencijaNastave).Cascade.SaveUpdate();
+            HasMany(x => x.ucenici).Cascade.SaveUpdate();
+
+
+            Table("Razred");
+        }
+    }
 }

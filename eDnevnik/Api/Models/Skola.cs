@@ -18,4 +18,18 @@ namespace Api.Models
        
         public virtual ICollection<Razred> razredi { get; set; }
     }
+
+    public class SkolaMapa : ClassMap<Skola>
+    {
+        public SkolaMapa()
+        {
+            Id(x => x.idSKola);
+            Map(x => x.naziv);
+            HasMany(x => x.profesori).Cascade.SaveUpdate();
+            HasMany(x => x.razredi).Cascade.SaveUpdate();
+
+
+            Table("Razred");
+        }
+    }
 }

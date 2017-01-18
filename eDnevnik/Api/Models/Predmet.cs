@@ -14,4 +14,17 @@ namespace Api.Models
         public virtual string naziv { get; set; }        
         public virtual ICollection<Kategorija> kategorije { get; set; }
     }
+
+    public class PredmetMapa : ClassMap<Predmet>
+    {
+        public PredmetMapa()
+        {
+
+            Id(x => x.idPredmet);
+            Map(x => x.naziv);
+            HasMany(x => x.kategorije).Cascade.SaveUpdate();
+
+            Table("Predmet");
+        }
+    }
 }
