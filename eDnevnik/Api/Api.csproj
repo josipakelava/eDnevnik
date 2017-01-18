@@ -223,6 +223,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mapping\imaBiljeskuMap.cs" />
+    <Compile Include="Mapping\imaIzostanakMap.cs" />
+    <Compile Include="Mapping\imaOcjenuMap.cs" />
+    <Compile Include="Mapping\KategorijaMap.cs" />
+    <Compile Include="Mapping\MjestoMap.cs" />
+    <Compile Include="Mapping\OsobaMap.cs" />
+    <Compile Include="Mapping\PredajeMap.cs" />
+    <Compile Include="Mapping\PredmetMap.cs" />
+    <Compile Include="Mapping\ProfesorMap.cs" />
+    <Compile Include="Mapping\RazredMap.cs" />
+    <Compile Include="Mapping\SkolaMap.cs" />
+    <Compile Include="Mapping\UcenikMap.cs" />
     <Compile Include="Models\imaBiljesku.cs" />
     <Compile Include="Models\imaIzostanak.cs" />
     <Compile Include="Models\imaOcjenu.cs" />
