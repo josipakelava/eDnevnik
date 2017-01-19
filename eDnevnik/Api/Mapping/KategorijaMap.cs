@@ -9,7 +9,7 @@ namespace Api.Mapping
         {
 
             Id(x => x.idKategorija).GeneratedBy.Increment();
-            Map(x => x.naziv);
+            Map(x => x.naziv).Not.Nullable();
 
             Table("Kategorija");
         }

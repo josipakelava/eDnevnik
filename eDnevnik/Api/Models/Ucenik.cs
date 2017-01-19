@@ -7,15 +7,16 @@ namespace Api.Models
 
         public Ucenik()
         {
-            this.biljeske = new HashSet<imaBiljesku>();
-            this.izostanci = new HashSet<imaIzostanak>();
-            this.ocjene = new HashSet<imaOcjenu>();
+            this.biljeske = new HashSet<Biljeska>();
+            this.izostanci = new HashSet<Izostanak>();
+            this.ocjene = new HashSet<Ocjena>();
         }
 
-        public virtual ICollection<imaBiljesku> biljeske { get; set; }
-        public virtual ICollection<imaIzostanak> izostanci { get; set; }
-        public virtual ICollection<imaOcjenu> ocjene { get; set; }
-        public virtual Osoba osoba { get; set; }
+        public virtual ICollection<Biljeska> biljeske { get; set; }
+        public virtual ICollection<Izostanak> izostanci { get; set; }
+        public virtual ICollection<Ocjena> ocjene { get; set; }
+        public virtual Razred razred { get; set; }
+
     }
 
 }

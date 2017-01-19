@@ -2,7 +2,7 @@ namespace Api.Models
 {
     using System;
 
-    public class Osoba
+    public abstract class Osoba
     {
         public virtual int idOsoba { get; set; }
         public virtual string ime { get; set; }

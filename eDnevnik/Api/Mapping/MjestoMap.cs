@@ -9,7 +9,7 @@ namespace Api.Mapping
         {
 
             Id(x => x.idMjesto).GeneratedBy.Assigned();
-            Map(x => x.ime);
+            Map(x => x.ime).Not.Nullable();
 
             Table("Mjesto");
         }

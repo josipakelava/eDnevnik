@@ -4,18 +4,16 @@ namespace Api.Mapping
     using Models;
 
 
-    public class UcenikMap : ClassMap<Ucenik>
+    public class UcenikMap : SubclassMap<Ucenik>
     {
         public UcenikMap()
         {
-            Id(x => x.osoba.idOsoba).GeneratedBy.Assigned();
-            References(x => x.osoba).Column("idOsoba");
-            HasMany(x => x.biljeske).Cascade.SaveUpdate().Inverse();
-            HasMany(x => x.izostanci).Cascade.SaveUpdate().Inverse();
-            HasMany(x => x.ocjene).Cascade.SaveUpdate().Inverse();
+            References(x => x.razred).Column("idRazred").Not.Nullable();
+            HasMany(x => x.biljeske).Cascade.All();
+            HasMany(x => x.izostanci).Cascade.All();
+            HasMany(x => x.ocjene).Cascade.All();
 
-
-            Table("Ucenici");
+            Table("Ucenik");
         }
     }
 }

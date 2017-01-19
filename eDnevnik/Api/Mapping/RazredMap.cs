@@ -7,12 +7,13 @@ namespace Api.Mapping
     {
         public RazredMap()
         {
-            Id(x => x.idRazred).GeneratedBy.Increment();
-            Map(x => x.naziv);
-            References(x => x.skola).Column("idSkola");
-            References(x => x.razrednik).Column("idRazrednik");
-            HasMany(x => x.ucenici).Cascade.SaveUpdate().Inverse();
-        
+            Id(x => x.idRazred).GeneratedBy.Assigned();
+            Map(x => x.naziv).Not.Nullable();
+            References(x => x.razrednik).Column("idRazrednik").Not.Nullable();
+            References(x => x.skola).Column("idSkola").Not.Nullable();
+            HasMany(x => x.evidencijaNastave).Cascade.All();
+            HasMany(x => x.ucenici).Cascade.SaveUpdate();
+
             Table("Razred");
         }
     }

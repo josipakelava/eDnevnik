@@ -15,7 +15,14 @@ namespace Api.Controllers
 
                 using (var transaction = session.BeginTransaction())
                 {
-                    Osoba osoba  = session.QueryOver<Osoba>().Where(x => x.ime == "Tea").List()[0];
+                    Profesor profesor =  session.QueryOver<Profesor>().Where(x => x.ime == "Tea").List()[0];
+                    profesor.skola = new Skola()
+                    {
+                        idSkola = 2345,
+                        naziv = "Lucijanka"
+                    };
+
+                    session.Save(profesor);
                     transaction.Commit();
                 }
 
