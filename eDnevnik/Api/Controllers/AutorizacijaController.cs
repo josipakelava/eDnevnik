@@ -10,6 +10,7 @@ using Api.Mapping;
 using Microsoft.Owin.Security;
 using System.Security.Claims;
 using Microsoft.AspNet.Identity;
+using System.Threading;
 
 namespace Api.Controllers
 {
@@ -28,6 +29,7 @@ namespace Api.Controllers
         private void Prijava(Osoba o, string uloga, bool zapamtiMe)
         {
             var korisnik = new ClaimsIdentity(new[] {
+                    new Claim(ClaimTypes.Sid, o.idOsoba.ToString()),
                     new Claim(ClaimTypes.Name, o.ime),
                     new Claim(ClaimTypes.Surname, o.prezime),
                     new Claim(ClaimTypes.Email, o.email),
@@ -37,6 +39,8 @@ namespace Api.Controllers
                 ClaimTypes.Name,
                 ClaimTypes.Role
             );
+
+            Thread.CurrentPrincipal = new ClaimsPrincipal(korisnik);
 
             Authentication.SignIn(new AuthenticationProperties
             {
@@ -67,6 +71,7 @@ namespace Api.Controllers
         public ActionResult Login(LoginViewModel model)
         {
             bool uspjeh = true;
+            Osoba korisnik;
 
             if (ModelState.IsValid)
             {
@@ -76,8 +81,6 @@ namespace Api.Controllers
                     {
                         try
                         {
-                            Osoba korisnik;
-
                             switch (model.Uloga)
                             {
                                 case "Ucenik":

@@ -7,7 +7,6 @@ namespace Api.Mapping
     {
         public OsobaMap()
         {
-
             Id(x => x.idOsoba).GeneratedBy.Assigned();
             Map(x => x.ime).Not.Nullable();
             Map(x => x.prezime).Not.Nullable(); ;
@@ -16,7 +15,7 @@ namespace Api.Mapping
             Map(x => x.OIB).Not.Nullable(); ;
             Map(x => x.email).Not.Nullable(); ;
             Map(x => x.password).Not.Nullable(); ;
-            References(x => x.mjesto).Column("idMjesto").Not.Nullable(); ;
+            References(x => x.mjesto).Column("idMjesto").Not.Nullable().Fetch.Join() ;
 
             Table("Osoba");
         }

@@ -1,18 +1,14 @@
 ﻿
-@{
-    ViewBag.Title = "Učenici";
-}
-
 @Html.Partial("_StudentNavPartial");
 <div class="profilData">
     <h1>Profil</h1>
     <br />
-    <h3>Ime:</h3>
-    <h3>Prezime:</h3>
-    <h3>Datum rođenja:</h3>
-    <h3>OIB:</h3>
-    <h3>Adresa:</h3>
-    <h3>Mjesto:</h3>
-    <h3>e-mail:</h3>
+    <h3>Ime:</h3><p>@ViewBag.podaci.ime</p>
+    <h3>Prezime:</h3><p>@ViewBag.podaci.prezime</p>
+    <h3>Datum rođenja:</h3><p>@ViewBag.podaci.datumRodjenja</p>
+    <h3>OIB:</h3><p>@ViewBag.podaci.OIB</p>
+    <h3>Adresa:</h3><p>@ViewBag.podaci.adresa</p>
+    <h3>Mjesto:</h3><p>@ViewBag.podaci.mjesto.ime</p>
+    <h3>e-mail:</h3><p>@ViewBag.podaci.email</p>
 </div>
 
