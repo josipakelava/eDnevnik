@@ -1,5 +1,6 @@
 namespace Api.Models
 {
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
 
     public abstract class Osoba

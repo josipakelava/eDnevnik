@@ -6,7 +6,8 @@ using System.Web.Mvc;
 
 namespace Api.Controllers
 {
-    public class StudentController : Controller
+    [Authorize(Roles = "Ucenik, Administrator")]
+    public class UcenikController : Controller
     {
         // GET: Student
         public ActionResult Index()
