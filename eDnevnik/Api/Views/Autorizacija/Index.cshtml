@@ -1,0 +1,31 @@
+﻿@model Api.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "eDnevnik";
+}
+
+<div class="loginContainer">
+    <div class="panelDiv">
+        <h1>Dobrodošli u <span class="logo">eDnevnik</span></h1>
+        <br />
+        <div class="loginFlow">
+            <h3 class="loginSubtitle">Prijava u sustav</h3>
+            <form method="post" action="/Autorizacija/Login">
+                <input class="formInput" name="Email" type="text"
+                       placeholder="E-mail" /><br />
+                <input class="formInput" name="Password" type="password"
+                       placeholder="Lozinka" /><br />
+                <div class="form-group">
+                    <select class="form-control" name="Uloga">
+                        <option value="Ucenik">Učenik</option>
+                        <option>Razrednik</option>
+                        <option>Profesor</option>
+                        <option>Administrator</option>
+                    </select>
+                </div>
+                <label class="checkbox-inline"><input type="checkbox" name="ZapamtiMe" value=true>Zapamti me</label><br />
+                <input class="formButton" type="submit" value="Prijava" />
+            </form>
+        </div>
+    </div>
+</div>
