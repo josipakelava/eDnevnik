@@ -235,6 +235,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mapping\AdministratorMap.cs" />
     <Compile Include="Mapping\MjestoMap.cs" />
     <Compile Include="Mapping\OsobaMap.cs" />
     <Compile Include="Mapping\ProfesorMap.cs" />
@@ -248,6 +249,7 @@
     <Compile Include="Mapping\PredmetMap.cs" />
     <Compile Include="Mapping\RazredMap.cs" />
     <Compile Include="Mapping\UcenikMap.cs" />
+    <Compile Include="Models\Administrator.cs" />
     <Compile Include="Models\Biljeska.cs" />
     <Compile Include="Models\Izostanak.cs" />
     <Compile Include="Models\Ocjena.cs" />

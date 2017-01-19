@@ -15,7 +15,7 @@ namespace Api.Controllers
 
                 using (var transaction = session.BeginTransaction())
                 {
-                    Profesor profesor =  session.QueryOver<Profesor>().Where(x => x.ime == "Tea").List()[0];
+                    Administrator admin =  session.QueryOver<Administrator>().Where(x => x.ime == "Matija").List()[0];
           
                     transaction.Commit();
                 }

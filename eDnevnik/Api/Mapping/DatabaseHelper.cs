@@ -11,9 +11,7 @@ namespace Api.Mapping
     {
         private static ISessionFactory sessionFactory;
 
-
         public static ISession OpenSession()
-
         {
             if (sessionFactory == null)
             {
@@ -26,7 +24,6 @@ namespace Api.Mapping
                 .BuildSessionFactory();
             }
             return sessionFactory.OpenSession();
-
         }
 
     }

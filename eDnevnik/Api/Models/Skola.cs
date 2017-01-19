@@ -16,5 +16,7 @@ namespace Api.Models
         public virtual ICollection<Profesor> profesori { get; set; }
         public virtual ICollection<Razred> razredi { get; set; }
 
+        public virtual Administrator administrator { get; set; }
+
     }
 }
