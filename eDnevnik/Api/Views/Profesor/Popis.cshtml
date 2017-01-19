@@ -1,0 +1,242 @@
+﻿
+@{
+    ViewBag.Title = "Popis";
+}
+
+@Html.Partial("_ProfesorNavPartial")
+
+
+<div id="accordion" class="positionAccordion" role="tablist" aria-multiselectable="false">
+        <div class="card">
+            <div class="popisItemTitle">
+                <a style="display:inline-block" class="collapsed subjectRow" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <div class="card-header" role="tab" id="headingOne">
+                        <h5 class="mb-0">
+                            Josipa Kelava
+                        </h5>
+                    </div>
+                </a>
+                <input type="checkbox" class="checkbox">
+            </div>
+                    <div class="container">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="thCard">Kategorija</th>
+                                        <th class="thCard">IX</th>
+                                        <th class="thCard">X</th>
+                                        <th class="thCard">XI</th>
+                                        <th class="thCard">XII</th>
+                                        <th class="thCard">I</th>
+                                        <th class="thCard">II</th>
+                                        <th class="thCard">III</th>
+                                        <th class="thCard">IV</th>
+                                        <th class="thCard">V</th>
+                                        <th class="thCard">VI</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th class="thCard" scope="row">Pismeni</th>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="thCard" scope="row">Usmeni</th>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="thCard" scope="row">Zadaće</th>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="thCard" scope="row">Zalaganje</th>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div type="button" class="btn btn-success addOcjena" style="margin-bottom: 10px;">Spremi ocjenu</div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="thCard" colspan="2">Bilješke<div type="button" class="btn btn-primary addBiljeska" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span></div></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th class="thCard" scope="row">Datum</th>
+                                        <th class="thCard">Zapis</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <a class="collapsed subjectRow" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <div class="card-header" role="tab" id="headingTwo">
+                    <h5 class="mb-0">
+                        Tea Pović
+                    </h5>
+                </div>
+            </a>
+            <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="card-block">
+                    <div class="container">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="thCard">Kategorija</th>
+                                        <th class="thCard">IX</th>
+                                        <th class="thCard">X</th>
+                                        <th class="thCard">XI</th>
+                                        <th class="thCard">XII</th>
+                                        <th class="thCard">I</th>
+                                        <th class="thCard">II</th>
+                                        <th class="thCard">III</th>
+                                        <th class="thCard">IV</th>
+                                        <th class="thCard">V</th>
+                                        <th class="thCard">VI</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th class="thCard" scope="row">Pismeni</th>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="thCard" scope="row">Usmeni</th>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="thCard" scope="row">Zadaće</th>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="thCard" scope="row">Zalaganje</th>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div type="button" class="btn btn-success addOcjena" style="margin-bottom: 10px;">Spremi ocjenu</div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="thCard" colspan="2">Bilješke<div type="button" class="btn btn-primary addBiljeska" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span></div></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th class="thCard" scope="row">Datum</th>
+                                        <th class="thCard">Zapis</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel" style="display: inline"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;&nbsp;Unos nove bilješke za danas</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <textarea class="form-control inputBiljeska" id="exampleTextarea" rows="3"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
+                <button type="button" class="btn btn-primary saveChangeColor">Spremi promjene</button>
+            </div>
+        </div>
+    </div>
+</div>
+
