@@ -9,15 +9,15 @@ namespace Api.Mapping
         {
 
             Id(x => x.idOsoba).GeneratedBy.Assigned();
-            Map(x => x.ime);
-            Map(x => x.prezime);
-            Map(x => x.datumRodjenja);
-            Map(x => x.adresa);
-            Map(x => x.OIB);
-            Map(x => x.email);
-            Map(x => x.password);
-            References(x => x.mjesto).Column("idMjesto");
-            UseUnionSubclassForInheritanceMapping();
+            Map(x => x.ime).Not.Nullable();
+            Map(x => x.prezime).Not.Nullable(); ;
+            Map(x => x.datumRodjenja).Not.Nullable(); ;
+            Map(x => x.adresa).Not.Nullable(); ;
+            Map(x => x.OIB).Not.Nullable(); ;
+            Map(x => x.email).Not.Nullable(); ;
+            Map(x => x.password).Not.Nullable(); ;
+            References(x => x.mjesto).Column("idMjesto").Not.Nullable(); ;
+
             Table("Osoba");
         }
     }

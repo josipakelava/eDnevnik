@@ -11,8 +11,8 @@ namespace Api.Mapping
         {
 
             Id(x => x.idPredmet).GeneratedBy.Assigned();
-            Map(x => x.naziv);
-            HasMany(x => x.kategorije).Cascade.SaveUpdate();
+            Map(x => x.naziv).Not.Nullable();
+            HasManyToMany(x => x.kategorije);
 
             Table("Predmet");
         }
