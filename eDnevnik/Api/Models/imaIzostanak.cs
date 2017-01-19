@@ -7,6 +7,6 @@ namespace Api.Models
         public virtual string razlog { get; set; }
         public virtual bool opravdanost { get; set; }
         public virtual Predmet predmet { get; set; }
-        public virtual Ucenik ucenik { get; set; }
     }
+
 }

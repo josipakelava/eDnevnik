@@ -14,4 +14,5 @@ namespace Api.Models
         public virtual string naziv { get; set; }        
         public virtual ICollection<Kategorija> kategorije { get; set; }
     }
+
 }

@@ -5,4 +5,5 @@ namespace Api.Models
         public virtual int idKategorija { get; set; }
         public virtual string naziv { get; set; }
     }
+
 }

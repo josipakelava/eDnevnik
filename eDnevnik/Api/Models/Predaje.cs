@@ -6,4 +6,5 @@ namespace Api.Models
         public virtual Profesor profesor { get; set; }
         public virtual Razred razred { get; set; }
     }
+
 }

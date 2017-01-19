@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Api.Mapping;
+using Api.Models;
 
 namespace Api.Controllers
 {
@@ -55,16 +57,17 @@ namespace Api.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
-            return View();
-        }
+            using (var session = DatabaseHelper.OpenSession())
+            {
 
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
-        {
-            // look in database and find role
+                using (var transaction = session.BeginTransaction())
+                {
+                    Osoba osoba  = session.QueryOver<Osoba>().Where(x => x.ime == "Tea").List()[0];
+                    transaction.Commit();
+                }
 
-            return View();
+                return View();
+            }
         }
     }
 }

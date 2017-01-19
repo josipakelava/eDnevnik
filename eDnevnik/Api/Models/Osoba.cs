@@ -1,7 +1,7 @@
 namespace Api.Models
 {
     using System;
-    
+
     public class Osoba
     {
         public virtual int idOsoba { get; set; }
@@ -14,4 +14,6 @@ namespace Api.Models
         public virtual string password { get; set; }
         public virtual Mjesto mjesto { get; set; }
     }
+
+
 }
