@@ -8,7 +8,7 @@ namespace Api.Mapping
         public MjestoMap()
         {
 
-            Id(x => x.idMjesto);
+            Id(x => x.idMjesto).GeneratedBy.Assigned();
             Map(x => x.ime);
 
             Table("Mjesto");

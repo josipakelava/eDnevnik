@@ -8,7 +8,7 @@ namespace Api.Mapping
         public OsobaMap()
         {
 
-            Id(x => x.idOsoba);
+            Id(x => x.idOsoba).GeneratedBy.Assigned();
             Map(x => x.ime);
             Map(x => x.prezime);
             Map(x => x.datumRodjenja);
@@ -17,7 +17,7 @@ namespace Api.Mapping
             Map(x => x.email);
             Map(x => x.password);
             References(x => x.mjesto).Column("idMjesto");
-
+            UseUnionSubclassForInheritanceMapping();
             Table("Osoba");
         }
     }

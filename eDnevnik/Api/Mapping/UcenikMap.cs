@@ -8,17 +8,14 @@ namespace Api.Mapping
     {
         public UcenikMap()
         {
-
+            Id(x => x.osoba.idOsoba).GeneratedBy.Assigned();
             References(x => x.osoba).Column("idOsoba");
-            References(x => x.razred).Column("idRazred");
-            HasMany(x => x.biljeske).Cascade.SaveUpdate();
-
-            HasMany(x => x.izostanci).Cascade.SaveUpdate();
-
-            HasMany(x => x.ocjene).Cascade.SaveUpdate();
+            HasMany(x => x.biljeske).Cascade.SaveUpdate().Inverse();
+            HasMany(x => x.izostanci).Cascade.SaveUpdate().Inverse();
+            HasMany(x => x.ocjene).Cascade.SaveUpdate().Inverse();
 
 
-            Table("UCenici");
+            Table("Ucenici");
         }
     }
 }

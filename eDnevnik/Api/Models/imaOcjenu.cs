@@ -9,7 +9,6 @@ namespace Api.Models
         public virtual int ocjena { get; set; }
         public virtual Kategorija kategorija { get; set; }
         public virtual Predmet predmet { get; set; }
-        public virtual Ucenik ucenik{ get; set; }
     }
 
 }

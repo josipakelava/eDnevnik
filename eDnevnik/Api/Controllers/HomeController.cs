@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using Api.Mapping;
+using Api.Models;
 
 namespace Api.Controllers
 {
@@ -11,7 +10,17 @@ namespace Api.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            using (var session = DatabaseHelper.OpenSession())
+            {
+
+                using (var transaction = session.BeginTransaction())
+                {
+                    Osoba osoba  = session.QueryOver<Osoba>().Where(x => x.ime == "Tea").List()[0];
+                    transaction.Commit();
+                }
+
+                return View();
+            }
         }
     }
 }

@@ -16,7 +16,6 @@ namespace Api.Models
         public virtual ICollection<imaIzostanak> izostanci { get; set; }
         public virtual ICollection<imaOcjenu> ocjene { get; set; }
         public virtual Osoba osoba { get; set; }
-        public virtual Razred razred { get; set; }
     }
 
 }

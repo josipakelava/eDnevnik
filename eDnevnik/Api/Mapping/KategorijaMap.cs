@@ -8,7 +8,7 @@ namespace Api.Mapping
         public KategorijaMap()
         {
 
-            Id(x => x.idKategorija);
+            Id(x => x.idKategorija).GeneratedBy.Increment();
             Map(x => x.naziv);
 
             Table("Kategorija");

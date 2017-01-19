@@ -1,5 +1,6 @@
 namespace Api.Mapping
 {
+    using System;
     using FluentNHibernate.Mapping;
     using Models;
 
@@ -8,13 +9,10 @@ namespace Api.Mapping
     {
         public SkolaMap()
         {
-            Id(x => x.idSkola);
+            Id(x => x.idSkola).GeneratedBy.Increment();
             Map(x => x.naziv);
-            HasMany(x => x.profesori).Cascade.SaveUpdate();
-            HasMany(x => x.razredi).Cascade.SaveUpdate();
 
-
-            Table("Razred");
+            Table("Skola");
         }
     }
 }

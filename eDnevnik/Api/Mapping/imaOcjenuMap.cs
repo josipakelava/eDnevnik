@@ -8,12 +8,11 @@ namespace Api.Mapping
         public imaOcjenuMap()
         {
 
-            Id(x => x.id);
+            Id(x => x.id).GeneratedBy.Increment();
             Map(x => x.datum);
             Map(x => x.ocjena);
             References(x => x.kategorija).Column("idKategorija");
             References(x => x.predmet).Column("idPredmet");
-            References(x => x.ucenik).Column("idUcenik");
 
             Table("imaOcjenu");
         }

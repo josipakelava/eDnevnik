@@ -10,7 +10,7 @@ namespace Api.Mapping
         public PredmetMap()
         {
 
-            Id(x => x.idPredmet);
+            Id(x => x.idPredmet).GeneratedBy.Assigned();
             Map(x => x.naziv);
             HasMany(x => x.kategorije).Cascade.SaveUpdate();
 
