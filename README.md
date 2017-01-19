@@ -1,0 +1,3 @@
+# eDnevnik
+
+Objektno oblikovanje - Projekt
