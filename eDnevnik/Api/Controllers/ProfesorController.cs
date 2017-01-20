@@ -7,33 +7,28 @@ using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using Domena;
+using Repository;
+using Api.Models;
 
 namespace Api.Controllers
 {
     [Authorize(Roles = "Profesor, Administrator")]
     public class ProfesorController : Controller
     {
+        private IProfesorRepository _repository = new ProfesorRepository();
         // GET: Profesor
         [Authorize]
         public ActionResult Index()
         {
-            //int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
-            //Profesor profesor;
+            int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
+            Profesor profesor = _repository.Find(id);
 
-            //using (var session = databasehelper.opensession())
-            //{
-            //    using (var transaction = session.begintransaction())
-            //    {
-            //        profesor = session.queryover<profesor>().where(p => p.idosoba == id).list()[0];
-
-
-            //    }
-
-            //}
-            //if (profesor.razrednistvo == null) {
-            //    TempData["razrednistvo"] = 0;
-            //} else TempData["razrednistvo"] = 1;
-            //ViewBag.profesor = profesor;
+            if (profesor.razrednistvo == null)
+            {
+                TempData["razrednistvo"] = 0;
+            }
+            else TempData["razrednistvo"] = 1;
+            ViewBag.profesor = profesor;
             return View();
         }
 
@@ -41,57 +36,31 @@ namespace Api.Controllers
         [Authorize]
         public ActionResult Predmeti(int idRazred)
         {
-            //int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
-            //IList<EvidencijaNastave> evidencija;
-            //using (var session = DatabaseHelper.OpenSession())
-            //{
-            //    using (var transaction = session.BeginTransaction())
-            //    {
-            //        evidencija = session.QueryOver<EvidencijaNastave>().Where(p => p.profesor.idOsoba == id ).And(p => p.razred.idRazred == idRazred).List();
-            //    }
-            //}
-            //ViewBag.evidencija = evidencija;
-            //TempData["idRazred"] = idRazred;
+            int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
+            ViewBag.evidencija = _repository.GetAllSubjects(id, idRazred);
+            TempData["idRazred"] = idRazred;
             return View();
         }
 
         // GET: Profesor/Ucenici
         public ActionResult Popis(int idPredmet, int idRazred)
         {
-            //int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
-            //Razred razred;
-
-            //IList<EvidencijaNastave> evidencija;
-            //using (var session = DatabaseHelper.OpenSession())
-            //{
-            //    using (var transaction = session.BeginTransaction())
-            //    {
-            //        razred = session.QueryOver<Razred>().Where(r => r.idRazred == 123).List()[0];
-            //    }
-            //}
-            //TempData["idPredmet"] = idPredmet;
-            //ViewBag.razred = razred;
+            int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
+            TempData["idPredmet"] = idPredmet;
+            ViewBag.razred = _repository.GetClass(id, idRazred);
             return View();
         }
 
         public ActionResult Profil()
         {
-            //int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
-            //Profesor profesor;
-            //using (var session = DatabaseHelper.OpenSession())
-            //{
-            //    using (var transaction = session.BeginTransaction())
-            //    {
-            //        profesor = session.QueryOver<Profesor>().Where(u => u.idOsoba == id).List()[0];
-            //    }
-            //}
-            //ViewBag.profesor = profesor;
+            int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
+            ViewBag.profesor = _repository.Find(id);
             return View();
         }
 
         public ActionResult Izostanci()
         {
-            //int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
+            int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
             //Profesor profesor;
             //IList<Izostanak> izostanci;
             //List<Izostanak> pomocni = new List<Izostanak>();
@@ -104,18 +73,28 @@ namespace Api.Controllers
             //        {
             //            pomocni.AddRange(ucenik.izostanci);
             //        }
-                  
+
             //       // izostanci = session.QueryOver<Izostanak>().Where(p => p.).List();
 
             //    }
 
             //}
             //pomocni = pomocni.OrderBy(o => o.datum).ToList();
-            //ViewBag.izostanci = pomocni;
-          
-            return View();
+
+
+            List<IzostanakViewModel> izostanci = IzostanakViewModel.toList(_repository.GetAllAbsences(id));
+            return View(izostanci);
+        }
+
+        [HttpPost]
+        public ActionResult SpremiIzostanke(List<IzostanakViewModel> izostanci)
+        {
+            foreach (IzostanakViewModel izostanak in izostanci)
+            {
+                _repository.UpdateIzostanak(izostanak.id, izostanak.opravdanost, izostanak.razlog);
+            }
+            return RedirectToAction("Izostanci");
         }
     }
 
-
-}
+    }
