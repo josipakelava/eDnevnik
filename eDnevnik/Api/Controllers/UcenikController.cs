@@ -1,61 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading;
-using System.Web;
 using System.Web.Mvc;
 using Domena;
+using Repository;
+using Api.Models;
 
 namespace Api.Controllers
 {
     [Authorize(Roles = "Ucenik, Administrator")]
     public class UcenikController : Controller
     {
+        private IUcenikRepository _repository = new UcenikRepository();
+
         // GET: Student
         public ActionResult Index()
         {
-            //int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
-            //Ucenik ucenik;
-            //using (var session = DatabaseHelper.OpenSession())
-            //{
-            //    using (var transaction = session.BeginTransaction())
-            //    {
-            //        ucenik = session.QueryOver<Ucenik>().Where(u => u.idOsoba == id).List()[0];
-            //    }
-            //}
-            //ViewBag.podaci = ucenik;
+            int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
+            ViewBag.podaci = _repository.Find(id);
             return View();
         }
 
         public ActionResult Predmeti()
         {
-            //int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
-            //using (var session = DatabaseHelper.OpenSession())
-            //{
-            //    using (var transaction = session.BeginTransaction())
-            //    {
-            //        Ucenik ucenik = session.QueryOver<Ucenik>().Where(u => u.idOsoba == id).List()[0];
-            //        ViewBag.evidencija = session.QueryOver<EvidencijaNastave>().Where(u => u.razred == ucenik.razred).List();
-            //        ViewBag.ocjene = OcjenaViewModel.toList(session.QueryOver<Ocjena>().Where(u => u.ucenik.idOsoba == id).List());
-            //        ViewBag.ucenik = ucenik;
-            //    }
-            //}
+            int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
+            ViewBag.evidencija = _repository.GetSchedule(id);
+            ViewBag.ocjene = OcjenaViewModel.toList(_repository.GetAllGrades(id));
+            ViewBag.biljeske = _repository.GetAllNotes(id);
             return View();
         }
 
         public ActionResult Izostanci()
         {
-            //int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
-            //using (var session = DatabaseHelper.OpenSession())
-            //{
-            //    using (var transaction = session.BeginTransaction())
-            //    {
-            //        Ucenik ucenik = session.QueryOver<Ucenik>().Where(u => u.idOsoba == id).List()[0];
-            //        ViewBag.izostanci = session.QueryOver<Izostanak>().Where(u => u.ucenik.idOsoba == id).List();
-            //        ViewBag.ucenik = ucenik;
-            //    }
-            //}
+            int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
+            ViewBag.izostanci = _repository.GetAllAbesnces(id);
+            
             return View();
         }
     }
