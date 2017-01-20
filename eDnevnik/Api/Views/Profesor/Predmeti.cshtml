@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Predmet";
+}
+
+<div class="classContainer">
+
+    @for (int i = 0; i < ViewBag.evidencija.Count; i++)
+    {
+
+
+        //ViewContext.RouteData.Values["idRazred"]
+        @:
+        <a href="@Url.Action("Ucenici", "Profesor", new { idPredmet = @ViewBag.evidencija[i].predmet.idPredmet, idRazred = 123 })">
+            <div class="classItem">@ViewBag.evidencija[i].predmet.naziv</div>
+        </a>
+
+    }
+</div>
+

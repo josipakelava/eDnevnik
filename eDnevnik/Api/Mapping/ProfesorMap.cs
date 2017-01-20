@@ -9,9 +9,9 @@ namespace Api.Mapping
         {
             Map(x => x.radiOd).Not.Nullable();
             Map(x => x.radiDo);
-            References(x => x.razrednistvo).Column("razrednistvo");
-            References(x => x.skola).Column("idSkola").Not.Nullable().Cascade.SaveUpdate();
-            HasMany(x => x.evidencijaNastave).Cascade.SaveUpdate();
+            References(x => x.razrednistvo).Column("razrednistvo").Fetch.Join();
+            References(x => x.skola).Column("idSkola").Not.Nullable().Cascade.SaveUpdate().Fetch.Join();
+            HasMany(x => x.evidencijaNastave).Cascade.SaveUpdate().Fetch.Join();
 
             Table("Profesor");
         }

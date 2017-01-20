@@ -4,6 +4,15 @@
 }
 
 <div class="classContainer">
-    <div class="classItem">1.a</div>
+    
+    @for (int i = 0; i < ViewBag.profesor.evidencijaNastave.Count; i++)
+    {
+
+        @:
+            <a href="@Url.Action("Predmeti", "Profesor", new { idRazred = @ViewBag.profesor.evidencijaNastave[i].razred.idRazred })">
+            <div class="classItem">@ViewBag.profesor.evidencijaNastave[i].razred.naziv</div> 
+            </a>
+         
+     }
 </div>
 
