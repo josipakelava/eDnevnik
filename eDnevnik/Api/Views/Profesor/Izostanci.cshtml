@@ -10,60 +10,28 @@
             <tr>
                 <th class="tableIzostanci">Datum</th>
                 <th class="tableIzostanci">Predmet</th>
+                <th class="tableIzostanci">Ucenik</th>
                 <th class="tableIzostanci">Razlog</th>
                 <th class="tableIzostanci">Opravdanost</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td><input type="text" class="form-control inputIzostanci" id="formGroupExampleInput"></td>
-                <td>
-                    <select class="form-control inputIzostanci" id="inlineFormCustomSelect">
-                        <option selected>Odaberi</option>
-                        <option value="1">Opravdano</option>
-                        <option value="2">Neopravdano</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td><input type="text" class="form-control inputIzostanci" id="formGroupExampleInput"></td>
-                <td>
-                    <select class="form-control inputIzostanci" id="inlineFormCustomSelect">
-                        <option selected>Odaberi</option>
-                        <option value="1">Opravdano</option>
-                        <option value="2">Neopravdano</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td><input type="text" class="form-control inputIzostanci" id="formGroupExampleInput"></td>
-                <td>
-                    <select class="form-control inputIzostanci" id="inlineFormCustomSelect">
-                        <option selected>Odaberi</option>
-                        <option value="1">Opravdano</option>
-                        <option value="2">Neopravdano</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td><input type="text" class="form-control inputIzostanci" id="formGroupExampleInput"></td>
-                <td>
-                    <select class="form-control inputIzostanci" id="inlineFormCustomSelect">
-                        <option selected>Odaberi</option>
-                        <option value="1">Opravdano</option>
-                        <option value="2">Neopravdano</option>
-                    </select>
-                </td>
-            </tr>
+
+            @for (int i = 0; i < ViewBag.izostanci.Count; i++)
+            {
+                <tr>
+                    <td>@ViewBag.izostanci[i].datum</td>
+                    <td>@ViewBag.izostanci[i].predmet.naziv</td>
+                    <td>@ViewBag.izostanci[i].ucenik.ime @ViewBag.izostanci[i].ucenik.prezime</td>
+                    <td><input type="text" class="form-control inputIzostanci" id="@i" value=@ViewBag.izostanci[i].razlog></td>
+                    <td>
+                        <select class="form-control inputIzostanci" id="inlineFormCustomSelect">
+                            <option value="1"  @(  ViewBag.izostanci[i].opravdanost ? "selected" : "")>Opravdano</option>
+                            <option value="2"  @(  !ViewBag.izostanci[i].opravdanost ? "selected" : "")>Neopravdano</option>
+                        </select>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>
-

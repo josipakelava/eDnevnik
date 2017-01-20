@@ -12,8 +12,8 @@ namespace Api.Mapping
             Map(x => x.datum).Not.Nullable();
             Map(x => x.razlog);
             Map(x => x.opravdanost);
-            References(x => x.predmet).Column("idPredmet").Not.Nullable();
-            References(x => x.ucenik).Column("idUcenik").Not.Nullable();
+            References(x => x.predmet).Column("idPredmet").Not.Nullable().Not.LazyLoad();
+            References(x => x.ucenik).Column("idUcenik").Not.Nullable().Not.LazyLoad();
 
             Table("Izostanak");
         }

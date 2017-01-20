@@ -10,7 +10,7 @@
     {
         
         @:
-        <a href="@Url.Action("Popis", "Profesor", new { idPredmet = @ViewBag.evidencija[i].predmet.idPredmet, idRazred = @ViewBag.idRazred })">
+        <a href="@Url.Action("Popis", "Profesor", new { idPredmet = @ViewBag.evidencija[i].predmet.idPredmet, idRazred = TempData.Peek("idRazred")})">
             <div class="classItem orangeButton">@ViewBag.evidencija[i].predmet.naziv</div>
         </a>
 

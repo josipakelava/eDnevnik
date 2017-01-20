@@ -1,5 +1,6 @@
 ﻿using Api.Mapping;
 using Api.Models;
+using NHibernate.Criterion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,14 +20,20 @@ namespace Api.Controllers
         {
             int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
             Profesor profesor;
-            IList<EvidencijaNastave> evidencija;
+
             using (var session = DatabaseHelper.OpenSession())
             {
                 using (var transaction = session.BeginTransaction())
                 {
                     profesor = session.QueryOver<Profesor>().Where(p => p.idOsoba == id).List()[0];
+                    
+             
                 }
+
             }
+            if (profesor.razrednistvo == null) {
+                TempData["razrednistvo"] = 0;
+            } else TempData["razrednistvo"] = 1;
             ViewBag.profesor = profesor;
             return View();
         }
@@ -45,7 +52,7 @@ namespace Api.Controllers
                 }
             }
             ViewBag.evidencija = evidencija;
-            ViewBag.idRazred = idRazred;
+            TempData["idRazred"] = idRazred;
             return View();
         }
 
@@ -63,17 +70,51 @@ namespace Api.Controllers
                     razred = session.QueryOver<Razred>().Where(r => r.idRazred == 123).List()[0];
                 }
             }
+            TempData["idPredmet"] = idPredmet;
             ViewBag.razred = razred;
             return View();
         }
 
         public ActionResult Profil()
         {
+            int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
+            Profesor profesor;
+            using (var session = DatabaseHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    profesor = session.QueryOver<Profesor>().Where(u => u.idOsoba == id).List()[0];
+                }
+            }
+            ViewBag.profesor = profesor;
             return View();
         }
 
         public ActionResult Izostanci()
         {
+            int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
+            Profesor profesor;
+            IList<Izostanak> izostanci;
+            List<Izostanak> pomocni = new List<Izostanak>();
+            using (var session = DatabaseHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    profesor = session.QueryOver<Profesor>().Where(p => p.idOsoba == id).List()[0];
+                    foreach(var ucenik in profesor.razrednistvo.ucenici)
+                    {
+                        pomocni.AddRange(ucenik.izostanci);
+                    }
+                  
+                   // izostanci = session.QueryOver<Izostanak>().Where(p => p.).List();
+
+                }
+
+            }
+            pomocni = pomocni.OrderBy(o => o.datum).ToList();
+            ViewBag.izostanci = pomocni;
+          
+
             return View();
         }
     }

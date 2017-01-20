@@ -17,9 +17,17 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a class="navItem" href="/Profesor/Profil"><span class="glyphicon glyphicon-user"></span> &nbsp;Profil</a></li>
                 <li><a class="navItem" href="/Profesor/Index"><span class="glyphicon glyphicon-education"></span> &nbsp;Razredi</a></li>
-                <li><a class="navItem" href="/Profesor/Predmeti"><span class="glyphicon glyphicon-book"></span> &nbsp;Predmeti</a></li>
-                <li><a class="navItem" href="/Profesor/Popis"><span class="glyphicon glyphicon-list-alt"></span> &nbsp;Popis</a></li>
-                <li><a class="navItem" href="/Profesor/Izostanci"><span class="glyphicon glyphicon-remove"></span> &nbsp;Izostanci</a></li>
+                <li><a class="navItem" href=@Url.Action("Popis", "Profesor", new {idRazred = TempData.Peek("idRazred")})><span class="glyphicon glyphicon-book"></span> &nbsp;Predmeti</a></li>
+                <li><a class="navItem" href=@Url.Action("Popis", "Profesor", new { idPredmet = TempData.Peek("idPredmet"), idRazred = TempData.Peek("idRazred") }) ><span class="glyphicon glyphicon-list-alt"></span> &nbsp;Popis</a></li>
+               
+                @if ((int) TempData.Peek("razrednistvo") == 1)
+                {
+                    <li><a class="navItem" href="/Profesor/Izostanci"><span class="glyphicon glyphicon-remove"></span> &nbsp;Izostanci</a></li>
+                }
+                else
+                {
+                    <li><a class="navItem" href="/Profesor/Izostanci" style="pointer-events: none;cursor: default"><span class="glyphicon glyphicon-remove"></span> &nbsp;Izostanci</a></li>
+                }
                 <li><a class="navItem" href="#"><span class="glyphicon glyphicon-log-in"></span> &nbsp;Odjava</a></li>
             </ul>
         </div>
