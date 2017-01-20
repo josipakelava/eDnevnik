@@ -321,6 +321,11 @@
     <Content Include="Views\Ucenik\Predmeti.cshtml" />
     <Content Include="Views\Shared\_StudentNavPartial.cshtml" />
     <Content Include="Views\Profesor\Predmeti.cshtml" />
+    <Content Include="Views\Shared\_ProfesorNavPartial.cshtml" />
+    <Content Include="Views\Profesor\Popis.cshtml" />
+    <Content Include="Views\Profesor\Profil.cshtml" />
+    <Content Include="Views\Profesor\Izostanci.cshtml" />
+    <Content Include="Views\Profesor\Predmeti.cshtml" />
     <Content Include="Views\Profesor\Ucenici.cshtml" />
   </ItemGroup>
   <ItemGroup>

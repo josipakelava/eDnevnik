@@ -65,6 +65,26 @@ namespace Api.Controllers
             ViewBag.razred = razred;
             return View();
         }
+
+        public ActionResult Predmeti()
+        {
+            return View();
+        }
+
+        public ActionResult Popis()
+        {
+            return View();
+        }
+
+        public ActionResult Profil()
+        {
+            return View();
+        }
+
+        public ActionResult Izostanci()
+        {
+            return View();
+        }
     }
 
 

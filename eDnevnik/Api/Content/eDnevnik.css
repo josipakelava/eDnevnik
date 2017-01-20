@@ -188,8 +188,14 @@ input[type="number"] {
 
 .classContainer{
     width: 60%;
+    height: 100%;
     margin-left: 20%;
     padding-top: 5%;
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
 }
 
 .classItem{
@@ -199,8 +205,49 @@ input[type="number"] {
     padding: 1%;
     font-size: 30px;
     text-align: center;
+    margin-bottom: 5px;
+}
+
+.orangeButton{
+    background: orange;
+}
+
+.orangeButton:hover{
+    background: #ffc65e !important;
+}
+
+.tableIzostanci{
+    background-color: whitesmoke !important;
 }
 
 .classItem:hover{
     background-color: #076ecb;
 }
+
+.addBiljeska{
+    font-size: 15px !important;
+    float: right;
+}
+
+.addOcjena{
+    background-color: #52da52 !important;
+    border-color: #52da52 !important;
+    color: white;
+    font-size: 15px !important;
+    margin-bottom: 10px !important;
+    
+}
+
+.saveChangeColor{
+    background-color: #52da52 !important;
+    border-color: #52da52 !important;
+}
+
+.inputIzostanci{
+    outline: none;
+  border: none !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;;
+}
+
