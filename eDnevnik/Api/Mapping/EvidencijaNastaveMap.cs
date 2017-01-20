@@ -7,7 +7,7 @@ namespace Api.Mapping
     {
         public EvidencijaNastaveMap()
         {
-            CompositeId().KeyReference(x => x.profesor).KeyReference(x => x.razred).KeyReference(x => x.predmet);
+            CompositeId().KeyReference(x => x.profesor, "idProfesor").KeyReference(x => x.razred, "idRazred").KeyReference(x => x.predmet, "idPredmet");
             References(x => x.profesor).Column("idProfesor").Not.Nullable().Fetch.Join();
             References(x => x.razred).Column("idRazred").Not.Nullable().Fetch.Join();
             References(x => x.predmet).Column("idPredmet").Not.Nullable().Fetch.Join();

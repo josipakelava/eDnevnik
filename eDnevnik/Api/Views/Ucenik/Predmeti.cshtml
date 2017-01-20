@@ -1,19 +1,21 @@
 ﻿
 @{
-    ViewBag.Title = "Predmeti";
+    ViewBag.Title = "evidencija";
 }
 
 @Html.Partial("_StudentNavPartial")
 <div id="accordion" class="positionAccordion" role="tablist" aria-multiselectable="true">
+
+@for (int i = 0; i < ViewBag.evidencija.Count; i++)
+{
     <div class="card">
-        <a class="collapsed subjectRow" data-toggle="collapse" data-parent="#accordion" href="#1" aria-expanded="false" aria-controls="collapseTwo">
+        <a class="collapsed subjectRow" data-toggle="collapse" data-parent="#accordion" href=@string.Format("#{0}",@i) aria-expanded="false" aria-controls="collapseTwo">
             <div class="card-header" role="tab" id="headingTwo">
-                <h5 class="mb-0">
-                    MATEMATIKA(prof. Harcet)
-                </h5>
+                <h5 class="mb-0">@ViewBag.evidencija[i].predmet.naziv (prof. @ViewBag.evidencija[i].profesor.prezime)</h5>
+           
             </div>
         </a>
-        <div id="1" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+        <div id=@i class="collapse" role="tabpanel" aria-labelledby="headingTwo">
             <div class="card-block">
                 <div class="container">
                     <div class="table-responsive">
@@ -34,8 +36,10 @@
                                 </tr>
                             </thead>
                             <tbody>
+                              @for (int j = 0; j < ViewBag.evidencija[i].predmet.kategorije.Count; j++)
+                              {
                                 <tr>
-                                    <th class="thCard" scope="row">Pismeni</th>
+                                    <th class="thCard" scope="row">@ViewBag.evidencija[i].predmet.kategorije[j].naziv</th>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -47,45 +51,7 @@
                                     <td></td>
                                     <td></td>
                                 </tr>
-                                <tr>
-                                    <th class="thCard" scope="row">Usmeni</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th class="thCard" scope="row">Zadaće</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th class="thCard" scope="row">Zalaganje</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                              }
                             </tbody>
                         </table>
                     </div>
@@ -116,227 +82,6 @@
             </div>
         </div>
     </div>
-    <div class="card">
-        <a class="collapsed subjectRow" data-toggle="collapse" data-parent="#accordion" href="#2" aria-expanded="false" aria-controls="collapseTwo">
-            <div class="card-header" role="tab" id="headingTwo">
-                <h5 class="mb-0">
-                    HRVATSKI(prof. Lončar)
-                </h5>
-            </div>
-        </a>
-        <div id="2" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
-            <div class="card-block">
-                <div class="container">
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th class="thCard">Kategorija</th>
-                                    <th class="thCard">IX&nbsp;</th>
-                                    <th class="thCard">X&nbsp;&nbsp;</th>
-                                    <th class="thCard">XI&nbsp;</th>
-                                    <th class="thCard">XII</th>
-                                    <th class="thCard">I&nbsp;&nbsp;</th>
-                                    <th class="thCard">II&nbsp;</th>
-                                    <th class="thCard">III</th>
-                                    <th class="thCard">IV&nbsp;</th>
-                                    <th class="thCard">V&nbsp;&nbsp;</th>
-                                    <th class="thCard">VI&nbsp;</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th class="thCard" scope="row">Pismeni</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th class="thCard" scope="row">Usmeni</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th class="thCard" scope="row">Zadaće</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th class="thCard" scope="row">Zalaganje</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th class="thCard" colspan="2">Bilješke</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th class="thCard" scope="row">Datum</th>
-                                    <th class="thCard">Zapis</th>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="card">
-        <a class="collapsed subjectRow" data-toggle="collapse" data-parent="#accordion" href="#3" aria-expanded="false" aria-controls="collapseTwo">
-            <div class="card-header" role="tab" id="headingTwo">
-                <h5 class="mb-0">
-                    ENGLESKI(prof. Matovinović)
-                </h5>
-            </div>
-        </a>
-        <div id="3" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
-            <div class="card-block">
-                <div class="container">
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th class="thCard">Kategorija</th>
-                                    <th class="thCard">IX&nbsp;</th>
-                                    <th class="thCard">X&nbsp;&nbsp;</th>
-                                    <th class="thCard">XI&nbsp;</th>
-                                    <th class="thCard">XII</th>
-                                    <th class="thCard">I&nbsp;&nbsp;</th>
-                                    <th class="thCard">II&nbsp;</th>
-                                    <th class="thCard">III</th>
-                                    <th class="thCard">IV&nbsp;</th>
-                                    <th class="thCard">V&nbsp;&nbsp;</th>
-                                    <th class="thCard">VI&nbsp;</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th class="thCard" scope="row">Pismeni</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th class="thCard" scope="row">Usmeni</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th class="thCard" scope="row">Zadaće</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th class="thCard" scope="row">Zalaganje</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th class="thCard" colspan="2">Bilješke</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th class="thCard" scope="row">Datum</th>
-                                    <th class="thCard">Zapis</th>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+}
 </div>
 

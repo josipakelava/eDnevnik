@@ -31,6 +31,16 @@ namespace Api.Controllers
 
         public ActionResult Predmeti()
         {
+            int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
+            Ucenik ucenik;
+            using (var session = DatabaseHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    ucenik = session.QueryOver<Ucenik>().Where(u => u.idOsoba == id).List()[0];
+                    ViewBag.evidencija = session.QueryOver<EvidencijaNastave>().Where(u => u.razred == ucenik.razred).List();
+                }
+            }
             return View();
         }
 

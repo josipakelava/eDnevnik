@@ -12,7 +12,7 @@ namespace Api.Mapping
 
             Id(x => x.idPredmet).GeneratedBy.Assigned();
             Map(x => x.naziv).Not.Nullable();
-            HasManyToMany(x => x.kategorije);
+            HasManyToMany(x => x.kategorije).Not.LazyLoad();
 
             Table("Predmet");
         }
