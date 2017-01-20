@@ -12,7 +12,7 @@ namespace Api.Mapping
             References(x => x.razrednik).Column("idRazrednik").Not.Nullable();
             References(x => x.skola).Column("idSkola").Not.Nullable();
             HasMany(x => x.evidencijaNastave).Cascade.All();
-            HasMany(x => x.ucenici).Cascade.SaveUpdate();
+            HasMany(x => x.ucenici).Cascade.SaveUpdate().Not.LazyLoad();
 
             Table("Razred");
         }
