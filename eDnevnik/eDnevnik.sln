@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Re
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapiranje-Domena", "Mapiranje\Mapiranje-Domena.csproj", "{0D1AE90E-F3FD-48A2-B417-C2D2BC4548B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RESTApi", "API\API\RESTApi.csproj", "{5600DEC5-2DFB-4213-B58B-00A27B78105C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{0D1AE90E-F3FD-48A2-B417-C2D2BC4548B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D1AE90E-F3FD-48A2-B417-C2D2BC4548B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D1AE90E-F3FD-48A2-B417-C2D2BC4548B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5600DEC5-2DFB-4213-B58B-00A27B78105C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5600DEC5-2DFB-4213-B58B-00A27B78105C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5600DEC5-2DFB-4213-B58B-00A27B78105C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5600DEC5-2DFB-4213-B58B-00A27B78105C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

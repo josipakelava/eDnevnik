@@ -14,13 +14,6 @@ namespace Domena
         public virtual string password { get; set; }
         public virtual Mjesto mjesto { get; set; }
 
-        public virtual String datumRodjenjaString
-        {
-            get
-            {
-                return datumRodjenja.ToShortDateString();
-            }
-        }
     }
 
 

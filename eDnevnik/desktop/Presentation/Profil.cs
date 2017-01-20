@@ -22,7 +22,7 @@ namespace Desktop
 
             txtIme.Text = o.ime;
             txtPrezime.Text = o.prezime;
-            txtDatRod.Text = o.datumRodjenjaString;
+            txtDatRod.Text = o.datumRodjenja.ToShortDateString();
             txtOIB.Text = o.OIB;
             txtAdresa.Text = o.adresa;
             txtMjesto.Text = o.mjesto.ime;

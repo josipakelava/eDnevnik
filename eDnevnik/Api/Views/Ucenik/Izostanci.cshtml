@@ -18,10 +18,10 @@
             @for (int i = 0; i < ViewBag.izostanci.Count; i++)
             {
             <tr>
-                <td>@ViewBag.izostanci[i].datumString</td>
+                <td>@ViewBag.izostanci[i].datum.ToShortDateString()</td>
                 <td>@ViewBag.izostanci[i].predmet.naziv</td>
                 <td>@ViewBag.izostanci[i].razlog</td>
-                <td>@ViewBag.izostanci[i].opravdanostString</td>
+                <td>@(ViewBag.izostanci[i].opravdanost?"Opravdano":"Neopravdano")</td>
             </tr>
             }
         </tbody>

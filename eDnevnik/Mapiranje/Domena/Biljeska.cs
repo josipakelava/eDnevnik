@@ -9,14 +9,6 @@ namespace Domena
         public virtual string biljeska { get; set; }
         public virtual Predmet predmet { get; set; }
         public virtual Ucenik ucenik { get; set; }
-
-        public virtual String datumString
-        {
-            get
-            {
-                return datum.ToShortDateString();
-            }
-        }
     }
 
 }
