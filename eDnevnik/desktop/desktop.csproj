@@ -33,6 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NHibernate, Version=4.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.4.1.0.4000\lib\net40\NHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,22 +54,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="eDnevnikDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>eDnevnikDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Global.cs" />
-    <Compile Include="Home.cs">
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NavController.cs" />
+    <Compile Include="Factory\FormFactory.cs" />
+    <Compile Include="Factory\Globals.cs" />
+    <Compile Include="Factory\IFormFactory.cs" />
+    <Compile Include="Presentation\Home.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Home.Designer.cs">
+    <Compile Include="Presentation\Home.Designer.cs">
       <DependentUpon>Home.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="Presentation\Profil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\Profil.Designer.cs">
+      <DependentUpon>Profil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Home.resx">
+    <EmbeddedResource Include="Presentation\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation\Profil.resx">
+      <DependentUpon>Profil.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -72,17 +88,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="eDnevnikDataSet.xsc">
-      <DependentUpon>eDnevnikDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="eDnevnikDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>eDnevnikDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="eDnevnikDataSet.xss">
-      <DependentUpon>eDnevnikDataSet.xsd</DependentUpon>
-    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -97,13 +103,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Api\Web.csproj">
-      <Project>{2def573d-9556-403f-b116-afa28e1daf84}</Project>
-      <Name>Web</Name>
-    </ProjectReference>
+    <Content Include="Content\login.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\login.ico" />
+    <ProjectReference Include="..\Mapiranje\Mapiranje-Domena.csproj">
+      <Project>{0d1ae90e-f3fd-48a2-b417-c2d2bc4548b5}</Project>
+      <Name>Mapiranje-Domena</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Repository\Repository.csproj">
+      <Project>{895d622a-65ed-4d6d-8ec4-bc1adce44717}</Project>
+      <Name>Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

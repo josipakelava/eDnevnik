@@ -1,9 +1,4 @@
 ﻿using Api.Models;
-using Microsoft.AspNet.Identity.Owin;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Domena;
@@ -79,13 +74,11 @@ namespace Api.Controllers
                 if (korisnik != null)
                 {
                     Prijava(korisnik, model.Uloga, model.ZapamtiMe);
-
                     return RedirectToAction("Index", model.Uloga);
                 }
             }
                
             ModelState.AddModelError("", "Uneseni podaci nisu točni. Pokušajte ponovno.");
-
             return RedirectToAction("Index", "Autorizacija");
         }
 

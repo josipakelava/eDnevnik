@@ -66,7 +66,7 @@
                                     if (ViewBag.biljeske[j].predmet == @ViewBag.evidencija[i].predmet)
                                     {
                                 <tr>
-                                    <td>@ViewBag.biljeske[j].datumString</td>
+                                    <td>@ViewBag.biljeske[j].datum.ToShortDateString()</td>
                                     <td>@ViewBag.biljeske[j].biljeska</td>
                                 </tr>
                                         }

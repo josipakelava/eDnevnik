@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "podaci";
+    ViewBag.Title = "Osobni podatci";
 }
 @Html.Partial("_StudentNavPartial")
 <div class="profilData">
@@ -7,7 +7,7 @@
     <br />
     <h3 class="kategorija">Ime:</h3><h3 class="podatak">@ViewBag.podaci.ime</h3><br />
     <h3 class="kategorija">Prezime:</h3><h3 class="podatak">@ViewBag.podaci.prezime</h3><br />
-    <h3 class="kategorija">Datum rođenja:</h3><h3 class="podatak">@ViewBag.podaci.datumRodjenjaString</h3><br />
+    <h3 class="kategorija">Datum rođenja:</h3><h3 class="podatak">@ViewBag.podaci.datumRodjenja.ToShortDateString()</h3><br />
     <h3 class="kategorija">OIB:</h3><h3 class="podatak">@ViewBag.podaci.OIB</h3><br />
     <h3 class="kategorija">Adresa:</h3><h3 class="podatak">@ViewBag.podaci.adresa</h3><br />
     <h3 class="kategorija">Mjesto:</h3><h3 class="podatak">@ViewBag.podaci.mjesto.ime</h3><br />
