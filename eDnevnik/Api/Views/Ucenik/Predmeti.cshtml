@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "evidencija";
+    ViewBag.Title = "Predmeti";
 }
 
 @Html.Partial("_StudentNavPartial")
@@ -36,22 +36,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                              @for (int j = 0; j < ViewBag.evidencija[i].predmet.kategorije.Count; j++)
-                              {
-                                <tr>
-                                    <th class="thCard" scope="row">@ViewBag.evidencija[i].predmet.kategorije[j].naziv</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                              }
+                                @for (int j = 0; j < ViewBag.evidencija[i].predmet.kategorije.Count; j++)
+                                {
+                                    <tr>
+                                        <th class="thCard" scope="row">@ViewBag.evidencija[i].predmet.kategorije[j].naziv</th>
+                                        @for (int m = 0; m < 10; m++)
+                                        {
+                                            <td id=@string.Format("{0}{1}{2}", @ViewBag.evidencija[i].predmet.naziv.Replace(" ", ""), @ViewBag.evidencija[i].predmet.kategorije[j].naziv.Replace(" ", ""), (@m + 8) % 12 + 1)></td>
+                                        }
+                                    </tr>
+                                }
                             </tbody>
                         </table>
                     </div>
@@ -67,14 +61,16 @@
                                     <th class="thCard" scope="row">Datum</th>
                                     <th class="thCard">Zapis</th>
                                 </tr>
+                                @for (int j = 0; j < ViewBag.ucenik.biljeske.Count; j++)
+                                {
+                                    if (ViewBag.ucenik.biljeske[j].predmet == @ViewBag.evidencija[i].predmet)
+                                    {
                                 <tr>
-                                    <td></td>
-                                    <td></td>
+                                    <td>@ViewBag.ucenik.biljeske[j].datumString</td>
+                                    <td>@ViewBag.ucenik.biljeske[j].biljeska</td>
                                 </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                                        }
+                                    }
                             </tbody>
                         </table>
                     </div>
@@ -85,3 +81,15 @@
 }
 </div>
 
+@section Scripts
+{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            var ocjene =  @Html.Raw(Json.Encode(((ICollection<Api.Models.OcjenaViewModel>) ViewBag.ocjene)));
+            for (var i = 0; i < ocjene.length; i++) {
+                $("#" + ocjene[i].predmet + ocjene[i].kategorija + ocjene[i].mjesec).append(ocjene[i].ocjena)
+            }
+        });
+    </script>
+}

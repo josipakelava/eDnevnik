@@ -1,5 +1,6 @@
 namespace Api.Models
 {
+    using Newtonsoft.Json;
     using System.Collections.Generic;
 
     public partial class Ucenik : Osoba
@@ -7,9 +8,9 @@ namespace Api.Models
 
         public Ucenik()
         {
-            this.biljeske = new HashSet<Biljeska>();
-            this.izostanci = new HashSet<Izostanak>();
-            this.ocjene = new HashSet<Ocjena>();
+            this.biljeske = new List<Biljeska>();
+            this.izostanci = new List<Izostanak>();
+            this.ocjene = new List<Ocjena>();
         }
 
         public virtual ICollection<Biljeska> biljeske { get; set; }
