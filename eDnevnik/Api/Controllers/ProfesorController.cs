@@ -45,11 +45,12 @@ namespace Api.Controllers
                 }
             }
             ViewBag.evidencija = evidencija;
+            ViewBag.idRazred = idRazred;
             return View();
         }
 
         // GET: Profesor/Ucenici
-        public ActionResult Ucenici(int idPredmet, int idRazred)
+        public ActionResult Popis(int idPredmet, int idRazred)
         {
             int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
             Razred razred;
@@ -63,16 +64,6 @@ namespace Api.Controllers
                 }
             }
             ViewBag.razred = razred;
-            return View();
-        }
-
-        public ActionResult Predmeti()
-        {
-            return View();
-        }
-
-        public ActionResult Popis()
-        {
             return View();
         }
 
