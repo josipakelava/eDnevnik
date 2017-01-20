@@ -61,17 +61,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IAutorizacijaRepository.cs" />
+    <Compile Include="Interfaces\IUlogaRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AutorizacijaRepository.cs" />
+    <Compile Include="Repositories\UlogaRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Mapiranje\Mapiranje.csproj">
+    <ProjectReference Include="..\Mapiranje\Mapiranje-Domena.csproj">
       <Project>{0d1ae90e-f3fd-48a2-b417-c2d2bc4548b5}</Project>
-      <Name>Mapiranje</Name>
+      <Name>Mapiranje-Domena</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

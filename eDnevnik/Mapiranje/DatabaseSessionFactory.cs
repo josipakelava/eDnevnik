@@ -15,6 +15,8 @@ namespace Domena
         {
             if (sessionFactory == null)
             {
+                var constr = System.Configuration.ConfigurationManager.ConnectionStrings;
+
                 string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["eDnevnik"].ConnectionString;
 
                 sessionFactory = Fluently.Configure().Database(MsSqlConfiguration.MsSql2012

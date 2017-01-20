@@ -3,20 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Desktop.Controllers;
 
 namespace Desktop
 {
-    static class Program
+    static class Startup
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
+            HomeController homeController = new HomeController();
+            IList<string> uloge = homeController.GetRoles();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Home());
+            Home home = new Home(uloge, homeController);
+            Globals.MakeActive(home);
+            Application.Run(home);
         }
     }
 }

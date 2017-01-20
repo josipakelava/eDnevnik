@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Desktop_Presentation
+namespace Repository
 {
-    class Program
+    public interface IUlogaRepository
     {
-        static void Main(string[] args)
-        {
-        }
+        IList<string> GetAll();
     }
 }

@@ -79,6 +79,7 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(270, 26);
             this.txtEmail.TabIndex = 0;
+            this.txtEmail.KeyUp += new System.Windows.Forms.KeyEventHandler(this.keyUp);
             // 
             // label3
             // 
@@ -98,6 +99,7 @@
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(270, 26);
             this.txtPassword.TabIndex = 1;
+            this.txtPassword.KeyUp += new System.Windows.Forms.KeyEventHandler(this.keyUp);
             // 
             // label4
             // 
@@ -116,6 +118,7 @@
             this.cbUloga.Name = "cbUloga";
             this.cbUloga.Size = new System.Drawing.Size(270, 24);
             this.cbUloga.TabIndex = 2;
+            this.cbUloga.KeyUp += new System.Windows.Forms.KeyEventHandler(this.keyUp);
             // 
             // label5
             // 
@@ -139,6 +142,7 @@
             this.btnLogin.Text = "Prijava";
             this.btnLogin.UseVisualStyleBackColor = false;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            this.btnLogin.KeyUp += new System.Windows.Forms.KeyEventHandler(this.keyUp);
             // 
             // Home
             // 

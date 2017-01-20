@@ -313,9 +313,9 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Mapiranje\Mapiranje.csproj">
+    <ProjectReference Include="..\Mapiranje\Mapiranje-Domena.csproj">
       <Project>{0d1ae90e-f3fd-48a2-b417-c2d2bc4548b5}</Project>
-      <Name>Mapiranje</Name>
+      <Name>Mapiranje-Domena</Name>
     </ProjectReference>
     <ProjectReference Include="..\Repository\Repository.csproj">
       <Project>{895d622a-65ed-4d6d-8ec4-bc1adce44717}</Project>
