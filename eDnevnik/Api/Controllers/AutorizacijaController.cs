@@ -6,7 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Api.Mapping;
+using Domena;
+using Repository;
 using Microsoft.Owin.Security;
 using System.Security.Claims;
 using Microsoft.AspNet.Identity;
@@ -17,6 +18,7 @@ namespace Api.Controllers
     [Authorize]
     public class AutorizacijaController : Controller
     {
+        private IAutorizacijaRepository _repository = new AutorizacijaRepository();
 
         private IAuthenticationManager Authentication
         {
@@ -70,58 +72,21 @@ namespace Api.Controllers
         [AllowAnonymous]
         public ActionResult Login(LoginViewModel model)
         {
-            bool uspjeh = true;
-            Osoba korisnik;
-
             if (ModelState.IsValid)
             {
-                using (var session = DatabaseHelper.OpenSession())
+                Osoba korisnik = _repository.GetByLoginInfo(model.Email, model.Password, model.Uloga);
+
+                if (korisnik != null)
                 {
-                    using (var transaction = session.BeginTransaction())
-                    {
-                        try
-                        {
-                            switch (model.Uloga)
-                            {
-                                case "Ucenik":
-                                    korisnik = session.QueryOver<Ucenik>().Where(u => u.email == model.Email && u.password == model.Password).List()[0];
-                                    Prijava(korisnik, "Ucenik", model.ZapamtiMe);
-                                    break;
-                                case "Razrednik":
-                                    korisnik = session.QueryOver<Profesor>().Where(u => u.email == model.Email && u.password == model.Password).List()[0];
-                                    Prijava(korisnik, "Razrednik", model.ZapamtiMe);
-                                    break;
-                                case "Profesor":
-                                    korisnik = session.QueryOver<Profesor>().Where(u => u.email == model.Email && u.password == model.Password).List()[0];
-                                    Prijava(korisnik, "Profesor", model.ZapamtiMe);
-                                    break;
-                                    //case "Administrator":
-                                    //    korisnik = (Administrator)session.QueryOver<Administrator>().Where(u => u.email == model.Email && u.password == model.Password);
-                                    //    Prijava(korisnik, "Administrator", model.ZapamtiMe);
-                                    //    break;
-                            }
-                        } catch (IndexOutOfRangeException)
-                        {
-                            // Uneseni netočni podatci
-                            uspjeh = false;
-                        }
-                        transaction.Commit();
-                    }
+                    Prijava(korisnik, model.Uloga, model.ZapamtiMe);
+
+                    return RedirectToAction("Index", model.Uloga);
                 }
-            } else
-            {
-                // Model nije validan
-                uspjeh = false;
             }
-
-            if (uspjeh)
-            {
-                return RedirectToAction("Index", model.Uloga);
-            }
-
+               
             ModelState.AddModelError("", "Uneseni podaci nisu točni. Pokušajte ponovno.");
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Autorizacija");
         }
 
         [Authorize]
