@@ -1,7 +1,8 @@
 namespace Api.Models
 {
+    using Newtonsoft.Json;
     using System;
-    
+
     public class Biljeska
     {
         public virtual int id { get; set; }
@@ -9,6 +10,14 @@ namespace Api.Models
         public virtual string biljeska { get; set; }
         public virtual Predmet predmet { get; set; }
         public virtual Ucenik ucenik { get; set; }
+
+        public virtual String datumString
+        {
+            get
+            {
+                return datum.ToShortDateString();
+            }
+        }
     }
 
 }

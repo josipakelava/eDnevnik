@@ -1,7 +1,8 @@
 namespace Api.Models
 {
+    using Newtonsoft.Json;
     using System;
-    
+
     public class Ocjena
     {
         public virtual int id { get; set; }

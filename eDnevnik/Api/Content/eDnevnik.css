@@ -251,3 +251,19 @@ input[type="number"] {
   box-shadow: none !important;;
 }
 
+.kategorija{
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.podatak{
+    display: inline-block;
+    margin-left: 10px;
+    margin-bottom: 15px;
+    font-weight:bold;
+}
+
+.ocjenaBox{
+    text-align: center;
+}
+
