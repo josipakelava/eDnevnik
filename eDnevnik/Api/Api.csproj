@@ -256,7 +256,7 @@
     <Compile Include="Mapping\PredmetMap.cs" />
     <Compile Include="Mapping\RazredMap.cs" />
     <Compile Include="Mapping\UcenikMap.cs" />
-    <Compile Include="Models\Administrator.cs" />
+    <Compile Include="Models\Domena\Administrator.cs" />
     <Compile Include="Models\Autorizacija\AutorizacijaModels.cs" />
     <Compile Include="Models\Domena\Biljeska.cs" />
     <Compile Include="Models\Domena\EvidencijaNastave.cs" />
