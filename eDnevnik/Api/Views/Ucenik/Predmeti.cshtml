@@ -11,7 +11,7 @@
     <div class="card">
         <a class="collapsed subjectRow" data-toggle="collapse" data-parent="#accordion" href=@string.Format("#{0}",@i) aria-expanded="false" aria-controls="collapseTwo">
             <div class="card-header" role="tab" id="headingTwo">
-                <h5 class="mb-0">@ViewBag.evidencija[i].predmet.naziv&nbsp;&nbsp; (prof. @ViewBag.evidencija[i].profesor.prezime)</h5>
+                <h5 class="mb-0">@ViewBag.evidencija[i].predmet.naziv&nbsp;&nbsp;(prof. @ViewBag.evidencija[i].profesor.prezime)</h5>
            
             </div>
         </a>
@@ -61,13 +61,13 @@
                                     <th class="thCard" scope="row">Datum</th>
                                     <th class="thCard">Zapis</th>
                                 </tr>
-                                @for (int j = 0; j < ViewBag.ucenik.biljeske.Count; j++)
+                                @for (int j = 0; j < ViewBag.biljeske.Count; j++)
                                 {
-                                    if (ViewBag.ucenik.biljeske[j].predmet == @ViewBag.evidencija[i].predmet)
+                                    if (ViewBag.biljeske[j].predmet == @ViewBag.evidencija[i].predmet)
                                     {
                                 <tr>
-                                    <td>@ViewBag.ucenik.biljeske[j].datumString</td>
-                                    <td>@ViewBag.ucenik.biljeske[j].biljeska</td>
+                                    <td>@ViewBag.biljeske[j].datumString</td>
+                                    <td>@ViewBag.biljeske[j].biljeska</td>
                                 </tr>
                                         }
                                     }
