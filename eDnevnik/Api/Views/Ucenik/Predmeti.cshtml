@@ -11,7 +11,7 @@
     <div class="card">
         <a class="collapsed subjectRow" data-toggle="collapse" data-parent="#accordion" href=@string.Format("#{0}",@i) aria-expanded="false" aria-controls="collapseTwo">
             <div class="card-header" role="tab" id="headingTwo">
-                <h5 class="mb-0">@ViewBag.evidencija[i].predmet.naziv (prof. @ViewBag.evidencija[i].profesor.prezime)</h5>
+                <h5 class="mb-0">@ViewBag.evidencija[i].predmet.naziv&nbsp;&nbsp; (prof. @ViewBag.evidencija[i].profesor.prezime)</h5>
            
             </div>
         </a>
@@ -42,7 +42,7 @@
                                         <th class="thCard" scope="row">@ViewBag.evidencija[i].predmet.kategorije[j].naziv</th>
                                         @for (int m = 0; m < 10; m++)
                                         {
-                                            <td id=@string.Format("{0}{1}{2}", @ViewBag.evidencija[i].predmet.naziv.Replace(" ", ""), @ViewBag.evidencija[i].predmet.kategorije[j].naziv.Replace(" ", ""), (@m + 8) % 12 + 1)></td>
+                                            <td id=@string.Format("{0}{1}{2}", @ViewBag.evidencija[i].predmet.naziv.Replace(" ", ""), @ViewBag.evidencija[i].predmet.kategorije[j].naziv.Replace(" ", ""), (@m + 8) % 12 + 1) class="ocjenaBox"></td>
                                         }
                                     </tr>
                                 }
