@@ -107,7 +107,7 @@ namespace Api.Controllers
                     }
                 }   
             }
-            return RedirectToAction("Popis");
+            return RedirectToAction("Popis", new { idPredmet = TempData.Peek("idPredmet"), idRazred = TempData.Peek("idPredmet") });
         }
 
         public DateTime GenerirajDatum(int mjesec)

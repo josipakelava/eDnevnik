@@ -8,7 +8,7 @@ namespace Mapiranje
     {
         public BiljeskaMap()
         {
-            Id(x => x.id).GeneratedBy.Assigned();
+            Id(x => x.id).GeneratedBy.Increment();
             Map(x => x.datum).Not.Nullable();
             Map(x => x.biljeska).Not.Nullable();
             References(x => x.predmet).Column("idPredmet").Not.Nullable();
