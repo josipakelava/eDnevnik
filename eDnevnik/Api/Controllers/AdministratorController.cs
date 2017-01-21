@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace Api.Controllers
 {
-    public class AdminController : Controller
+    public class AdministratorController : Controller
     {
-        // GET: Admin
+        // GET: Administrator
         public ActionResult Index()
         {
             return View();

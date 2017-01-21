@@ -4,8 +4,11 @@
 }
 
 @Html.Partial("_StudentNavPartial")
+<div>
+    <h4 class="kategorija">Razred:</h4><h4 class="podatak">@ViewBag.evidencija[0].razred.naziv</h4><br />
+    <h4 class="kategorija">Razrednik:</h4><h4 class="podatak">prof. @ViewBag.evidencija[0].razred.razrednik.prezime  @ViewBag.evidencija[0].razred.razrednik.ime</h4><br />
+</div>
 <div id="accordion" class="positionAccordion" role="tablist" aria-multiselectable="true">
-
 @for (int i = 0; i < ViewBag.evidencija.Count; i++)
 {
     <div class="card">

@@ -30,9 +30,6 @@ namespace Repository
                         case "Ucenik":
                             korisnik = _session.QueryOver<Ucenik>().Where(u => u.email == email && u.password == password).List()[0];
                             break;
-                        case "Razrednik":
-                            korisnik = _session.QueryOver<Profesor>().Where(u => u.email == email && u.password == password).List()[0];
-                            break;
                         case "Profesor":
                             korisnik = _session.QueryOver<Profesor>().Where(u => u.email == email && u.password == password).List()[0];
                             break;

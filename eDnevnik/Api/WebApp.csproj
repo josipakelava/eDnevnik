@@ -236,7 +236,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AdministratorController.cs" />
     <Compile Include="Controllers\AutorizacijaController.cs" />
     <Compile Include="Controllers\ProfesorController.cs" />
     <Compile Include="Controllers\UcenikController.cs" />
@@ -302,10 +302,10 @@
     <Content Include="Views\Profesor\Profil.cshtml" />
     <Content Include="Views\Profesor\Izostanci.cshtml" />
     <Content Include="Views\Profesor\Predmeti.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Administrator\Index.cshtml" />
     <Content Include="Views\Shared\_AdminNavPartial.cshtml" />
-    <Content Include="Views\Admin\UrediOsobne.cshtml" />
-    <Content Include="Views\Admin\UrediProfesor.cshtml" />
+    <Content Include="Views\Administrator\UrediOsobne.cshtml" />
+    <Content Include="Views\Administrator\UrediProfesor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
