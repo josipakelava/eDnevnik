@@ -17,7 +17,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a class="navItem" href="/Profesor/Profil"><span class="glyphicon glyphicon-user"></span> &nbsp;Profil</a></li>
                 <li><a class="navItem" href="/Profesor/Index"><span class="glyphicon glyphicon-education"></span> &nbsp;Razredi</a></li>
-                <li><a class="navItem" href=@Url.Action("Popis", "Profesor", new {idRazred = TempData.Peek("idRazred")})><span class="glyphicon glyphicon-book"></span> &nbsp;Predmeti</a></li>
+                <li><a class="navItem" href=@Url.Action("Predmeti", "Profesor", new {idRazred = TempData.Peek("idRazred")})><span class="glyphicon glyphicon-book"></span> &nbsp;Predmeti</a></li>
                 <li><a class="navItem" href=@Url.Action("Popis", "Profesor", new { idPredmet = TempData.Peek("idPredmet"), idRazred = TempData.Peek("idRazred") }) ><span class="glyphicon glyphicon-list-alt"></span> &nbsp;Popis</a></li>
                
                 @if ((int) TempData.Peek("razrednistvo") == 1)

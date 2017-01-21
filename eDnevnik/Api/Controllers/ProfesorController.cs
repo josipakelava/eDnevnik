@@ -47,8 +47,10 @@ namespace Api.Controllers
         {
             int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
             TempData["idPredmet"] = idPredmet;
-            ViewBag.razred = _repository.GetClass(id, idRazred);
-            return View();
+            Predmet predmet = _repository.GetSubject(idPredmet);
+            Razred razred = _repository.GetClass(id, idRazred);
+            List<RazredViewModel> rvm = RazredViewModel.toList(razred, predmet);
+            return View(rvm);
         }
 
         public ActionResult Profil()
@@ -61,27 +63,6 @@ namespace Api.Controllers
         public ActionResult Izostanci()
         {
             int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
-            //Profesor profesor;
-            //IList<Izostanak> izostanci;
-            //List<Izostanak> pomocni = new List<Izostanak>();
-            //using (var session = DatabaseHelper.OpenSession())
-            //{
-            //    using (var transaction = session.BeginTransaction())
-            //    {
-            //        profesor = session.QueryOver<Profesor>().Where(p => p.idOsoba == id).List()[0];
-            //        foreach(var ucenik in profesor.razrednistvo.ucenici)
-            //        {
-            //            pomocni.AddRange(ucenik.izostanci);
-            //        }
-
-            //       // izostanci = session.QueryOver<Izostanak>().Where(p => p.).List();
-
-            //    }
-
-            //}
-            //pomocni = pomocni.OrderBy(o => o.datum).ToList();
-
-
             List<IzostanakViewModel> izostanci = IzostanakViewModel.toList(_repository.GetAllAbsences(id));
             return View(izostanci);
         }
@@ -95,6 +76,64 @@ namespace Api.Controllers
             }
             return RedirectToAction("Izostanci");
         }
-    }
+
+
+        [HttpPost]
+        public ActionResult SpremiRazred(List<RazredViewModel> razred)
+        {
+            foreach (RazredViewModel ucenik in razred)
+            {
+                if(ucenik.novabiljeska != null) {
+                    _repository.InsertNote(ucenik.idPredmet, ucenik.idUcenik, ucenik.novabiljeska, DateTime.Today);
+                }
+                if(ucenik.izostanak == true)
+                {
+                    _repository.InsertAbsence(ucenik.idPredmet, ucenik.idUcenik, DateTime.Today);
+                }
+                foreach (KategorijaView kategorija in ucenik.kategorije)
+                {
+                    foreach(OcjenaViewModel ovm in kategorija.ocjene)
+                    {
+                        if(ovm.id >= 0 && ovm.ocjena > 0 && ovm.ocjena < 6)
+                        {
+                            _repository.UpdateGrade(ovm.id, ovm.ocjena);
+                        } else
+                        {
+                            if(ovm.ocjena != 0 && ovm.ocjena > 0 && ovm.ocjena < 6)
+                            {
+                                _repository.InsertGrade(ovm.ocjena, ucenik.idUcenik, ucenik.idPredmet, kategorija.id, GenerirajDatum(ovm.mjesecUredivanje));
+                            }
+                        }
+                    }
+                }   
+            }
+            return RedirectToAction("Popis", new { idPredmet = TempData.Peek("idPredmet"), idRazred = TempData.Peek("idPredmet") });
+        }
+
+        public DateTime GenerirajDatum(int mjesec)
+        {
+            int godina = DateTime.Today.Year;
+            if(mjesec >= 9 && DateTime.Today.Month >= 1)
+            {
+                godina = DateTime.Today.Year - 1;
+            }
+            else if (mjesec >= 9 && DateTime.Today.Month >= 9)
+            {
+                godina = DateTime.Today.Year;
+            }
+            else if (mjesec <= 6 && DateTime.Today.Month >= 9)
+            {
+                godina = DateTime.Today.Year - 1;
+            }
+            else if (mjesec <= 6 && DateTime.Today.Month >= 1)
+            {
+                godina = DateTime.Today.Year;
+            }
+
+            DateTime datum = new DateTime(godina, mjesec, 15);
+            return datum;
+        }
 
     }
+
+}
