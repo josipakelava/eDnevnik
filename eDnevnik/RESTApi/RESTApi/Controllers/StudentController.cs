@@ -17,6 +17,10 @@ namespace RESTApi.Controllers
             return JsonConvert.SerializeObject(_repository.Find(int.Parse(id)));
         }
 
-
+        [Authorize]
+        public String Index()
+        {
+            return "MATIJA";
+        }
     }
 }
