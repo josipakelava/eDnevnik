@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-
 namespace RESTApi
 {
     public class RouteConfig
@@ -16,7 +15,8 @@ namespace RESTApi
             routes.MapRoute(
                 name: "Default",
                 url: "api/{controller}/{action}/{id}",
-                defaults: new { controller = "", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "RESTApi.Controllers" }
             );
         }
     }
