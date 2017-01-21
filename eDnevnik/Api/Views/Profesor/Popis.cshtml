@@ -13,14 +13,16 @@
         var collapseId = "collapse" + (i + 1);
         <div class="card">
             <div class="popisItemTitle">
-                <a style="display:inline-block" class="collapsed subjectRow" data-toggle="collapse" data-parent="#accordion" href="#@collapseId" aria-expanded="true" aria-controls=@collapseId>
+                <a class="collapsed subjectRow rowWithCheckFirst" data-toggle="collapse" data-parent="#accordion" href="#@collapseId" aria-expanded="true" aria-controls=@collapseId>
                     <div class="card-header" role="tab" id=@headingId>
                         <h5 class="mb-0">
                             @ViewBag.razred.ucenici[i].ime  @ViewBag.razred.ucenici[i].prezime
                         </h5>
                     </div>
                 </a>
-                <input type="checkbox" class="checkbox">
+                <div class="checkboxContainer">
+                    <input type="checkbox" class="checkbox">
+                </div>
             </div>
             <div id=@collapseId class="collapse" role="tabpanel" aria-labelledby=@headingId>
                 <div class="card-block">

@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "_AdminNavPartial";
+}
+
+<nav class="navbar navbar-default navCostum">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand logoNav">eDnevnik</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="navItem" href="/Admin/Index"><span class="glyphicon glyphicon-user"></span> &nbsp;Registracija</a></li>
+                <li><a class="navItem" href="/Admin/UrediOsobne"><span class="glyphicon glyphicon-pencil"></span> &nbsp;Uređivanje osobnih podataka</a></li>
+                <li><a class="navItem" href="/Admin/UrediProfesor"><span class="glyphicon glyphicon-edit"></span> &nbsp;Uređivanja podataka o profesoru</a></li>
+                <li><a class="navItem" href="/Autorizacija/Logout"><span class="glyphicon glyphicon-log-in"></span> &nbsp;Odjava</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+

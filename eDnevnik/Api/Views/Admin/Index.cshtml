@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@Html.Partial("_AdminNavPartial")
+
+<div class="registerContainer">
+    <h3 class="loginSubtitle">Registracija novog korisnika</h3>
+    <form method="post" action="">
+        <input class="formInput" name="Email" type="text"
+               placeholder="E-mail" /><br />
+        <input class="formInput" name="Password" type="password"
+               placeholder="Lozinka" /><br />
+        <input class="formInput" name="repeatPassword" type="password"
+               placeholder="Ponovljena Lozinka" /><br />
+        <div class="form-group">
+            <select class="form-control" name="Uloga">
+                <option value="Ucenik">Učenik</option>
+                <option>Razrednik</option>
+                <option>Profesor</option>
+                <option>Administrator</option>
+            </select>
+        </div>
+        <input class="formButton" type="submit" value="Registriraj" />
+    </form>
+</div>

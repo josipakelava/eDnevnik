@@ -25,9 +25,9 @@
                         @Html.HiddenFor(m => Model[i].datum)
                         @Html.HiddenFor(m => Model[i].predmet)
                         @Html.HiddenFor(m => Model[i].ucenik)
-                        <td>@Html.DisplayFor(m => Model[i].datum)</td>
-                        <td>@Html.DisplayFor(m => Model[i].predmet)</td>
-                        <td>@Html.DisplayFor(m => Model[i].ucenik)</td>
+                        <td class="izostanciUredenje">@Html.DisplayFor(m => Model[i].datum)</td>
+                        <td class="izostanciUredenje">@Html.DisplayFor(m => Model[i].predmet)</td>
+                        <td class="izostanciUredenje">@Html.DisplayFor(m => Model[i].ucenik)</td>
                         <td>
                             @Html.TextBoxFor(m => Model[i].razlog, new { Class = "form-control inputIzostanci", Value = Model[i].razlog })
                             @*<input type="text" class="form-control inputIzostanci"  value=@ViewBag.izostanci[i].razlog>*@
@@ -58,7 +58,7 @@
                                 }
             </tbody>
         </table>
-        <input type="submit" value="Submit" />
+        <input type="submit" class="btn btn-primary saveChangeColor moveLeft" value="Spremi promjene" />
     </div>
 }
 

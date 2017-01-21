@@ -238,9 +238,17 @@ input[type="number"] {
     
 }
 
+.addOcjena:hover{
+    background-color: #62f662 !important;
+}
+
 .saveChangeColor{
     background-color: #52da52 !important;
     border-color: #52da52 !important;
+}
+
+.saveChangeColor:hover{
+    background-color: #62f662 !important;
 }
 
 .inputIzostanci{
@@ -265,5 +273,45 @@ input[type="number"] {
 
 .ocjenaBox{
     text-align: center;
+}
+
+.rowWithCheckFirst{
+    display: inline-block;
+    width: calc(100% - 30px);
+    margin: 0px !important;
+}
+
+.checkboxContainer{
+    display: inline-block !important;
+    width: 20px;
+}
+
+.checkbox{
+    width: 20px !important;
+    height: 20px !important;
+}
+
+.popisItemTitle{
+    width: 100%;
+    background: #e0ecf6;
+}
+
+a:hover, a:focus{
+    text-decoration: none !important;
+}
+
+.izostanciUredenje{
+    vertical-align: middle !important;
+}
+
+.moveLeft{
+    margin-left: calc(90% - 130px);
+}
+
+.registerContainer{
+    height: 90%;
+    width: 80%;
+    margin-left: 10%;
+    padding-top: 10%;
 }
 
