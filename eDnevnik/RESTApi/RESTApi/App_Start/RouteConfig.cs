@@ -16,7 +16,7 @@ namespace RESTApi
             routes.MapRoute(
                 name: "Default",
                 url: "api/{controller}/{action}/{id}",
-                defaults: new { controller = "Autorizacija", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
