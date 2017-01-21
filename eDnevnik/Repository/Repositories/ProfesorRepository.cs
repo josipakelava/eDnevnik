@@ -33,6 +33,10 @@ namespace Repository
         {
             return _session.QueryOver<EvidencijaNastave>().Where(p => p.profesor.idOsoba == id).And(p => p.razred.idRazred == idRazred).List();
         }
+        public Predmet GetSubject(int id)
+        {
+            return _session.QueryOver<Predmet>().Where(p => p.idPredmet == id).List()[0];
+        }
 
         public Razred GetClass(int id, int idRazred)
         {
@@ -52,6 +56,72 @@ namespace Repository
                 transaction.Commit();
             }
            
+        }
+
+        public void UpdateGrade(int id, int novaOcjena)
+        {
+            using (var transaction = _session.BeginTransaction())
+            {
+                Ocjena ocjena = _session.QueryOver<Ocjena>().Where(r => r.id == id).List()[0];
+                if (ocjena.ocjena == novaOcjena)
+                    return;
+                ocjena.ocjena = novaOcjena;
+                _session.Update(ocjena);
+
+                transaction.Commit();
+            }
+        }
+
+        public void InsertGrade(int ocjena, int idUcenik, int idPredmet, int idKategorija, DateTime datum)
+        {
+            using (var transaction = _session.BeginTransaction())
+            {
+                Ocjena novaOcjena = new Ocjena();
+                
+                novaOcjena.ocjena = ocjena;
+                novaOcjena.kategorija = _session.Load<Kategorija>(idKategorija); ;
+
+                novaOcjena.predmet = _session.Load<Predmet>(idPredmet);
+                novaOcjena.ucenik = _session.Load<Ucenik>(idUcenik);
+                novaOcjena.datum = datum;
+
+                _session.Save(novaOcjena);
+
+                transaction.Commit();
+            }
+        }
+
+        public void InsertAbsence(int idPredmet, int idUcenik, DateTime datum)
+        {
+            using (var transaction = _session.BeginTransaction())
+            {
+                Izostanak novaiIzostanak = new Izostanak();
+
+                novaiIzostanak.predmet = _session.Load<Predmet>(idPredmet);
+                novaiIzostanak.ucenik = _session.Load<Ucenik>(idUcenik);
+                novaiIzostanak.datum = datum;
+
+                _session.Save(novaiIzostanak);
+
+                transaction.Commit();
+            }
+        }
+
+        public void InsertNote(int idPredmet, int idUcenik, string biljeska, DateTime datum)
+        {
+            using (var transaction = _session.BeginTransaction())
+            {
+                Biljeska novaBiljeska = new Biljeska();
+
+                novaBiljeska.biljeska = biljeska;
+                novaBiljeska.predmet = _session.Load<Predmet>(idPredmet);
+                novaBiljeska.ucenik= _session.Load<Ucenik>(idUcenik);
+                novaBiljeska.datum = datum;
+
+                _session.Save(novaBiljeska);
+
+                transaction.Commit();
+            }
         }
     }
 }

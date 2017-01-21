@@ -246,6 +246,7 @@
     <Compile Include="Models\AutorizacijaModels.cs" />
     <Compile Include="Models\IzostanakViewModel.cs" />
     <Compile Include="Models\OcjenaViewModel.cs" />
+    <Compile Include="Models\RazredViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

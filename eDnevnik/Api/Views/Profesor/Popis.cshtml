@@ -1,148 +1,169 @@
-﻿
+﻿@model List<Api.Models.RazredViewModel>
 @{
     ViewBag.Title = "Popis";
 }
-
 @Html.Partial("_ProfesorNavPartial")
 
 
-<div id="accordion" class="positionAccordion" role="tablist" aria-multiselectable="false">
-    @for (int i = 0; i < ViewBag.razred.ucenici.Count; i++)
+    @using (Html.BeginForm("SpremiRazred", "Profesor", FormMethod.Post))
     {
-        var headingId = "heading" + (i + 1);
-        var collapseId = "collapse" + (i + 1);
-        <div class="card">
-            <div class="popisItemTitle">
-                <a class="collapsed subjectRow rowWithCheckFirst" data-toggle="collapse" data-parent="#accordion" href="#@collapseId" aria-expanded="true" aria-controls=@collapseId>
-                    <div class="card-header" role="tab" id=@headingId>
-                        <h5 class="mb-0">
-                            @ViewBag.razred.ucenici[i].ime  @ViewBag.razred.ucenici[i].prezime
-                        </h5>
+
+        <div id="accordion" class="positionAccordion" role="tablist" aria-multiselectable="false">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+            var headingId = "heading" + (i + 1);
+            var collapseId = "collapse" + (i + 1);
+            <div class="card">
+                <div class="popisItemTitle">
+                    <a class="collapsed subjectRow rowWithCheckFirst" data-toggle="collapse" data-parent="#accordion" href="#@collapseId" aria-expanded="true" aria-controls=@collapseId>
+                        <div class="card-header" role="tab" id=@headingId>
+                            <h5 class="mb-0">
+                                @Html.DisplayFor(m => Model[i].ucenik)
+                            </h5>
+                        </div>
+                    </a>
+                    <div class="checkboxContainer">
+                        @*<input type="checkbox" class="checkbox">*@
+                        @Html.CheckBoxFor(m => Model[i].izostanak, new { Class = "checkbox" })
                     </div>
-                </a>
-                <div class="checkboxContainer">
-                    <input type="checkbox" class="checkbox">
+                </div>
+                <div id=@collapseId class="collapse" role="tabpanel" aria-labelledby=@headingId>
+                    <div class="card-block">
+                        <div class="container">
+                            @*@using (Html.BeginForm("SpremiOcjene", "Profesor", FormMethod.Post))
+                                {*@
+                            @Html.HiddenFor(m => Model[i].idUcenik)
+                            @Html.HiddenFor(m => Model[i].idPredmet)
+                            @Html.HiddenFor(m => Model[i].ucenik)
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th class="thCard">Kategorija</th>
+                                            <th class="thCard">IX</th>
+                                            <th class="thCard">X</th>
+                                            <th class="thCard">XI</th>
+                                            <th class="thCard">XII</th>
+                                            <th class="thCard">I</th>
+                                            <th class="thCard">II</th>
+                                            <th class="thCard">III</th>
+                                            <th class="thCard">IV</th>
+                                            <th class="thCard">V</th>
+                                            <th class="thCard">VI</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @for (int j = 0; j < Model[i].kategorije.Count; j++)
+                                        {
+
+                                            @Html.HiddenFor(m => Model[i].kategorije[j].id)
+                                            <tr>
+                                                <th class="thCard" scope="row">@Model[i].kategorije[j].naziv</th>
+                                                @for (int m = 0; m < 10; m++)
+                                                {
+
+                                                    if (@Model[i].kategorije[j].ocjene[m].ocjena == 0)
+                                                    {
+                                                        <td>@Html.TextBoxFor(l => Model[i].kategorije[j].ocjene[m].ocjena, new { Type = "number", Min = "1", Max = "5", Class = "tableInput", Value = "" })</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>@Html.TextBoxFor(l => Model[i].kategorije[j].ocjene[m].ocjena, new { Type = "number", Min = "1", Max = "5", Class = "tableInput", Size = Model[i].kategorije[j].ocjene[m].ocjena })</td>
+                                                    }
+
+                                                    @Html.HiddenFor(l => Model[i].kategorije[j].ocjene[m].id)
+                                                    @Html.HiddenFor(l => Model[i].kategorije[j].ocjene[m].mjesecUredivanje)
+
+                                                }
+                                            </tr>
+                                        }
+
+                                        @*<tr>
+                                                <th class="thCard" scope="row">Pismeni</th>
+
+                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
+                                            </tr>*@
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            @*<div type="button" class="btn btn-success addOcjena" style="margin-bottom: 10px;">Spremi ocjenu</div>*@
+                            @*<input type="submit" class="btn btn-success addOcjena"  style="margin-bottom: 10px;" value="Spremi ocjenu" />
+                                }*@
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th class="thCard" colspan="2">Bilješke<div type="button" onclick="openTextArea(this.id)" id="@collapseId" class="btn btn-primary addBiljeska"><span class="glyphicon glyphicon-plus"></span></div></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @for (int m = 0; m < Model[i].biljeske.Count; m++)
+                                        {
+                                            <tr>
+                                                <td class="thCard" scope="row">@Model[i].biljeske[m].datum</td>
+                                                <td class="thCard">@Model[i].biljeske[m].biljeska</td>
+                                            </tr>
+                                        }
+
+                                        <tr style="display:none" id="@collapseId">
+                                            <td class="thCard" scope="row">@DateTime.Today</td>
+                                            <td class="thCard">@Html.TextBoxFor(m => Model[i].novabiljeska, new {Class = "form-control inputIzostanci" })</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div id=@collapseId class="collapse" role="tabpanel" aria-labelledby=@headingId>
-                <div class="card-block">
-                    <div class="container">
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th class="thCard">Kategorija</th>
-                                        <th class="thCard">IX</th>
-                                        <th class="thCard">X</th>
-                                        <th class="thCard">XI</th>
-                                        <th class="thCard">XII</th>
-                                        <th class="thCard">I</th>
-                                        <th class="thCard">II</th>
-                                        <th class="thCard">III</th>
-                                        <th class="thCard">IV</th>
-                                        <th class="thCard">V</th>
-                                        <th class="thCard">VI</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th class="thCard" scope="row">Pismeni</th>
+            }
+        </div>
+    <input type="submit" class="btn btn-success addOcjena" style="margin-bottom: 10px;" value="Spremi izostanke" />
+}
        
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                    </tr>
-                                    <tr>
-                                        <th class="thCard" scope="row">Usmeni</th>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                    </tr>
-                                    <tr>
-                                        <th class="thCard" scope="row">Zadaće</th>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                    </tr>
-                                    <tr>
-                                        <th class="thCard" scope="row">Zalaganje</th>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                        <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div type="button" class="btn btn-success addOcjena" style="margin-bottom: 10px;">Spremi ocjenu</div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th class="thCard" colspan="2">Bilješke<div type="button" class="btn btn-primary addBiljeska" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span></div></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th class="thCard" scope="row">Datum</th>
-                                        <th class="thCard">Zapis</th>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+<script>
+
+    function openTextArea(clicked_id) {
+        var filter = "tr#" + clicked_id;
+        var element = document.querySelectorAll(filter)[0];
+        element.style.display = null;
+    }
+
+</script>
+        <!-- Modal -->
+        @*<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="exampleModalLabel" style="display: inline"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;&nbsp;Unos nove bilješke za danas</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
+                    @using (Html.BeginForm("SpremiBiješku", "Profesor", FormMethod.Post))
+                    {
+                    <div class="modal-body">
+                        <textarea class="form-control inputBiljeska" id="exampleTextarea" rows="3"></textarea>
+                     
+                 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
+                        <button type="button" class="btn btn-primary saveChangeColor">Spremi promjene</button>
+                    </div>
+                    }
                 </div>
             </div>
-        </div>
-    }
-</div>
-
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel" style="display: inline"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;&nbsp;Unos nove bilješke za danas</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <textarea class="form-control inputBiljeska" id="exampleTextarea" rows="3"></textarea>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
-                <button type="button" class="btn btn-primary saveChangeColor">Spremi promjene</button>
-            </div>
-        </div>
-    </div>
-</div>
-
+        </div>*@
