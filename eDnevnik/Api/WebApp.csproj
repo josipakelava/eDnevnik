@@ -307,6 +307,7 @@
     <Content Include="Views\Shared\_AdminNavPartial.cshtml" />
     <Content Include="Views\Administrator\UrediOsobne.cshtml" />
     <Content Include="Views\Administrator\UrediProfesor.cshtml" />
+    <Content Include="Views\Profesor\MojRazred.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

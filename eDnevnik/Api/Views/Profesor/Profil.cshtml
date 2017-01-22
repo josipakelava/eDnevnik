@@ -5,14 +5,14 @@
 
 @Html.Partial("_ProfesorNavPartial")
 <div class="profilData">
-    <h1>Profil</h1>
+    <h1 style="color: orange">Profil</h1>
     <br />
-    <h3>Ime:</h3><p>@ViewBag.profesor.ime</p>
-    <h3>Prezime:</h3><p>@ViewBag.profesor.prezime</p>
-    <h3>Datum rođenja:</h3><p>@ViewBag.profesor.datumRodjenja.ToShortDateString()</p>
-    <h3>OIB:</h3><p>@ViewBag.profesor.OIB</p>
-    <h3>Adresa:</h3><p>@ViewBag.profesor.adresa</p>
-    <h3>Mjesto:</h3><p>@ViewBag.profesor.mjesto.ime</p>
-    <h3>e-mail:</h3><p>@ViewBag.profesor.email</p>
+    <h3 class="kategorija">Ime:</h3><h3 class="podatak">@ViewBag.profesor.ime</h3><br/>
+    <h3 class="kategorija">Prezime:</h3><h3 class="podatak">@ViewBag.profesor.prezime</h3><br />
+    <h3 class="kategorija">Datum rođenja:</h3><h3 class="podatak">@ViewBag.profesor.datumRodjenja.ToShortDateString()</h3><br />
+    <h3 class="kategorija">OIB:</h3><h3 class="podatak">@ViewBag.profesor.OIB</h3><br />
+    <h3 class="kategorija">Adresa:</h3><h3 class="podatak">@ViewBag.profesor.adresa</h3><br />
+    <h3 class="kategorija">Mjesto:</h3><h3 class="podatak">@ViewBag.profesor.mjesto.ime</h3><br />
+    <h3 class="kategorija">e-mail:</h3><h3 class="podatak">@ViewBag.profesor.email</h3>
 </div>
 

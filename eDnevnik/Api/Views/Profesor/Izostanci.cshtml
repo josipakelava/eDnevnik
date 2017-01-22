@@ -8,6 +8,7 @@
 
 @using (Html.BeginForm("SpremiIzostanke", "Profesor", FormMethod.Post, new { name = "formAnswerScheme", id = "formAnswerScheme" }))
 {
+    <a href="/Profesor/MojRazred"><div class="btn btn-primary pregledRazredOcjene">Pregledaj ocjene za razred</div></a>
     <div class="table-responsive">
         <table class="table table-bordered absanceTable">
             <thead>

@@ -7,9 +7,9 @@
 
     @using (Html.BeginForm("SpremiRazred", "Profesor", FormMethod.Post))
     {
-
         <div id="accordion" class="positionAccordion" role="tablist" aria-multiselectable="false">
-            @for (int i = 0; i < Model.Count; i++)
+            <input type="submit" class="btn btn-success addOcjena" style="margin-bottom: 10px;" value="Spremi sve unesene promjene" />
+             @for (int i = 0; i < Model.Count; i++)
             {
             var headingId = "heading" + (i + 1);
             var collapseId = "collapse" + (i + 1);
@@ -65,11 +65,11 @@
 
                                                     if (@Model[i].kategorije[j].ocjene[m].ocjena == 0)
                                                     {
-                                                        <td>@Html.TextBoxFor(l => Model[i].kategorije[j].ocjene[m].ocjena, new { Type = "number", Min = "1", Max = "5", Class = "tableInput", Value = "" })</td>
+                                                        <td>@Html.TextBoxFor(l => Model[i].kategorije[j].ocjene[m].ocjena, new { Type = "number", Min = "1", Max = "5", Class = "tableInput ocjenaBox", Value = "" })</td>
                                                     }
                                                     else
                                                     {
-                                                        <td>@Html.TextBoxFor(l => Model[i].kategorije[j].ocjene[m].ocjena, new { Type = "number", Min = "1", Max = "5", Class = "tableInput", Size = Model[i].kategorije[j].ocjene[m].ocjena })</td>
+                                                        <td>@Html.TextBoxFor(l => Model[i].kategorije[j].ocjene[m].ocjena, new { Type = "number", Min = "1", Max = "5", Class = "tableInput ocjenaBox", Size = Model[i].kategorije[j].ocjene[m].ocjena })</td>
                                                     }
 
                                                     @Html.HiddenFor(l => Model[i].kategorije[j].ocjene[m].id)
@@ -112,7 +112,7 @@
                                         @for (int m = 0; m < Model[i].biljeske.Count; m++)
                                         {
                                             <tr>
-                                                <td class="thCard" scope="row">@Model[i].biljeske[m].datum</td>
+                                                <td class="thCard" scope="row">@Model[i].biljeske[m].datum.ToShortDateString()</td>
                                                 <td class="thCard">@Model[i].biljeske[m].biljeska</td>
                                             </tr>
                                         }
@@ -130,7 +130,7 @@
             </div>
             }
         </div>
-    <input type="submit" class="btn btn-success addOcjena" style="margin-bottom: 10px;" value="Spremi izostanke" />
+    
 }
        
 <script>

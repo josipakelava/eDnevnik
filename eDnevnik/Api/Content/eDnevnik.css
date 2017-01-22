@@ -123,6 +123,10 @@
     border-radius: .25rem;
 }
 
+.cardInside{
+    width: 100% !important;
+}
+
 .card-block {
     -webkit-box-flex: 1;
     -webkit-flex: 1 1 auto;
@@ -139,6 +143,12 @@
     margin-bottom: 0;
     background-color: #e0ecf6;
     border-bottom: 1px solid #e0ecf6 !important;
+}
+
+.card-headerOutside{
+    background-color: #6ca5d8 !important;
+    border-bottom-color: #6ca5d8 !important;
+    color: white !important;
 }
 
 .subjectRow:hover{
@@ -312,10 +322,27 @@ a:hover, a:focus{
     height: 90%;
     width: 80%;
     margin-left: 10%;
-    padding-top: 10%;
+    padding-top: 2%;
 }
 
 .smallTable{
     width: 90%;
 }
 
+.pregledRazredOcjene{
+    margin-left: 10%;
+    margin-bottom: 20px !important;
+    background-color: orange !important;
+    border-color: orange !important;
+}
+
+.pregledRazredOcjene:hover{
+    background-color: #ffc355 !important;
+    border-color: #ffc355 !important;
+}
+
+hr{
+    border: 0;
+    height: 3px;
+    background-color: #0D4F8B;
+}

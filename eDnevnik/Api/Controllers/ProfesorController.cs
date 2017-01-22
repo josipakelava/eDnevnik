@@ -67,6 +67,11 @@ namespace Api.Controllers
             return View(izostanci);
         }
 
+        public ActionResult MojRazred()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult SpremiIzostanke(List<IzostanakViewModel> izostanci)
         {
