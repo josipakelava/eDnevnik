@@ -27,25 +27,6 @@ namespace RESTApi
                 SigningCredentials = new SigningCredentials(signKey, SecurityAlgorithms.HmacSha256),
             };
 
-            //var tokenValidationParameters = new TokenValidationParameters
-            //{
-            //    ValidateIssuerSigningKey = true,
-            //    IssuerSigningKey = signKey,
-
-            //    ValidateLifetime = true,
-
-            //    ClockSkew = TimeSpan.Zero
-            //};
-
-            // OVO NE RADI -> CITANJE TOKENA -> TREBA VIDIT PAKETE
-            //app.UseJwtBearerAuthentication(new JwtBearerAuthenticationOptions {
-            //    AllowedAudiences = new[] { "All" },
-            //    IssuerSecurityTokenProviders = new[]
-            //    {
-            //        new SymmetricKeyIssuerSecurityTokenProvider("localhost", Encoding.ASCII.GetBytes("eDnevnik"))
-            //    }
-            //});
-
             app.Use<TokenProviderMiddleware>(Options.Create(options));
         }
     }

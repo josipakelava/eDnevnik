@@ -19,7 +19,7 @@ namespace RESTApi
     {
         public class TokenProviderOptions
         {
-            public string Path { get; set; } = "/api/token";
+            public string Path { get; set; } = "/api/Login";
 
             public string Issuer { get; set; }
 
@@ -85,9 +85,6 @@ namespace RESTApi
                 // You can add other claims here, if you want:
                 var claims = new Claim[]
                 {
-                    new Claim(JwtRegisteredClaimNames.Sub, email),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                    new Claim(JwtRegisteredClaimNames.Iat, now.ToUniversalTime().ToString(), ClaimValueTypes.Integer64),
                     new Claim(ClaimTypes.Sid, o.idOsoba.ToString()),
                     new Claim(ClaimTypes.Name, o.ime),
                     new Claim(ClaimTypes.Surname, o.prezime),
@@ -107,7 +104,7 @@ namespace RESTApi
 
                 var response = new
                 {
-                    access_token = encodedJwt,
+                    access_token = "Bearer " + encodedJwt,
                 };
 
                 // Serialize and return the response
