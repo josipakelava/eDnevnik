@@ -33,12 +33,16 @@ namespace Repository
         {
             return _session.QueryOver<EvidencijaNastave>().Where(p => p.profesor.idOsoba == id).And(p => p.razred.idRazred == idRazred).List();
         }
+        public IList<EvidencijaNastave> GetAllClassSubjects(int idRazred)
+        {
+            return _session.QueryOver<EvidencijaNastave>().Where(p => p.razred.idRazred == idRazred).List();
+        }
         public Predmet GetSubject(int id)
         {
             return _session.QueryOver<Predmet>().Where(p => p.idPredmet == id).List()[0];
         }
 
-        public Razred GetClass(int id, int idRazred)
+        public Razred GetClass(int idRazred)
         {
             return _session.QueryOver<Razred>().Where(r => r.idRazred == idRazred).List()[0];
         }
