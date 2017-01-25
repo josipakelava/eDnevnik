@@ -2,7 +2,7 @@ namespace Domena
 {
     using System;
 
-    public abstract class Osoba
+    public class Osoba
     {
         public virtual int idOsoba { get; set; }
         public virtual string ime { get; set; }

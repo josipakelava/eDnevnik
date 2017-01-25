@@ -1,9 +1,14 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Predmeti";
 }
 
 @Html.Partial("_StudentNavPartial")
+@if (ViewBag.evidencija.Count == 0)
+{
+    <div>Nisi upisan niti u jedan razred. Molimo te obrati se administratoru!</div>
+}
+else
+{
 <div style="margin-left: 10%">
     <h4 class="kategorija" style="color: #0d4f8b">Razred:</h4><h4 class="podatak" style="color: orange">@ViewBag.evidencija[0].razred.naziv</h4><br />
     <h4 class="kategorija" style="color: #0d4f8b">Razrednik:</h4><h4 class="podatak" style="color: orange">prof. @ViewBag.evidencija[0].razred.razrednik.prezime  @ViewBag.evidencija[0].razred.razrednik.ime</h4><br />
@@ -81,9 +86,9 @@
             </div>
         </div>
     </div>
-}
+        }
 </div>
-
+}
 @section Scripts
 {
     <script type="text/javascript">

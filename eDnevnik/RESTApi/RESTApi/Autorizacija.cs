@@ -16,22 +16,7 @@ namespace RESTApi
             if (httpContext.Request.Headers["Authorization"] != null && httpContext.Request.Headers["Authorization"].Split(' ').Length ==2)
             {
                 var jwtToken = new JwtSecurityToken(httpContext.Request.Headers["Authorization"].Split(' ')[1]);
-                Claim[] claims = new Claim[5];
-                int i = 0;
-                foreach (Claim claim in jwtToken.Claims)
-                {
-                    switch (claim.Type)
-                    {
-                        case ClaimTypes.Sid:
-                        case ClaimTypes.Name:
-                        case ClaimTypes.Surname:
-                        case ClaimTypes.Email:
-                        case ClaimTypes.Role:
-                            claims[i++] = claim;
-                            break;
-                    }
-                }
-                Thread.CurrentPrincipal = new ClaimsPrincipal(new ClaimsIdentity(claims));
+                Thread.CurrentPrincipal = new ClaimsPrincipal(new ClaimsIdentity(jwtToken.Claims));
                 return true;
             }
             return false;

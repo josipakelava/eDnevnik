@@ -13,9 +13,17 @@ namespace Repository
         {
             IList<string> uloge = new List<string>();
             uloge.Add("Ucenik");
-            //uloge.Add("Razrednik");
             uloge.Add("Profesor");
             uloge.Add("Administrator");
+
+            return uloge;
+        }
+
+        public IList<string> GetAllToCreate()
+        {
+            IList<string> uloge = new List<string>();
+            uloge.Add("Ucenik");
+            uloge.Add("Profesor");
 
             return uloge;
         }

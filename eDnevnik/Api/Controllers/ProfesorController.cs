@@ -20,7 +20,7 @@ namespace Api.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
+            int id = int.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value);
             Profesor profesor = _repository.Find(id);
 
             if (profesor.razrednistvo == null)
@@ -36,7 +36,7 @@ namespace Api.Controllers
         [Authorize]
         public ActionResult Predmeti(int idRazred)
         {
-            int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
+            int id = int.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value);
             ViewBag.evidencija = _repository.GetAllSubjects(id, idRazred);
             TempData["idRazred"] = idRazred;
             return View();
@@ -45,7 +45,7 @@ namespace Api.Controllers
         // GET: Profesor/Ucenici
         public ActionResult Popis(int idPredmet, int idRazred)
         {
-            int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
+            int id = int.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value);
             TempData["idPredmet"] = idPredmet;
             Predmet predmet = _repository.GetSubject(idPredmet);
             Razred razred = _repository.GetClass(id, idRazred);
@@ -55,14 +55,14 @@ namespace Api.Controllers
 
         public ActionResult Profil()
         {
-            int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
+            int id = int.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value);
             ViewBag.profesor = _repository.Find(id);
             return View();
         }
 
         public ActionResult Izostanci()
         {
-            int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
+            int id = int.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value);
             List<IzostanakViewModel> izostanci = IzostanakViewModel.toList(_repository.GetAllAbsences(id));
             return View(izostanci);
         }

@@ -14,6 +14,7 @@ namespace Repository
          IList<Ocjena> GetAllGrades(int id);
          IList<EvidencijaNastave> GetSchedule(int id);
          IList<Biljeska> GetAllNotes(int id);
+        IList<Ocjena> GetAllGradesForSubject(int idOsoba, int idPredmet);
 
     }
 }

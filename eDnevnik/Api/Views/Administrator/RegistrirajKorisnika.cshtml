@@ -1,0 +1,46 @@
+﻿@model Api.Models.OsobaViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+@Html.Partial("_AdminNavPartial")
+
+<div class="registerContainer">
+    <h2 class="loginSubtitle" style="color: orange">Registracija novog korisnika</h2>
+    @using (Html.BeginForm("RegistrirajKorisnika", "Administrator", FormMethod.Post, new { name = "formAnswerScheme", id = "form" }))
+    {
+            @Html.TextBoxFor(m => m.email, new { Class = "formInput", Name = "Email", Type = "text", Placeholder = "E-mail" })
+            @Html.ValidationMessageFor(m => m.email, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(m => m.password, new { Class = "formInput", Name = "Password", Type = "password", Placeholder = "Lozinka" })
+            @Html.ValidationMessageFor(m => m.password, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(m => m.repeatedPassword, new { Class = "formInput", Name = "RepeatedPassword", Type = "password", Placeholder = "Ponovljena lozinka" })
+            @Html.ValidationMessageFor(m => m.repeatedPassword, "", new { @class = "text-danger" })
+
+            @Html.DropDownListFor(m => m.role, new SelectList(ViewBag.uloga), new { Class = "form-control", Name = "role" })
+
+            <hr />
+
+            @Html.TextBoxFor(m => m.ime, new { Class = "formInput", Name = "Ime", Type = "text", Placeholder = "Ime" })
+            @Html.ValidationMessageFor(m => m.ime, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(m => m.prezime, new { Class = "formInput", Name = "Prezime", Type = "text", Placeholder = "Prezime" })
+            @Html.ValidationMessageFor(m => m.prezime, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(m => m.datumRodjenja, new { Class = "formInput", Name = "DatumRodjenja", Type = "date", Placeholder = "Datum rođenja (dd.mm.yyyy.)" })
+            @Html.ValidationMessageFor(m => m.datumRodjenja, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(m => m.OIB, new { Class = "formInput", Name = "OIB", Type = "number", Placeholder = "OIB", Min = "0" })
+            @Html.ValidationMessageFor(m => m.OIB, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(m => m.adresa, new { Class = "formInput", Name = "Adresa", Type = "text", Placeholder = "Adresa" })
+            @Html.ValidationMessageFor(m => m.adresa, "", new { @class = "text-danger" })
+
+            @Html.DropDownListFor(m => m.idMjesto, new SelectList(ViewBag.mjesta, "idMjesto", "ime"), "Mjesto", new { Class = "form-control", Name = "idMjesto" })
+            @Html.ValidationMessageFor(m => m.idMjesto, "", new { @class = "text-danger" })
+            <input class="formButton" type="submit" value="Registriraj" />
+   }
+</div>
+@section Scripts
+{
+    <script type="text/javascript">
+        $("#form").submit(function () {
+            $(this).valid();
+        });
+    </script>
+    }

@@ -27,9 +27,6 @@ namespace Api.Controllers
         {
             var korisnik = new ClaimsIdentity(new[] {
                     new Claim(ClaimTypes.Sid, o.idOsoba.ToString()),
-                    new Claim(ClaimTypes.Name, o.ime),
-                    new Claim(ClaimTypes.Surname, o.prezime),
-                    new Claim(ClaimTypes.Email, o.email),
                     new Claim(ClaimTypes.Role, uloga)
                 },
                 DefaultAuthenticationTypes.ApplicationCookie,

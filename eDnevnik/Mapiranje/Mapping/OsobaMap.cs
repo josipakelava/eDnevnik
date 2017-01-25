@@ -7,7 +7,7 @@ namespace Mapiranje
     {
         public OsobaMap()
         {
-            Id(x => x.idOsoba).GeneratedBy.Assigned();
+            Id(x => x.idOsoba).GeneratedBy.Increment();
             Map(x => x.ime).Not.Nullable();
             Map(x => x.prezime).Not.Nullable(); ;
             Map(x => x.datumRodjenja).Not.Nullable(); ;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domena;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public interface IUlogaRepository
+    public interface IMjestoRepository
     {
-        IList<string> GetAll();
-        IList<string> GetAllToCreate();
+        IList<Mjesto> GetAll();
     }
 }

@@ -13,11 +13,27 @@ namespace RESTApi
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+              name: "Predmet",
+              url: "api/Subjects/{subjectId}/{action}",
+              defaults: new { controller = "Subjects", action = "", subjectId = UrlParameter.Optional },
+              namespaces: new[] { "RESTApi.Controllers" }
+          );
+
+            routes.MapRoute(
+                name: "UcenikPredmet",
+                url: "api/Ucenik/Subjects/{subjectId}/{action}",
+                defaults: new { controller = "Ucenik", action = "", subjectId = UrlParameter.Optional },
+                namespaces: new[] { "RESTApi.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "api/{controller}/{action}/{id}",
                 defaults: new { controller = "", action = "Index", id = UrlParameter.Optional },
                 namespaces: new[] { "RESTApi.Controllers" }
             );
+
+       
         }
     }
 }
