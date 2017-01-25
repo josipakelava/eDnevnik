@@ -16,5 +16,9 @@ namespace Repository
         {
             return _session.QueryOver<Predmet>().Where(p => p.idPredmet == id).List()[0].kategorije;
         }
+        public Predmet GetSubject(int id)
+        {
+            return _session.QueryOver<Predmet>().Where(p => p.idPredmet == id).List()[0];
+        }
     }
 }

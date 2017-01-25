@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public interface IPredmetRepository
+    public interface IRazredRepository
     {
-        ICollection<Kategorija> GetAllCategories(int id);
-        Predmet GetSubject(int id);
+        Razred GetClass(int idRazred);
     }
 }

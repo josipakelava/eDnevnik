@@ -15,13 +15,20 @@ namespace Api.Controllers
     [Authorize(Roles = "Profesor, Administrator")]
     public class ProfesorController : Controller
     {
-        private IProfesorRepository _repository = new ProfesorRepository();
+        private IProfesorRepository _profesorRepository = new ProfesorRepository();
+        private IBiljeskaRepository _biljeskaRepository = new BiljeskaRepository();
+        private IIzostanakRepository _izostanakRepository = new IzostanakRepository();
+        private IOcjenaRepository _ocjenaRepository = new OcjenaRepository();
+        private IPredmetRepository _predmetRepository = new PredmetRepository();
+        private IRazredRepository _razredRepository = new RazredRepository();
+        private IEvidencijaNastaveRepository _evidencijaNastaveRepository = new EvidencijaNastaveRepository();
+
         // GET: Profesor
         [Authorize]
         public ActionResult Index()
         {
             int id = int.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value);
-            Profesor profesor = _repository.Find(id);
+            Profesor profesor = _profesorRepository.Find(id);
 
             if (profesor.razrednistvo == null)
             {
@@ -29,6 +36,7 @@ namespace Api.Controllers
             }
             else TempData["razrednistvo"] = 1;
             ViewBag.profesor = profesor;
+
             return View();
         }
 
@@ -37,7 +45,7 @@ namespace Api.Controllers
         public ActionResult Predmeti(int idRazred)
         {
             int id = int.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value);
-            ViewBag.evidencija = _repository.GetAllSubjects(id, idRazred);
+            ViewBag.evidencija = _evidencijaNastaveRepository.GetAllProfesorSubjects(id, idRazred);
             TempData["idRazred"] = idRazred;
             return View();
         }
@@ -47,8 +55,8 @@ namespace Api.Controllers
         {
             int id = int.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value);
             TempData["idPredmet"] = idPredmet;
-            Predmet predmet = _repository.GetSubject(idPredmet);
-            Razred razred = _repository.GetClass(idRazred);
+            Predmet predmet = _predmetRepository.GetSubject(idPredmet);
+            Razred razred = _razredRepository.GetClass(idRazred);
             List<RazredViewModel> rvm = RazredViewModel.toList(razred, predmet);
             return View(rvm);
         }
@@ -56,23 +64,23 @@ namespace Api.Controllers
         public ActionResult Profil()
         {
             int id = int.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value);
-            ViewBag.profesor = _repository.Find(id);
+            ViewBag.profesor = _profesorRepository.Find(id);
             return View();
         }
 
         public ActionResult Izostanci()
         {
             int id = int.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value);
-            List<IzostanakViewModel> izostanci = IzostanakViewModel.toList(_repository.GetAllAbsences(id));
+            List<IzostanakViewModel> izostanci = IzostanakViewModel.toList(_profesorRepository.GetAllAbsencesOfClass(id));
             return View(izostanci);
         }
 
         public ActionResult MojRazred()
         {
             int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
-            Profesor profesor = _repository.Find(id);
-            Razred razred = _repository.GetClass(profesor.razrednistvo.idRazred);
-            IList<EvidencijaNastave> evidencija = _repository.GetAllClassSubjects(razred.idRazred);
+            Profesor profesor = _profesorRepository.Find(id);
+            Razred razred = _razredRepository.GetClass(profesor.razrednistvo.idRazred);
+            IList<EvidencijaNastave> evidencija = _evidencijaNastaveRepository.GetAllClassSubjects(razred.idRazred);
             List<MojRazredViewModel> podaciRazreda = MojRazredViewModel.toList(razred, evidencija);
             return View(podaciRazreda);
         }
@@ -82,7 +90,7 @@ namespace Api.Controllers
         {
             foreach (IzostanakViewModel izostanak in izostanci)
             {
-                _repository.UpdateIzostanak(izostanak.id, izostanak.opravdanost, izostanak.razlog);
+                _izostanakRepository.UpdateIzostanak(izostanak.id, izostanak.opravdanost, izostanak.razlog);
             }
             return RedirectToAction("Izostanci");
         }
@@ -94,11 +102,11 @@ namespace Api.Controllers
             foreach (RazredViewModel ucenik in razred)
             {
                 if(ucenik.novabiljeska != null) {
-                    _repository.InsertNote(ucenik.idPredmet, ucenik.idUcenik, ucenik.novabiljeska, DateTime.Today);
+                    _biljeskaRepository.InsertNote(ucenik.idPredmet, ucenik.idUcenik, ucenik.novabiljeska, DateTime.Today);
                 }
                 if(ucenik.izostanak == true)
                 {
-                    _repository.InsertAbsence(ucenik.idPredmet, ucenik.idUcenik, DateTime.Today);
+                    _izostanakRepository.InsertAbsence(ucenik.idPredmet, ucenik.idUcenik, DateTime.Today);
                 }
                 foreach (KategorijaView kategorija in ucenik.kategorije)
                 {
@@ -106,12 +114,12 @@ namespace Api.Controllers
                     {
                         if(ovm.id >= 0 && ovm.ocjena > 0 && ovm.ocjena < 6)
                         {
-                            _repository.UpdateGrade(ovm.id, ovm.ocjena);
+                            _ocjenaRepository.UpdateGrade(ovm.id, ovm.ocjena);
                         } else
                         {
                             if(ovm.ocjena != 0 && ovm.ocjena > 0 && ovm.ocjena < 6)
                             {
-                                _repository.InsertGrade(ovm.ocjena, ucenik.idUcenik, ucenik.idPredmet, kategorija.id, GenerirajDatum(ovm.mjesecUredivanje));
+                                _ocjenaRepository.InsertGrade(ovm.ocjena, ucenik.idUcenik, ucenik.idPredmet, kategorija.id, GenerirajDatum(ovm.mjesecUredivanje));
                             }
                         }
                     }
