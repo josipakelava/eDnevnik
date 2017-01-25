@@ -22,7 +22,7 @@ namespace RESTApi
             routes.MapRoute(
                 name: "UcenikPredmet",
                 url: "api/Ucenik/Subjects/{subjectId}/{action}",
-                defaults: new { controller = "Ucenik", action = "", subjectId = UrlParameter.Optional },
+                defaults: new { controller = "Ucenik", action = "Subjects", subjectId = UrlParameter.Optional },
                 namespaces: new[] { "RESTApi.Controllers" }
             );
 
