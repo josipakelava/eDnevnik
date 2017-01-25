@@ -245,6 +245,7 @@
     </Compile>
     <Compile Include="Models\AutorizacijaModels.cs" />
     <Compile Include="Models\IzostanakViewModel.cs" />
+    <Compile Include="Models\MojRazredViewModel.cs" />
     <Compile Include="Models\OcjenaViewModel.cs" />
     <Compile Include="Models\OsobaViewModel.cs" />
     <Compile Include="Models\RazredViewModel.cs" />

@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Api.Models.MojRazredViewModel>
 @{
     ViewBag.Title = "MojRazred";
 }
@@ -6,27 +6,36 @@
 @Html.Partial("_ProfesorNavPartial")
 <br />
 <div id="accordion" class="positionAccordion" role="tablist" aria-multiselectable="true">
-    <div class="card">
-        <a class="collapsed subjectRow" data-toggle="collapse" data-parent="#accordion" href="#bruna" aria-expanded="true" aria-controls="collapseOne">
-            <div class="card-header card-headerOutside" role="tab" id="headingOne">
+   @for (int i = 0; i < Model.Count; i++)
+   {
+       var headingId = "heading" + (i + 1);
+       var collapseId = "collapse" + (i + 1);
+     <div class="card">
+        <a class="collapsed subjectRow" data-toggle="collapse" data-parent="#accordion" href="#@collapseId" aria-expanded="true" aria-controls="@collapseId">
+            <div class="card-header card-headerOutside" role="tab" id=@headingId>
                 <h5 class="mb-0">
-                    BRUNA KRALJICA
+                   @Model[i].ucenik
                 </h5>
             </div>
         </a>
 
-        <div id="bruna" class="collapse" role="tabpanel" aria-labelledby="headingOne">
+        <div id=@collapseId class="collapse" role="tabpanel" aria-labelledby="headingOne">
             <div id="accordion" class="positionAccordion" role="tablist" aria-multiselectable="true">
+@for (int j = 0; j < Model[i].predmeti.Count; j++)
+{
+
+    var headingId1 = "heading" + i + "p" + (j + 1);
+    var collapseId1 = "collapse" + i + "p" + (j + 1);
                 <div class="card cardInside">
-                    <a class="collapsed subjectRow" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <a class="collapsed subjectRow" data-toggle="collapse" data-parent="#accordion" href="#@collapseId1" aria-expanded="true" aria-controls="collapseOne">
                         <div class="card-header" role="tab" id="headingOne">
                             <h5 class="mb-0">
-                                MATEMATIKA(prof. Harcet)
+                                @Model[i].predmeti[j].naziv.ToUpper() (prof. @Model[i].predmeti[j].predavac )
                             </h5>
                         </div>
                     </a>
 
-                    <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne">
+                    <div id=@collapseId1 class="collapse" role="tabpanel" aria-labelledby="headingOne">
                         <div class="card-block">
                             <div class="container">
                                 <div class="table-responsive smallTable">
@@ -47,58 +56,27 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th class="thCard" scope="row">Pismeni</th>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                            </tr>
-                                            <tr>
-                                                <th class="thCard" scope="row">Usmeni</th>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                            </tr>
-                                            <tr>
-                                                <th class="thCard" scope="row">Zadaće</th>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                            </tr>
-                                            <tr>
-                                                <th class="thCard" scope="row">Zalaganje</th>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                            </tr>
+                                            @for (int m = 0; m < Model[i].predmeti[j].kategorije.Count; m++)
+                                            {
+
+                                                <tr>
+                                                    <th class="thCard" scope="row">@Model[i].predmeti[j].kategorije[m].naziv</th>
+                                                    @for (int l = 0; l < 10; l++)
+                                                    {
+
+                                                        if (@Model[i].predmeti[j].kategorije[m].ocjene[l].ocjena != 0)
+                                                        {
+                                                            <td class="ocjenaBox">@Model[i].predmeti[j].kategorije[m].ocjene[l].ocjena</td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td  class="ocjenaBox"></td>
+                                                        }
+
+
+                                                    }
+                                                </tr>
+                                            }
                                         </tbody>
                                     </table>
                                 </div>
@@ -114,14 +92,18 @@
                                                 <th class="thCard" scope="row">Datum</th>
                                                 <th class="thCard">Zapis</th>
                                             </tr>
-                                            <tr>
+                                            @*<tr>
                                                 <td><input type="number" min="1" max="5" class="tableInput" /></td>
                                                 <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="text" class="tableInput" /></td>
-                                            </tr>
+                                            </tr>*@
+                                            @for (int m = 0; m < @Model[i].predmeti[j].biljeske.Count; m++)
+                                            {
+                                                <tr>
+                                                    <td class="thCard" scope="row">@Model[i].predmeti[j].biljeske[m].datum.ToShortDateString()</td>
+                                                    <td class="thCard">@Model[i].predmeti[j].biljeske[m].biljeska</td>
+                                                </tr>
+                                            }
+                                 
                                         </tbody>
                                     </table>
                                 </div>
@@ -129,229 +111,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="card cardInside">
-                    <a class="collapsed subjectRow" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        <div class="card-header" role="tab" id="headingTwo">
-                            <h5 class="mb-0">
-                                HRVATSKI(prof. Lončar)
-                            </h5>
-                        </div>
-                    </a>
-                    <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
-                        <div class="card-block">
-                            <div class="container">
-                                <div class="table-responsive smallTable">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th class="thCard">Kategorija</th>
-                                                <th class="thCard">IX</th>
-                                                <th class="thCard">X</th>
-                                                <th class="thCard">XI</th>
-                                                <th class="thCard">XII</th>
-                                                <th class="thCard">I</th>
-                                                <th class="thCard">II</th>
-                                                <th class="thCard">III</th>
-                                                <th class="thCard">IV</th>
-                                                <th class="thCard">V</th>
-                                                <th class="thCard">VI</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th class="thCard" scope="row">Pismeni</th>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                            </tr>
-                                            <tr>
-                                                <th class="thCard" scope="row">Usmeni</th>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                            </tr>
-                                            <tr>
-                                                <th class="thCard" scope="row">Zadaće</th>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                            </tr>
-                                            <tr>
-                                                <th class="thCard" scope="row">Zalaganje</th>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="table-responsive smallTable">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th class="thCard" colspan="2">Bilješke</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th class="thCard" scope="row">Datum</th>
-                                                <th class="thCard">Zapis</th>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="text" class="tableInput" /></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card cardInside">
-                    <a class="collapsed subjectRow" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        <div class="card-header" role="tab" id="headingThree">
-                            <h5 class="mb-0">
-                                ENGLESKI(prof. Matovinović)
-                            </h5>
-                        </div>
-                    </a>
-                    <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
-                        <div class="card-block">
-                            <div class="container">
-                                <div class="table-responsive smallTable">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th class="thCard">Kategorija</th>
-                                                <th class="thCard">IX</th>
-                                                <th class="thCard">X</th>
-                                                <th class="thCard">XI</th>
-                                                <th class="thCard">XII</th>
-                                                <th class="thCard">I</th>
-                                                <th class="thCard">II</th>
-                                                <th class="thCard">III</th>
-                                                <th class="thCard">IV</th>
-                                                <th class="thCard">V</th>
-                                                <th class="thCard">VI</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th class="thCard" scope="row">Pismeni</th>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                            </tr>
-                                            <tr>
-                                                <th class="thCard" scope="row">Usmeni</th>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                            </tr>
-                                            <tr>
-                                                <th class="thCard" scope="row">Zadaće</th>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                            </tr>
-                                            <tr>
-                                                <th class="thCard" scope="row">Zalaganje</th>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="table-responsive smallTable">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th class="thCard" colspan="2">Bilješke</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th class="thCard" scope="row">Datum</th>
-                                                <th class="thCard">Zapis</th>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="number" min="1" max="5" class="tableInput" /></td>
-                                                <td><input type="text" class="tableInput" /></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+}
             </div>
         </div>
+        
     </div>
+   }
 </div>

@@ -65,11 +65,14 @@ namespace Api.Models
                 IList<BiljeskaView> biljeske = new List<BiljeskaView>();
                 foreach (Biljeska biljeska in ucenik.biljeske)
                 {
-                    BiljeskaView bv = new BiljeskaView();
-                    bv.id = biljeska.id;
-                    bv.datum = biljeska.datum;
-                    bv.biljeska = biljeska.biljeska;
-                    biljeske.Add(bv);
+                    if (biljeska.predmet.idPredmet == predmet.idPredmet)
+                    {
+                        BiljeskaView bv = new BiljeskaView();
+                        bv.id = biljeska.id;
+                        bv.datum = biljeska.datum;
+                        bv.biljeska = biljeska.biljeska;
+                        biljeske.Add(bv);
+                    }
                 }
                 biljeske = biljeske.OrderBy(o => o.datum).ToList();
                 rvm.biljeske = biljeske;

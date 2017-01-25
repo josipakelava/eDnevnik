@@ -48,7 +48,7 @@ namespace Api.Controllers
             int id = int.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value);
             TempData["idPredmet"] = idPredmet;
             Predmet predmet = _repository.GetSubject(idPredmet);
-            Razred razred = _repository.GetClass(id, idRazred);
+            Razred razred = _repository.GetClass(idRazred);
             List<RazredViewModel> rvm = RazredViewModel.toList(razred, predmet);
             return View(rvm);
         }
@@ -69,7 +69,12 @@ namespace Api.Controllers
 
         public ActionResult MojRazred()
         {
-            return View();
+            int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
+            Profesor profesor = _repository.Find(id);
+            Razred razred = _repository.GetClass(profesor.razrednistvo.idRazred);
+            IList<EvidencijaNastave> evidencija = _repository.GetAllClassSubjects(razred.idRazred);
+            List<MojRazredViewModel> podaciRazreda = MojRazredViewModel.toList(razred, evidencija);
+            return View(podaciRazreda);
         }
 
         [HttpPost]

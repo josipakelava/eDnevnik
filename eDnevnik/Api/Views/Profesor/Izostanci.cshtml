@@ -28,7 +28,7 @@
                         @Html.HiddenFor(m => Model[i].datum)
                         @Html.HiddenFor(m => Model[i].predmet)
                         @Html.HiddenFor(m => Model[i].ucenik)
-                        <td class="izostanciUredenje">@Html.DisplayFor(m => Model[i].datum)</td>
+                        <td class="izostanciUredenje">@Model[i].datum.ToShortDateString()</td>
                         <td class="izostanciUredenje">@Html.DisplayFor(m => Model[i].predmet)</td>
                         <td class="izostanciUredenje">@Html.DisplayFor(m => Model[i].ucenik)</td>
                         <td>

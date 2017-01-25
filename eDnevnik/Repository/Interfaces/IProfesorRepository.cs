@@ -12,9 +12,10 @@ namespace Repository
         Profesor Find(int id);
         IList<Izostanak> GetAllAbsences(int id);
         IList<EvidencijaNastave> GetAllSubjects(int id, int idRazred);
+        IList<EvidencijaNastave> GetAllClassSubjects(int idRazred);
 
         Predmet GetSubject(int id);
-        Razred GetClass(int id, int idRazred);
+        Razred GetClass(int idRazred);
 
         void UpdateIzostanak(int id, bool opravdanost, string razlog);
 
