@@ -13,6 +13,10 @@ namespace Api.Controllers
         IUlogaRepository _ulogaRepository = new UlogaRepository();
         IMjestoRepository _mjestoRepository = new MjestoRepository();
         IOsobaRepository _osobaRepository = new OsobaRepository();
+        IPredmetRepository _predmetRepository = new PredmetRepository();
+        IRazredRepository _razredReopsitory = new RazredRepository();
+        ISkolaRepository _skolaRepostiroy = new SkolaRepository();
+        IProfesorRepository _profesorRepository = new ProfesorRepository();
 
         // GET: Administrator
         public ActionResult Index()
@@ -45,15 +49,58 @@ namespace Api.Controllers
             return View();
         }
 
-        public ActionResult UrediProfesor()
+        public ActionResult DodajPredmet()
         {
-            return View();
+            return View(new PredmetViewModel());
+        }
+        public ActionResult DodajRazred()
+        {
+            ViewBag.skola = _skolaRepostiroy.GetAllSchool();
+            List<Profesor> osoba =(List<Profesor>) _profesorRepository.GetAll();
+            osoba = osoba.FindAll(x => x.razrednistvo == null);
+            ViewBag.osoba = osoba;
+
+            return View(new NoviRazredViewModel());
+        }
+        [HttpPost]
+        public ActionResult NoviPredmet(PredmetViewModel predmet)
+        {
+            _predmetRepository.InsertSubject(predmet.naziv);
+            return RedirectToAction("DodajPredmet");
+        }
+
+        [HttpPost]
+        public ActionResult NoviRazred(NoviRazredViewModel razred)
+        {
+            return RedirectToAction("DodajRazred");
         }
 
         public String DohvatiOsobu(int id)
         {
             Osoba osoba = _osobaRepository.Get(id);
             return JsonConvert.SerializeObject(OsobaViewModel.toModel(osoba));
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public JsonResult doesNazivExist(string naziv)
+        {
+
+            var predmeti = (List<Predmet>) _predmetRepository.GetAllSubject();
+            var postoji = predmeti.Find(x => x.naziv == naziv);
+                
+            return Json(postoji == null);
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public JsonResult doesNazivRazredExist(string naziv)
+        {
+
+            var razredi = (List<Razred>)_razredReopsitory.GetAllClasses();
+            var postoji = razredi.Find(x => x.naziv == naziv);
+
+            return Json(postoji == null);
         }
     }
 }

@@ -10,5 +10,9 @@ namespace Repository
     public interface IPredmetRepository
     {
         ICollection<Kategorija> GetAllCategories(int id);
+        Predmet GetSubject(int id);
+        IList<Predmet> GetAllSubject();
+
+        void InsertSubject(string naziv);
     }
 }
