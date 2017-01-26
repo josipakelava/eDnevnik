@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public interface IRazredRepository
+    public interface ISkolaRepository
     {
-        Razred GetClass(int idRazred);
-        IList<Razred> GetAllClasses();
+        IList<Skola> GetAllSchool();
     }
 }

@@ -17,6 +17,11 @@ namespace Repository
             return _session.QueryOver<Profesor>().Where(u => u.idOsoba == id).List()[0];
         }
 
+        public IList<Profesor> GetAll()
+        {
+            return _session.QueryOver<Profesor>().List();
+        }
+
         public IList<Izostanak> GetAllAbsencesOfClass(int idRazrednik)
         {
             Profesor profesor = Find(idRazrednik);

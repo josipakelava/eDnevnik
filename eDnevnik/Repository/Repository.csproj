@@ -70,6 +70,7 @@
     <Compile Include="Interfaces\IPredmetRepository.cs" />
     <Compile Include="Interfaces\IProfesorRepository.cs" />
     <Compile Include="Interfaces\IRazredRepository.cs" />
+    <Compile Include="Interfaces\ISkolaRepository.cs" />
     <Compile Include="Interfaces\IUcenikRepository.cs" />
     <Compile Include="Interfaces\IUlogaRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Repositories\PredmetRepository.cs" />
     <Compile Include="Repositories\ProfesorRepository.cs" />
     <Compile Include="Repositories\RazredRepository.cs" />
+    <Compile Include="Repositories\SkolaRepository.cs" />
     <Compile Include="Repositories\UcenikRepository.cs" />
     <Compile Include="Repositories\UlogaRepository.cs" />
   </ItemGroup>

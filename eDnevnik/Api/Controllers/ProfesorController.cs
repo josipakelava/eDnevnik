@@ -35,6 +35,7 @@ namespace Api.Controllers
                 TempData["razrednistvo"] = 0;
             }
             else TempData["razrednistvo"] = 1;
+            profesor.evidencijaNastave = profesor.evidencijaNastave.OrderBy(o => o.razred.naziv).ToList();
             ViewBag.profesor = profesor;
 
             return View();

@@ -11,6 +11,8 @@ namespace Repository
     {
         Profesor Find(int id);
         IList<Izostanak> GetAllAbsencesOfClass(int idRazrednik);
+
+        IList<Profesor> GetAll();
     
     }
 }

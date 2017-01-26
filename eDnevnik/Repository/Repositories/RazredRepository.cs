@@ -16,6 +16,10 @@ namespace Repository
         {
             return _session.QueryOver<Razred>().Where(r => r.idRazred == idRazred).List()[0];
         }
+        public IList<Razred> GetAllClasses()
+        {
+            return _session.QueryOver<Razred>().List();
+        }
 
     }
 }

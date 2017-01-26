@@ -20,5 +20,23 @@ namespace Repository
         {
             return _session.QueryOver<Predmet>().Where(p => p.idPredmet == id).List()[0];
         }
+
+        public IList<Predmet> GetAllSubject()
+        {
+            return _session.QueryOver<Predmet>().List();
+        }
+
+        public void InsertSubject(string naziv)
+        {
+            using (var transaction = _session.BeginTransaction())
+            {
+                Predmet predmet = new Predmet();
+
+                predmet.naziv = naziv;
+                _session.Save(predmet);
+
+                transaction.Commit();
+            }
+        }
     }
 }
