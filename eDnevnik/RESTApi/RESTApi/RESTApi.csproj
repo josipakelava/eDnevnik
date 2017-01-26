@@ -351,12 +351,13 @@
     <Compile Include="App_Start\Tokens.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Autorizacija.cs" />
-    <Compile Include="Controllers\SubjectsController.cs" />
     <Compile Include="Controllers\UcenikController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cmn.cs" />
     <Compile Include="Models\Izostanak.cs" />
+    <Compile Include="Models\Biljeska.cs" />
     <Compile Include="Models\Ocjena.cs" />
     <Compile Include="Models\Predmet.cs" />
     <Compile Include="Models\Ucenik.cs" />

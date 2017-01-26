@@ -42,5 +42,10 @@ namespace Repository
         {
             return _session.QueryOver<Ocjena>().Where(u => u.ucenik.idOsoba == idOsoba && u.predmet.idPredmet == idPredmet).List();
         }
+
+        public IList<Biljeska> GetAllNotesForSubject(int idOsoba, int idPredmet)
+        {
+            return _session.QueryOver<Biljeska>().Where(u => u.ucenik.idOsoba == idOsoba && u.predmet.idPredmet == idPredmet).List();
+        }
     }
 }
