@@ -13,5 +13,7 @@ namespace Api.Models
         [Required(ErrorMessage = "Obavezno polje")]
         [Remote("doesNazivExist", "Administrator", HttpMethod = "POST", ErrorMessage = "Predmet s tim imenom vec postoji, molim vas unesite drugacije ime")]
         public string naziv { get; set; }
+
+        public int idPredmet { get; set; }
     }
 }

@@ -17,6 +17,7 @@ namespace Api.Controllers
         IRazredRepository _razredReopsitory = new RazredRepository();
         ISkolaRepository _skolaRepostiroy = new SkolaRepository();
         IProfesorRepository _profesorRepository = new ProfesorRepository();
+        IEvidencijaNastaveRepository _evidencijaRepository = new EvidencijaNastaveRepository();
 
         // GET: Administrator
         public ActionResult Index()
@@ -47,6 +48,21 @@ namespace Api.Controllers
             ViewBag.osobe = OsobaViewModel.toList(_osobaRepository.GetAll());
             ViewBag.mjesta = _mjestoRepository.GetAll();
             return View();
+        }
+
+        public ActionResult EvidencijaNastave()
+        {
+            ViewBag.razred = _razredReopsitory.GetAllClasses();
+            ViewBag.predmet = _predmetRepository.GetAllSubject();
+            ViewBag.profesori = OsobaViewModel.toListProfesor(_profesorRepository.GetAll());
+            return View(new EvidencijaViewModel());
+        }
+
+        [HttpPost]
+        public ActionResult NovaEvidencija(EvidencijaViewModel evidencija)
+        {
+            _evidencijaRepository.InsertNew(evidencija.idRazred, evidencija.idPredmet, evidencija.idProfesor);
+            return RedirectToAction("EvidencijaNastave");
         }
 
         public ActionResult DodajPredmet()
@@ -93,6 +109,23 @@ namespace Api.Controllers
             osoba = osoba.FindAll(x => x.skola.idSkola == id || x.skola.idSkola == 0);
 
             return JsonConvert.SerializeObject(OsobaViewModel.toListProfesor(osoba));
+        }
+
+        public string PromijeniRazred(int id)
+        {
+            Razred razred = _razredReopsitory.GetClass(id);
+            List<Profesor> osoba = (List<Profesor>)_profesorRepository.GetAll();
+            osoba = osoba.FindAll(x => x.skola.idSkola == razred.skola.idSkola || x.skola.idSkola == 0);
+
+            List<Predmet> predmeti = (List<Predmet>) _predmetRepository.GetAllSubject();
+            List<EvidencijaNastave> evidencija =(List <EvidencijaNastave>) _evidencijaRepository.GetAllClassSubjects(id);
+            foreach (EvidencijaNastave item in evidencija)
+            {
+                predmeti = predmeti.FindAll(x => x.idPredmet != item.predmet.idPredmet);
+            }
+
+            
+            return JsonConvert.SerializeObject(EvidencijaViewModel.toList(osoba, predmeti));
         }
 
         [AllowAnonymous]

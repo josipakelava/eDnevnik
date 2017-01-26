@@ -244,6 +244,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AutorizacijaModels.cs" />
+    <Compile Include="Models\EvidencijaViewModel.cs" />
     <Compile Include="Models\IzostanakViewModel.cs" />
     <Compile Include="Models\MojRazredViewModel.cs" />
     <Compile Include="Models\NoviRazredViewModel.cs" />
@@ -313,6 +314,7 @@
     <Content Include="Views\Administrator\DodajPredmet.cshtml" />
     <Content Include="Views\Profesor\MojRazred.cshtml" />
     <Content Include="Views\Administrator\DodajRazred.cshtml" />
+    <Content Include="Views\Administrator\EvidencijaNastave.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

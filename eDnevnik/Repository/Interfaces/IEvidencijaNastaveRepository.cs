@@ -11,6 +11,8 @@ namespace Repository
     {
         IList<EvidencijaNastave> GetAllProfesorSubjects(int idProfesor, int idRazred);
         IList<EvidencijaNastave> GetAllClassSubjects(int idRazred);
+
+        void InsertNew(int idRazred, int idPredmet, int idProfesor);
     }
 
 }

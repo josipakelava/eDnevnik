@@ -38,5 +38,16 @@ namespace Repository
                 transaction.Commit();
             }
         }
+
+        public void InsertKategorijaPredmet(int idPredmet, int idKategorija)
+        {
+            using (var transaction = _session.BeginTransaction())
+            {
+         
+                //_session.Save(predmet);
+
+                //transaction.Commit();
+            }
+        }
     }
 }

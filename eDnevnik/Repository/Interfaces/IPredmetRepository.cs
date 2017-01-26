@@ -14,5 +14,7 @@ namespace Repository
         IList<Predmet> GetAllSubject();
 
         void InsertSubject(string naziv);
+
+        void InsertKategorijaPredmet(int idPredmet, int idKategorija);
     }
 }

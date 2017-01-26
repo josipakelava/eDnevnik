@@ -21,6 +21,20 @@ namespace Repository
             return _session.QueryOver<EvidencijaNastave>().Where(p => p.razred.idRazred == idRazred).List();
         }
 
+        public void InsertNew(int idRazred, int idPredmet, int idProfesor)
+        {
+            using (var transaction = _session.BeginTransaction())
+            {
+                EvidencijaNastave evidencija = new EvidencijaNastave();
+                
+                evidencija.predmet = _session.Load<Predmet>(idPredmet);
+                evidencija.profesor = _session.Load<Profesor>(idProfesor);
+                evidencija.razred = _session.Load<Razred>(idRazred); ;
 
+                _session.Save(evidencija);
+
+                transaction.Commit();
+            }
+        }
     }
 }
