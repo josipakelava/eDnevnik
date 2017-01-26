@@ -58,7 +58,7 @@ namespace Api.Controllers
             ViewBag.skola = _skolaRepostiroy.GetAllSchool();
             List<Profesor> osoba =(List<Profesor>) _profesorRepository.GetAll();
             osoba = osoba.FindAll(x => x.razrednistvo == null);
-            ViewBag.osoba = osoba;
+            ViewBag.osoba = OsobaViewModel.toListProfesor(osoba);
 
             return View(new NoviRazredViewModel());
         }
@@ -72,6 +72,10 @@ namespace Api.Controllers
         [HttpPost]
         public ActionResult NoviRazred(NoviRazredViewModel razred)
         {
+            _razredReopsitory.InsertClass(razred.naziv, razred.idRazrednik, razred.idSkola);
+            List<Razred> razredi = (List<Razred>)_razredReopsitory.GetAllClasses();
+            razredi = razredi.FindAll(x => x.razrednik.idOsoba == razred.idRazrednik);
+            _profesorRepository.UpdateRazrednistvo(razred.idRazrednik, razredi[0].idRazred, razred.idSkola);
             return RedirectToAction("DodajRazred");
         }
 
@@ -79,6 +83,16 @@ namespace Api.Controllers
         {
             Osoba osoba = _osobaRepository.Get(id);
             return JsonConvert.SerializeObject(OsobaViewModel.toModel(osoba));
+        }
+
+        public string PromijeniSkolu(int id)
+        {
+            TempData["skolaId"] = id;
+            List<Profesor> osoba = (List<Profesor>)_profesorRepository.GetAll();
+            osoba = osoba.FindAll(x => x.razrednistvo == null);
+            osoba = osoba.FindAll(x => x.skola.idSkola == id || x.skola.idSkola == 0);
+
+            return JsonConvert.SerializeObject(OsobaViewModel.toListProfesor(osoba));
         }
 
         [AllowAnonymous]
@@ -98,7 +112,8 @@ namespace Api.Controllers
         {
 
             var razredi = (List<Razred>)_razredReopsitory.GetAllClasses();
-            var postoji = razredi.Find(x => x.naziv == naziv);
+            int skola = (int) TempData.Peek("skolaId");
+            var postoji = razredi.Find(x => x.naziv == naziv && x.skola.idSkola == skola);
 
             return Json(postoji == null);
         }

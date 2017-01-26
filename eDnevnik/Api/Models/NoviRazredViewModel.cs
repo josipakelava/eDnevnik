@@ -17,7 +17,7 @@ namespace Api.Models
         public int idSkola { get; set; }
 
         [Required(ErrorMessage = "Obavezno polje")]
-        public int idRazednik { get; set; }
+        public int idRazrednik { get; set; }
 
 
     }

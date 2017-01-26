@@ -33,5 +33,20 @@ namespace Repository
             izostanci = izostanci.OrderBy(o => o.datum).ToList();
             return izostanci;
         }
+        public void UpdateRazrednistvo(int idProfesor, int idRazred, int idSkola)
+        {
+            using (var transaction = _session.BeginTransaction())
+            {
+                Profesor profesor = _session.QueryOver<Profesor>().Where(r => r.idOsoba == idProfesor).List()[0];
+                profesor.razrednistvo = _session.Load<Razred>(idRazred);
+                if(profesor.skola == null)
+                {
+                    profesor.skola = _session.Load<Skola>(idSkola);
+                }
+                _session.Update(profesor);
+
+                transaction.Commit();
+            }
+        }
     }
 }

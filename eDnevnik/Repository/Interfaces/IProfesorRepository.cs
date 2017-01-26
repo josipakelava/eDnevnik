@@ -13,6 +13,8 @@ namespace Repository
         IList<Izostanak> GetAllAbsencesOfClass(int idRazrednik);
 
         IList<Profesor> GetAll();
-    
+        void UpdateRazrednistvo(int idProfesor, int idRazred, int idSkola);
+
+
     }
 }

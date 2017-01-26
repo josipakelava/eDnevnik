@@ -30,7 +30,7 @@ namespace Api.Models
         [Compare("password", ErrorMessage = "Lozinke se ne poklapaju!")]
         public string repeatedPassword { get; set; }
         public string role  { get; set; }
-
+        public int idSkola { get; set; }
         [Required(ErrorMessage = "Obavezno polje")]
         public int idMjesto { get; set; }
 
@@ -68,6 +68,27 @@ namespace Api.Models
             return lista;
         }
 
+        public static IList<OsobaViewModel> toListProfesor(IList<Profesor> osobe)
+        {
+            IList<OsobaViewModel> lista = new List<OsobaViewModel>();
+            foreach (Profesor o in osobe)
+            {
+                OsobaViewModel ovm = new OsobaViewModel();
+                ovm.idSkola = o.skola.idSkola;
+                ovm.idOsoba = o.idOsoba;
+                ovm.ime = o.ime;
+                ovm.prezime = o.prezime;
+                ovm.datumRodjenja = o.datumRodjenja;
+                ovm.adresa = o.adresa;
+                ovm.OIB = o.OIB;
+                ovm.email = o.email;
+                ovm.password = o.password;
+                ovm.repeatedPassword = o.password;
+                ovm.idMjesto = o.mjesto.idMjesto;
+                lista.Add(ovm);
+            }
+            return lista;
+        }
         public static OsobaViewModel toModel(Osoba o)
         {
             OsobaViewModel ovm = new OsobaViewModel();
