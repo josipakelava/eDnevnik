@@ -32,8 +32,12 @@ namespace Desktop.Controllers
             switch(uloga)
             {
                 case "Ucenik":
-                    Profil profil = Globals.GetFactory().CreateProfilForm((Ucenik)korisnik);
-                    Globals.MakeActive(profil, korisnik);
+                    UcenikNaslovna naslovna = Globals.GetFactory().CreateUcenikNaslovna((Ucenik) korisnik);
+                    Globals.MakeActive(naslovna, korisnik, uloga);
+                    break;
+                case "Profesor":
+                    ProfesorNaslovna naslovnaProfesor = Globals.GetFactory().CreateProfesorNaslovna((Profesor) korisnik);
+                    Globals.MakeActive(naslovnaProfesor, korisnik, uloga);
                     break;
             }
         }
