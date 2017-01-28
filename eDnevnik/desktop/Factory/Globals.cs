@@ -13,13 +13,14 @@ namespace Desktop
         private static IFormFactory _formFactory = new FormFactory();
         private static Form _active = null;
         private static Osoba _korisnik = null;
+        private static string _uloga = null;
 
         public static IFormFactory GetFactory()
         {
             return _formFactory;
         }
 
-        public static void MakeActive(Form active, Osoba o = null)
+        public static void MakeActive(Form active, Osoba o = null, string uloga = null)
         {
             if (_active != null)
             {
@@ -35,11 +36,29 @@ namespace Desktop
             {
                 _korisnik = o;
             }
+
+            if (uloga != null)
+            {
+                _uloga = uloga;
+            }
         }
 
         public static Osoba GetKorisnik()
         {
             return _korisnik;
+        }
+
+        public static void Naslovna()
+        {
+            switch (_uloga)
+            {
+                case "Ucenik" :
+                    MakeActive(_formFactory.CreateUcenikNaslovna((Ucenik) _korisnik));
+                    return;
+                case "Profesor":
+                    MakeActive(_formFactory.CreateProfesorNaslovna((Profesor) _korisnik));
+                    return;
+            }
         }
     }
 }

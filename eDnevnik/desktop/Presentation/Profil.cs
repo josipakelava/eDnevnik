@@ -14,8 +14,6 @@ namespace Desktop
 {
     public partial class Profil: Form
     {
-        private NavController _controller = null;
-
         public Profil(Osoba o)
         {
             InitializeComponent();
@@ -27,18 +25,11 @@ namespace Desktop
             txtAdresa.Text = o.adresa;
             txtMjesto.Text = o.mjesto.ime;
             txtEmail.Text = o.email;
-
-            _controller = new NavController();
         }
 
-        private void profilToolStripMenuItem_Click(object sender, EventArgs e)
+        private void btnNaslovnica_Click(object sender, EventArgs e)
         {
-            _controller.Profil();
-        }
-
-        private void odjavaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _controller.Logout();
+            Globals.Naslovna();
         }
     }
 }

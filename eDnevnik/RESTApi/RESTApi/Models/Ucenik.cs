@@ -1,32 +1,27 @@
-﻿using Domena;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace RESTApi.Models
 {
-    public class Ucenik
+    public class Ucenik : Osoba
     {
-        public int id { get; set; }
-        public string firstName { get; set; }
-        public string lastName { get; set; }
-        public string address { get; set; }
-        public DateTime birthDate { get; set; }
-        public string oib { get; set; }
-        public string mail { get; set; }
-        public Mjesto city { get; set; }
-
-        public Ucenik(Domena.Ucenik ucenik)
+        public Razred grade;
+        public Ucenik(Domena.Ucenik ucenik) : base(ucenik)
         {
-            this.id = ucenik.idOsoba;
-            this.firstName = ucenik.ime;
-            this.lastName = ucenik.prezime;
-            this.address = ucenik.adresa;
-            this.birthDate = ucenik.datumRodjenja;
-            this.oib = ucenik.OIB;
-            this.mail = ucenik.email;
-            this.city = ucenik.mjesto;
+            grade = new Razred(ucenik.razred);
         }
+        public static IList<Ucenik> toList(ICollection<Domena.Ucenik> ucenici)
+        {
+            IList<Ucenik> studenti = new List<Ucenik>();
+            foreach (Domena.Ucenik u in ucenici)
+            {
+                Ucenik ucenik = new Ucenik(u);
+                studenti.Add(ucenik);
+            }
+            return studenti;
+        }
+
     }
 }

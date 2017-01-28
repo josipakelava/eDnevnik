@@ -15,14 +15,24 @@ namespace Api.Controllers
     [Authorize(Roles = "Profesor, Administrator")]
     public class ProfesorController : Controller
     {
-        private IProfesorRepository _profesorRepository = new ProfesorRepository();
-        private IBiljeskaRepository _biljeskaRepository = new BiljeskaRepository();
-        private IIzostanakRepository _izostanakRepository = new IzostanakRepository();
-        private IOcjenaRepository _ocjenaRepository = new OcjenaRepository();
-        private IPredmetRepository _predmetRepository = new PredmetRepository();
-        private IRazredRepository _razredRepository = new RazredRepository();
-        private IEvidencijaNastaveRepository _evidencijaNastaveRepository = new EvidencijaNastaveRepository();
+        private IProfesorRepository _profesorRepository;
+        private IBiljeskaRepository _biljeskaRepository;
+        private IIzostanakRepository _izostanakRepository;
+        private IOcjenaRepository _ocjenaRepository;
+        private IPredmetRepository _predmetRepository;
+        private IRazredRepository _razredRepository;
+        private IEvidencijaNastaveRepository _evidencijaNastaveRepository;
 
+        public ProfesorController()
+        {
+            _profesorRepository = new ProfesorRepository();
+            _biljeskaRepository = new BiljeskaRepository();
+            _izostanakRepository = new IzostanakRepository();
+            _ocjenaRepository = new OcjenaRepository();
+            _predmetRepository = new PredmetRepository();
+            _razredRepository = new RazredRepository();
+            _evidencijaNastaveRepository = new EvidencijaNastaveRepository();
+        }
         // GET: Profesor
         [Authorize]
         public ActionResult Index()

@@ -54,6 +54,8 @@ namespace Api.Controllers
         {
             ViewBag.razred = _razredReopsitory.GetAllClasses();
             ViewBag.predmet = _predmetRepository.GetAllSubject();
+
+            List<Profesor> profesori =(List<Profesor>) _profesorRepository.GetAll();
             ViewBag.profesori = OsobaViewModel.toListProfesor(_profesorRepository.GetAll());
             return View(new EvidencijaViewModel());
         }

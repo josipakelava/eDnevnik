@@ -14,12 +14,13 @@ namespace Repository
 
         public Profesor Find(int id)
         {
+            _session = DatabaseSessionFactory.OpenSession();
             return _session.QueryOver<Profesor>().Where(u => u.idOsoba == id).List()[0];
         }
 
         public IList<Profesor> GetAll()
         {
-            return _session.QueryOver<Profesor>().List();
+            return _session.QueryOver<Profesor>().List().Distinct().ToList();
         }
 
         public IList<Izostanak> GetAllAbsencesOfClass(int idRazrednik)

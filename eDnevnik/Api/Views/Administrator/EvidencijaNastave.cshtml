@@ -10,7 +10,7 @@
 
 <div class="registerContainer">
 
-    <h2 class="loginSubtitle" style="color: orange">Dodaj novi Razred</h2>
+    <h2 class="loginSubtitle" style="color: orange">Poveži predmete i razred</h2>
 
     @using (Html.BeginForm("NovaEvidencija", "Administrator", FormMethod.Post, new { name = "formAnswerScheme", id = "form" }))
     {
@@ -22,7 +22,7 @@
             @Html.DropDownListFor(m => m.idPredmet, new SelectList(ViewBag.predmet, "idPredmet", "naziv"), "Predmet", new { Class = "form-control", Name = "idPredmet", Id = "predmet" })
             @Html.ValidationMessageFor(m => m.idPredmet, "", new { @class = "text-danger" })
 
-            @Html.DropDownListFor(m => m.idProfesor, new SelectList(ViewBag.profesori, "idOsoba", "oibPrezimeIme"), "Profesor", new { Class = "form-control", Name = "idOsoba", Id = "osoba" })
+            @Html.DropDownListFor(m => m.idProfesor, new SelectList(ViewBag.profesori, "idOsoba", "oibPrezimeIme"), "Profesor", new { Class = "form-control", Name = "idProfesor" })
             @Html.ValidationMessageFor(m => m.idProfesor, "", new { @class = "text-danger" })
         </div>
 
@@ -37,7 +37,11 @@
     <script type="text/javascript">
      $(function() {
          $("#razred").change(function () {
-                var selectedItem = $(this).val();
+             var selectedItem = $(this).val();
+             var filter = "#unos";
+             var element = document.querySelectorAll(filter)[0];
+             element.style.display = "none";
+
                 $.ajax({
                     cache: false,
                     type: "GET",
@@ -48,13 +52,13 @@
                         data = JSON.parse(data);
                         console.log(data);
 
-                        $("#osoba").empty();
+                        $("#idProfesor").empty();
                         e = new Option("Profesor", '');
-                        $('#osoba').append(e);
+                        $('#idProfesor').append(e);
 
                         for (var i in data.profesori) {
                             e = new Option(data.profesori[i].oibPrezimeIme, data.profesori[i].idOsoba);
-                            $('#osoba').append(e);
+                            $('#idProfesor').append(e);
                         }
 
 
@@ -63,10 +67,13 @@
                         $('#predmet').append(e);
 
                         for (var i in data.predmeti) {
-                            console.log(data.predmeti[i].naziv)
                             e = new Option(data.predmeti[i].naziv, data.predmeti[i].idPredmet);
                             $('#predmet').append(e);
                         }
+
+                        var filter = "#unos";
+                        var element = document.querySelectorAll(filter)[0];
+                        element.style.display = null;
 
                     },
                     error:function (xhr, ajaxOptions, thrownError){
@@ -74,9 +81,7 @@
 
                     }
                 });
-                var filter = "#unos";
-                var element = document.querySelectorAll(filter)[0];
-                element.style.display = null;
+               
             });
 
         });
