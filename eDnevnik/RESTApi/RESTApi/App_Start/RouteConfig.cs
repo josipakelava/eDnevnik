@@ -26,7 +26,13 @@ namespace RESTApi
                 namespaces: new[] { "RESTApi.Controllers" }
             );
 
-       
+            routes.MapRoute(
+                name: "ProfesorPredmeti",
+                url: "api/Profesor/Grades/{gradeId}/Subjects",
+                defaults: new { controller = "Profesor", action = "Subjects", gradeId = UrlParameter.Optional },
+                namespaces: new[] { "RESTApi.Controllers" }
+            );
+
         }
     }
 }

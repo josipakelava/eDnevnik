@@ -351,6 +351,7 @@
     <Compile Include="App_Start\Tokens.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Autorizacija.cs" />
+    <Compile Include="Controllers\ProfesorController.cs" />
     <Compile Include="Controllers\UcenikController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -360,6 +361,9 @@
     <Compile Include="Models\Biljeska.cs" />
     <Compile Include="Models\Ocjena.cs" />
     <Compile Include="Models\Predmet.cs" />
+    <Compile Include="Models\Razred.cs" />
+    <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\Osoba.cs" />
     <Compile Include="Models\Ucenik.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StartupWebApi.cs" />
