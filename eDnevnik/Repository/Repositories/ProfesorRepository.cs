@@ -20,7 +20,7 @@ namespace Repository
 
         public IList<Profesor> GetAll()
         {
-            return _session.QueryOver<Profesor>().List();
+            return _session.QueryOver<Profesor>().List().Distinct().ToList();
         }
 
         public IList<Izostanak> GetAllAbsencesOfClass(int idRazrednik)

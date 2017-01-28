@@ -33,6 +33,12 @@ namespace Repository
                 Predmet predmet = new Predmet();
 
                 predmet.naziv = naziv;
+                IList<Kategorija> kategorije = _session.QueryOver<Kategorija>().List();
+                foreach (Kategorija item in kategorije)
+                {
+                    predmet.kategorije.Add(item);
+                }
+               
                 _session.Save(predmet);
 
                 transaction.Commit();

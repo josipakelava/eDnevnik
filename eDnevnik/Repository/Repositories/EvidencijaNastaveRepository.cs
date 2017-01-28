@@ -30,7 +30,7 @@ namespace Repository
                 evidencija.predmet = _session.Load<Predmet>(idPredmet);
                 evidencija.profesor = _session.Load<Profesor>(idProfesor);
                 evidencija.razred = _session.Load<Razred>(idRazred); ;
-
+                
                 _session.Save(evidencija);
 
                 transaction.Commit();
