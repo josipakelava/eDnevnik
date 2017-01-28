@@ -55,15 +55,31 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\NavController.cs" />
+    <Compile Include="Controllers\IzostanciController.cs" />
+    <Compile Include="Controllers\ProfesorNaslovnaController.cs" />
+    <Compile Include="Controllers\UcenikNaslovnaController.cs" />
     <Compile Include="Factory\FormFactory.cs" />
     <Compile Include="Factory\Globals.cs" />
     <Compile Include="Factory\IFormFactory.cs" />
+    <Compile Include="Presentation\Izostanci.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\Izostanci.Designer.cs">
+      <DependentUpon>Izostanci.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\Podaci\Helpers.cs" />
     <Compile Include="Presentation\Home.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Presentation\Home.Designer.cs">
       <DependentUpon>Home.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\Podaci\OcjeneImenik.cs" />
+    <Compile Include="Presentation\ProfesorNaslovna.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\ProfesorNaslovna.Designer.cs">
+      <DependentUpon>ProfesorNaslovna.cs</DependentUpon>
     </Compile>
     <Compile Include="Presentation\Profil.cs">
       <SubType>Form</SubType>
@@ -71,13 +87,28 @@
     <Compile Include="Presentation\Profil.Designer.cs">
       <DependentUpon>Profil.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presentation\UcenikNaslovna.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\UcenikNaslovna.Designer.cs">
+      <DependentUpon>UcenikNaslovna.cs</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Presentation\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Presentation\Izostanci.resx">
+      <DependentUpon>Izostanci.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation\ProfesorNaslovna.resx">
+      <DependentUpon>ProfesorNaslovna.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Presentation\Profil.resx">
       <DependentUpon>Profil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation\UcenikNaslovna.resx">
+      <DependentUpon>UcenikNaslovna.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -88,6 +119,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

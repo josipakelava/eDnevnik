@@ -33,7 +33,7 @@
 
             @Html.DropDownListFor(m => m.idMjesto, new SelectList(ViewBag.mjesta, "idMjesto", "ime"), "Mjesto", new { Class = "form-control", Name = "idMjesto" })
             @Html.ValidationMessageFor(m => m.idMjesto, "", new { @class = "text-danger" })
-            <input class="formButton" type="submit" value="Registriraj" />
+            <input class="formButton" type="submit" value="Registriraj" style="margin-top: 10px"/>
    }
 </div>
 @section Scripts

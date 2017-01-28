@@ -14,6 +14,7 @@ namespace Repository
 
         public Profesor Find(int id)
         {
+            _session = DatabaseSessionFactory.OpenSession();
             return _session.QueryOver<Profesor>().Where(u => u.idOsoba == id).List()[0];
         }
 
