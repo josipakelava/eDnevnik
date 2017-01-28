@@ -10,7 +10,10 @@ namespace Desktop.Controllers
 {
     public class ProfesorNaslovnaController
     {
-        private IProfesorRepository _repo = new ProfesorRepository();
+        private IProfesorRepository _profesorRepository = new ProfesorRepository();
+        private IOcjenaRepository _ocjenaRepostitory = new OcjenaRepository();
+        private IBiljeskaRepository _biljeskaRepository = new BiljeskaRepository();
+        private IIzostanakRepository _izostanakRepository = new IzostanakRepository();
 
         public void Profil()
         {
@@ -27,28 +30,28 @@ namespace Desktop.Controllers
 
         public void SpremiOcjenu(int ocjena, int idUcenik, int idPredmet, int kategorija, DateTime date)
         {
-            _repo.InsertGrade(ocjena, idUcenik, idPredmet, kategorija, date);
+            _ocjenaRepostitory.InsertGrade(ocjena, idUcenik, idPredmet, kategorija, date);
         }
 
         public Profesor GetProfesor(int idOsoba)
         {
-            return _repo.Find(idOsoba);
+            return _profesorRepository.Find(idOsoba);
         }
 
         public void SpremiBiljesku(int idPredmet, int idUcenik, string biljeska, DateTime date)
         {
-            _repo.InsertNote(idPredmet, idUcenik, biljeska, date);
+            _biljeskaRepository.InsertNote(idPredmet, idUcenik, biljeska, date);
         }
 
         public void MojRazred(Profesor profesor)
         {
-            Izostanci i = Globals.GetFactory().CreateIzostanci(_repo.GetAllAbsences(profesor.idOsoba), true);
+            Izostanci i = Globals.GetFactory().CreateIzostanci(_profesorRepository.GetAllAbsencesOfClass(profesor.idOsoba), true);
             Globals.MakeActive(i);
         }
 
         public void Nedostaje(int idPredmet, int idOsoba, DateTime date)
         {
-            _repo.InsertAbsence(idPredmet, idOsoba, date);
+            _izostanakRepository.InsertAbsence(idPredmet, idOsoba, date);
         }
     }
 }

@@ -9,11 +9,11 @@ namespace Desktop.Controllers
 {
     public class IzostanciController
     {
-        private ProfesorRepository _repo = null;
+        private IzostanakRepository _repo = null;
 
         public IzostanciController()
         {
-            _repo = new ProfesorRepository();
+            _repo = new IzostanakRepository();
         }
 
         public void Izostanak(int id, bool opravdanost, string biljeska)
