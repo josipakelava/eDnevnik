@@ -17,6 +17,7 @@ namespace RESTApi.Controllers
         private IPredmetRepository _predmetRepository = new PredmetRepository();
         private IProfesorRepository _profesorRepository = new ProfesorRepository();
         private IEvidencijaNastaveRepository _evidencijaRepository = new EvidencijaNastaveRepository();
+        private IRazredRepository _razredRepository = new RazredRepository();
 
         [Autorizacija]
         [HttpGet]
@@ -67,12 +68,43 @@ namespace RESTApi.Controllers
 
         [Autorizacija]
         [HttpGet]
-        public string SubjectsStudent()
+        public string StudentSubjects()
         {
             int idUcenik = int.Parse(Url.RequestContext.RouteData.Values["studentId"].ToString());
             return JsonConvert.SerializeObject(Predmet.toList(_ucenikRepository.GetSchedule(idUcenik)));
         }
 
+        [Autorizacija]
+        [HttpGet]
+        //[Route("Grades/{gradeId}/Subjects/{subjectId}/Students")]
+        public string SubjectAllStudents(int gradeId, int subjectId)
+        {
+            return JsonConvert.SerializeObject(Ucenik.toList(_razredRepository.GetClass(gradeId).ucenici));
+        }
+
+        [Autorizacija]
+        [HttpGet]
+        //[Route("api/Profesor/Grades/{gradeId}/Subjects/{subjectId}/Students/{studentId}")]
+        public string SubjectStudent(int gradeId, int subjectId, int studentId)
+        {
+            Domena.Ucenik ucenik = _ucenikRepository.Find(studentId);
+            IList<Ocjena> ocjene = Ocjena.toList(_ucenikRepository.GetAllGradesForSubject(studentId, subjectId));
+            IList<Biljeska> biljeske = Biljeska.toList(_ucenikRepository.GetAllNotesForSubject(studentId, subjectId));
+            ICollection<Domena.Kategorija> kategorije = _predmetRepository.GetAllCategories(subjectId);
+            return JsonConvert.SerializeObject(new Cmn(ocjene, biljeske, kategorije));
+        }
+
+        [Autorizacija]
+        [HttpGet]
+        //[Route("api/Profesor/MyGrade/{studentId}/Subjects/{subjectId}/Cmn")]
+        public string MyGradeStudentSubject(int studentId, int subjectId)
+        {
+            Domena.Ucenik ucenik = _ucenikRepository.Find(studentId);
+            IList<Ocjena> ocjene = Ocjena.toList(_ucenikRepository.GetAllGradesForSubject(studentId, subjectId));
+            IList<Biljeska> biljeske = Biljeska.toList(_ucenikRepository.GetAllNotesForSubject(studentId, subjectId));
+            ICollection<Domena.Kategorija> kategorije = _predmetRepository.GetAllCategories(subjectId);
+            return JsonConvert.SerializeObject(new Cmn(ocjene, biljeske, kategorije));
+        }
 
     }
 }

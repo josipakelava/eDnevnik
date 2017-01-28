@@ -27,19 +27,38 @@ namespace RESTApi
             );
 
             routes.MapRoute(
-                name: "ProfesorPredmeti",
+                name: "RazredPredmeti",
                 url: "api/Profesor/Grades/{gradeId}/Subjects",
                 defaults: new { controller = "Profesor", action = "Subjects", gradeId = UrlParameter.Optional },
                 namespaces: new[] { "RESTApi.Controllers" }
             );
 
             routes.MapRoute(
-                name: "ProfesorPredmetiUcenici",
-                url: "api/Profesor/Grades/{gradeId}/Subjects/{subjectId}/Students",
-                defaults: new { controller = "Profesor", action = "SubjectsStudent", studentId = UrlParameter.Optional },
-                namespaces: new[] { "RESTApi.Controllers" }
-            );
+               name: "ProfesorPredmeti",
+               url: "api/Profesor/MyGrade/{studentId}/Subjects",
+               defaults: new { controller = "Profesor", action = "StudentSubjects", studentId = UrlParameter.Optional },
+               namespaces: new[] { "RESTApi.Controllers" }
+           );
 
+            routes.MapRoute(
+              name: "SubjectAllStudents",
+              url: "api/Profesor/Grades/{gradeId}/Subjects/{subjectId}/Students",
+              defaults: new { controller = "Profesor", action = "SubjectAllStudents"},
+              namespaces: new[] { "RESTApi.Controllers" }
+          );
+
+            routes.MapRoute(
+             name: "SubjectStudent",
+             url: "api/Profesor/Grades/{gradeId}/Subjects/{subjectId}/Students/{studentId}",
+             defaults: new { controller = "Profesor", action = "SubjectStudent" },
+             namespaces: new[] { "RESTApi.Controllers" }
+         );
+            routes.MapRoute(
+             name: "MyGradeStudentSubject",
+             url: "api/Profesor/MyGrade/{studentId}/Subjects/{subjectId}/Cmn",
+             defaults: new { controller = "Profesor", action = "MyGradeStudentSubject" },
+             namespaces: new[] { "RESTApi.Controllers" }
+         );
         }
     }
 }
