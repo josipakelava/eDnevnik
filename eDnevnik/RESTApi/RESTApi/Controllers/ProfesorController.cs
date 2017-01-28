@@ -53,7 +53,7 @@ namespace RESTApi.Controllers
         {
             int id = int.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value);
             Domena.Profesor profesor = _profesorRepository.Find(id);
-            
+
             return JsonConvert.SerializeObject(Ucenik.toList(profesor.razrednistvo.ucenici));
         }
 
@@ -64,6 +64,15 @@ namespace RESTApi.Controllers
             int id = int.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value);
             return JsonConvert.SerializeObject(Predmet.toList(_evidencijaRepository.GetAllProfesorSubjects(id, int.Parse(Url.RequestContext.RouteData.Values["gradeId"].ToString()))));
         }
+
+        [Autorizacija]
+        [HttpGet]
+        public string SubjectsStudent()
+        {
+            int idUcenik = int.Parse(Url.RequestContext.RouteData.Values["studentId"].ToString());
+            return JsonConvert.SerializeObject(Predmet.toList(_ucenikRepository.GetSchedule(idUcenik)));
+        }
+
 
     }
 }

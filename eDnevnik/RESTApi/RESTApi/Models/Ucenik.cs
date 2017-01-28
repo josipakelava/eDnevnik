@@ -7,7 +7,7 @@ namespace RESTApi.Models
 {
     public class Ucenik : Osoba
     {
-        private Razred grade;
+        public Razred grade;
         public Ucenik(Domena.Ucenik ucenik) : base(ucenik)
         {
             grade = new Razred(ucenik.razred);

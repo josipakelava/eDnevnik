@@ -8,10 +8,10 @@ namespace RESTApi.Models
 {
     public class Razred
     {
-        private int id { get; set; }
-        private String name { get; set; }
-        private int classTeacherId { get; set; }
-        private int schoolId { get; set; }
+        public int id { get; set; }
+        public String name { get; set; }
+        public int classTeacherId { get; set; }
+        public int schoolId { get; set; }
 
         public Razred(Domena.Razred razred)
         {
@@ -26,7 +26,6 @@ namespace RESTApi.Models
             IList<Razred> razredi = new List<Razred>();
             foreach (EvidencijaNastave e in evidencija)
                 razredi.Add(new Razred(e.razred));
-
             return razredi;
         }
     }
