@@ -86,9 +86,6 @@ namespace RESTApi
                 var claims = new Claim[]
                 {
                     new Claim(ClaimTypes.Sid, o.idOsoba.ToString()),
-                    new Claim(ClaimTypes.Name, o.ime),
-                    new Claim(ClaimTypes.Surname, o.prezime),
-                    new Claim(ClaimTypes.Email, o.email),
                     new Claim(ClaimTypes.Role, uloga)
                 };
 

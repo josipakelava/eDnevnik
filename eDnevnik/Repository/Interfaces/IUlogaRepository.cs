@@ -9,5 +9,6 @@ namespace Repository
     public interface IUlogaRepository
     {
         IList<string> GetAll();
+        IList<string> GetAllToCreate();
     }
 }

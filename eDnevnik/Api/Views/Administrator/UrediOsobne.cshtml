@@ -1,9 +1,79 @@
-﻿
+﻿@model Api.Models.OsobaViewModel
 @{
     ViewBag.Title = "UrediOsobne";
 }
 
 @Html.Partial("_AdminNavPartial")
 
-<h2>UrediOsobne</h2>
+<div class="registerContainer">
+    <h2 class="loginSubtitle" style="color: orange">Ažuriranje osobnih podataka o korisnicima</h2>
 
+    @Html.DropDownList("Korisnici", new SelectList(ViewBag.osobe, "idOsoba", "oibPrezimeIme") , "Odaberite korisnika", new { Class = "form-control", Id="osoba"})
+    <hr />
+    @using (Html.BeginForm("AzurirajKorisnika", "Administrator", FormMethod.Post, new { name = "formAnswerScheme", id = "form" }))
+    {
+        @Html.TextBoxFor(m => m.email, new { Class = "formInput", Name = "Email", Type = "text", Placeholder = "E-mail" })
+        @Html.ValidationMessageFor(m => m.email, "", new { @class = "text-danger" })
+        @Html.TextBoxFor(m => m.password, new { Class = "formInput", Name = "Password", Type = "password", Placeholder = "Lozinka" })
+        @Html.ValidationMessageFor(m => m.password, "", new { @class = "text-danger" })
+        @Html.TextBoxFor(m => m.repeatedPassword, new { Class = "formInput", Name = "RepeatedPassword", Type = "password", Placeholder = "Ponovljena lozinka" })
+        @Html.ValidationMessageFor(m => m.repeatedPassword, "", new { @class = "text-danger" })
+
+        <hr />
+
+            @Html.TextBoxFor(m => m.ime, new { Class = "formInput", Name = "Ime", Type = "text", Placeholder = "Ime" })
+            @Html.ValidationMessageFor(m => m.ime, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(m => m.prezime, new { Class = "formInput", Name = "Prezime", Type = "text", Placeholder = "Prezime" })
+            @Html.ValidationMessageFor(m => m.prezime, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(m => m.datumRodjenja, new { Class = "formInput", Name = "DatumRodjenja", Type = "date", Placeholder = "Datum rođenja (dd.mm.yyyy.)"})
+            @Html.ValidationMessageFor(m => m.datumRodjenja, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(m => m.OIB, new { Class = "formInput", Name = "OIB", Type = "number", Placeholder = "OIB", Min = "0" })
+            @Html.ValidationMessageFor(m => m.OIB, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(m => m.adresa, new { Class = "formInput", Name = "Adresa", Type = "text", Placeholder = "Adresa" })
+            @Html.ValidationMessageFor(m => m.adresa, "", new { @class = "text-danger" })
+
+            @Html.DropDownListFor(m => m.idMjesto, new SelectList(ViewBag.mjesta, "idMjesto", "ime"), "Mjesto", new { Class = "form-control", Name = "idMjesto" })
+            @Html.ValidationMessageFor(m => m.idMjesto, "", new { @class = "text-danger" })
+            <input class="formButton" type="submit" value="Spremi promjene" style="margin-top: 10px"/>
+    }
+</div>
+@section Scripts
+{
+  <script type="text/javascript">
+     $(function() {
+            $("#osoba").change(function() {
+                var selectedItem = $(this).val();
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: "@(Url.Action("DohvatiOsobu", "Administrator"))",
+                    data: { "id": selectedItem},
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        $("[name='Email']").val(data.email);
+                        $("[name='Password']").val(data.password);
+                        $("[name='RepeatedPassword']").val(data.repeatedPassword);
+                        $("[name='Ime']").val(data.ime);
+                        $("[name='Prezime']").val(data.prezime);
+                        var date = new Date(data.datumRodjenja);
+
+                        var dan = date.getDate();
+                        if (dan < 10) dan = "0" + dan;
+
+                        var mjesec = date.getMonth() + 1;
+                        if (mjesec < 10) mjesec = "0" + mjesec;
+
+                        $("[name='DatumRodjenja']").val(date.getFullYear()+"-"+mjesec+"-"+dan);
+                        $("[name='OIB']").val(data.OIB);
+                        $("[name='Adresa']").val(data.adresa);
+                        $("[name='idMjesto']").val(data.idMjesto);
+                    },
+                    error:function (xhr, ajaxOptions, thrownError){
+                        alert('Failed to retrieve states.');
+
+                    }
+                });
+            });
+        });
+</script>
+}

@@ -1,0 +1,75 @@
+﻿@model Api.Models.NoviRazredViewModel
+@{
+    ViewBag.Title = "DodajRazred";
+}
+
+@Html.Partial("_AdminNavPartial")
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+<div class="registerContainer">
+
+    <h2 class="loginSubtitle" style="color: orange">Dodaj novi Razred</h2>
+
+    @using (Html.BeginForm("NoviRazred", "Administrator", FormMethod.Post, new { name = "formAnswerScheme", id = "form" }))
+    {
+        @Html.DropDownListFor(m => m.idSkola, new SelectList(ViewBag.skola, "idSkola", "naziv"), "Skola", new { Class = "form-control", Name = "idSkola", Id="skola"})
+        @Html.ValidationMessageFor(m => m.idSkola, "", new { @class = "text-danger" })
+
+        <br/>
+        <div style="display: none " id="unos">
+            @Html.TextBoxFor(m => m.naziv, new { Class = "formInput", Name = "Naziv", Type = "text", Placeholder = "Naziv" })
+            @Html.ValidationSummary();
+
+
+            @Html.DropDownListFor(m => m.idRazrednik, new SelectList(ViewBag.osoba, "idOsoba", "oibPrezimeIme"), "Razrednik", new { Class = "form-control", Name = "idRazrednik" })
+            @Html.ValidationMessageFor(m => m.idRazrednik, "", new { @class = "text-danger" })
+        </div>
+
+        <input class="formButton" type="submit" value="Dodaj" />
+    }
+
+
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+     $(function() {
+         $("#skola").change(function () {
+                var selectedItem = $(this).val();
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: "@(Url.Action("PromijeniSkolu", "Administrator"))",
+                    data: { "id": selectedItem},
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        console.log(data);
+
+                        $("#idRazrednik").empty();
+                        e = new Option("Razrednik", '');
+                        $('#idRazrednik').append(e);
+
+                        for (var i in data) {
+                            console.log(i);
+                            e = new Option(data[i].oibPrezimeIme, data[i].idOsoba);
+                            $('#idRazrednik').append(e);
+                        }
+
+                    },
+                    error:function (xhr, ajaxOptions, thrownError){
+                        alert('Failed to retrieve states.');
+
+                    }
+                });
+                var filter = "#unos";
+                var element = document.querySelectorAll(filter)[0];
+                element.style.display = null;
+            });
+
+        });
+    </script>
+}
+

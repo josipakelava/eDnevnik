@@ -37,5 +37,15 @@ namespace Repository
             Ucenik ucenik = Find(id);
             return _session.QueryOver<EvidencijaNastave>().Where(u => u.razred == ucenik.razred).List();
         }
+
+        public IList<Ocjena> GetAllGradesForSubject(int idOsoba, int idPredmet)
+        {
+            return _session.QueryOver<Ocjena>().Where(u => u.ucenik.idOsoba == idOsoba && u.predmet.idPredmet == idPredmet).List();
+        }
+
+        public IList<Biljeska> GetAllNotesForSubject(int idOsoba, int idPredmet)
+        {
+            return _session.QueryOver<Biljeska>().Where(u => u.ucenik.idOsoba == idOsoba && u.predmet.idPredmet == idPredmet).List();
+        }
     }
 }

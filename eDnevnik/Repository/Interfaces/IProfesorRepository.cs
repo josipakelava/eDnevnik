@@ -10,18 +10,11 @@ namespace Repository
     public interface IProfesorRepository
     {
         Profesor Find(int id);
-        IList<Izostanak> GetAllAbsences(int id);
-        IList<EvidencijaNastave> GetAllSubjects(int id, int idRazred);
+        IList<Izostanak> GetAllAbsencesOfClass(int idRazrednik);
 
-        Predmet GetSubject(int id);
-        Razred GetClass(int id, int idRazred);
+        IList<Profesor> GetAll();
+        void UpdateRazrednistvo(int idProfesor, int idRazred, int idSkola);
 
-        void UpdateIzostanak(int id, bool opravdanost, string razlog);
 
-        void UpdateGrade(int id, int ocjena);
-        void InsertGrade(int ocjena, int idUcenik, int idPredmet, int kategorija, DateTime datum);
-        void InsertAbsence(int idPredmet, int idUcenik, DateTime datum);
-
-        void InsertNote(int idPredmet, int idUcenik, string biljeska, DateTime datum);
     }
 }

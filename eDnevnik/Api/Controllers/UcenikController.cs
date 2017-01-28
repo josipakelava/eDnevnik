@@ -17,14 +17,14 @@ namespace Api.Controllers
         // GET: Student
         public ActionResult Index()
         {
-            int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
+            int id = int.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value);
             ViewBag.podaci = _repository.Find(id);
             return View();
         }
 
         public ActionResult Predmeti()
         {
-            int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
+            int id = int.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value);
             ViewBag.evidencija = _repository.GetSchedule(id);
             ViewBag.ocjene = OcjenaViewModel.toList(_repository.GetAllGrades(id));
             ViewBag.biljeske = _repository.GetAllNotes(id);
@@ -33,7 +33,7 @@ namespace Api.Controllers
 
         public ActionResult Izostanci()
         {
-            int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
+            int id = int.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value);
             ViewBag.izostanci = _repository.GetAllAbesnces(id);
             
             return View();

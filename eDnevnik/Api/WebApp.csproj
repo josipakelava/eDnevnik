@@ -244,8 +244,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AutorizacijaModels.cs" />
+    <Compile Include="Models\EvidencijaViewModel.cs" />
     <Compile Include="Models\IzostanakViewModel.cs" />
+    <Compile Include="Models\MojRazredViewModel.cs" />
+    <Compile Include="Models\NoviRazredViewModel.cs" />
     <Compile Include="Models\OcjenaViewModel.cs" />
+    <Compile Include="Models\OsobaViewModel.cs" />
+    <Compile Include="Models\PredmetViewModel.cs" />
     <Compile Include="Models\RazredViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -303,11 +308,13 @@
     <Content Include="Views\Profesor\Profil.cshtml" />
     <Content Include="Views\Profesor\Izostanci.cshtml" />
     <Content Include="Views\Profesor\Predmeti.cshtml" />
-    <Content Include="Views\Administrator\Index.cshtml" />
+    <Content Include="Views\Administrator\RegistrirajKorisnika.cshtml" />
     <Content Include="Views\Shared\_AdminNavPartial.cshtml" />
     <Content Include="Views\Administrator\UrediOsobne.cshtml" />
-    <Content Include="Views\Administrator\UrediProfesor.cshtml" />
+    <Content Include="Views\Administrator\DodajPredmet.cshtml" />
     <Content Include="Views\Profesor\MojRazred.cshtml" />
+    <Content Include="Views\Administrator\DodajRazred.cshtml" />
+    <Content Include="Views\Administrator\EvidencijaNastave.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
