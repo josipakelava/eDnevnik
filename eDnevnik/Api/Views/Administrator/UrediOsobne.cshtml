@@ -1,6 +1,6 @@
 ﻿@model Api.Models.OsobaViewModel
 @{
-    ViewBag.Title = "UrediOsobne";
+    ViewBag.Title = "Uređivanje podataka o korisniku";
 }
 
 @Html.Partial("_AdminNavPartial")
@@ -10,8 +10,9 @@
 
     @Html.DropDownList("Korisnici", new SelectList(ViewBag.osobe, "idOsoba", "oibPrezimeIme") , "Odaberite korisnika", new { Class = "form-control", Id="osoba"})
     <hr />
-    @using (Html.BeginForm("AzurirajKorisnika", "Administrator", FormMethod.Post, new { name = "formAnswerScheme", id = "form" }))
+    @using (Html.BeginForm("UrediOsobne", "Administrator", FormMethod.Post, new { name = "formAnswerScheme", id = "form" }))
     {
+        @Html.HiddenFor(m => m.idOsoba, new { Name = "IdOsoba" });
         @Html.TextBoxFor(m => m.email, new { Class = "formInput", Name = "Email", Type = "text", Placeholder = "E-mail" })
         @Html.ValidationMessageFor(m => m.email, "", new { @class = "text-danger" })
         @Html.TextBoxFor(m => m.password, new { Class = "formInput", Name = "Password", Type = "password", Placeholder = "Lozinka" })
@@ -50,6 +51,8 @@
                     data: { "id": selectedItem},
                     success: function (data) {
                         data = JSON.parse(data);
+                        $("[name='IdOsoba']").val(data.idOsoba);
+                        $("[name='Email']").val(data.email);
                         $("[name='Email']").val(data.email);
                         $("[name='Password']").val(data.password);
                         $("[name='RepeatedPassword']").val(data.repeatedPassword);

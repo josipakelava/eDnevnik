@@ -47,5 +47,22 @@ namespace Repository
         {
             return _session.QueryOver<Biljeska>().Where(u => u.ucenik.idOsoba == idOsoba && u.predmet.idPredmet == idPredmet).List();
         }
+
+        public IList<Ucenik> GetAllStudentsWithoutClass()
+        {
+            return _session.QueryOver<Ucenik>().Where(u => u.razred == null).List();
+        }
+
+        public void NewClass(int idOsoba, int idRazred)
+        {
+            using (var transaction = _session.BeginTransaction())
+            {
+                Ucenik ucenik = _session.QueryOver<Ucenik>().Where(u => u.idOsoba == idOsoba).List()[0];
+                ucenik.razred = _session.QueryOver<Razred>().Where(u => u.idRazred == idRazred).List()[0]; ;
+
+                _session.Update(ucenik);
+                transaction.Commit();
+            }
+        }
     }
 }

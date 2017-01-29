@@ -13,5 +13,6 @@ namespace Repository
         Osoba Get(int id);
         void AddUcenik(string ime, string prezime, DateTime? datumRodjenja, String adresa, string oib, string email, string password, int idMjesto);
         void AddProfesor(string ime, string prezime, DateTime? datumRodjenja, String adresa, string oib, string email, string password, int idMjesto);
+        void Update(int idOsoba, string ime, string prezime, DateTime? datumRodjenja, String adresa, string oib, string email, string password, int idMjesto);
     }
 }
