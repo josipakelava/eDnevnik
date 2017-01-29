@@ -14,15 +14,15 @@
 
     @using (Html.BeginForm("NovaEvidencija", "Administrator", FormMethod.Post, new { name = "formAnswerScheme", id = "form" }))
     {
-        @Html.DropDownListFor(m => m.idRazred, new SelectList(ViewBag.razred, "idRazred", "naziv"), "Razred", new { Class = "form-control", Name = "idRazred", Id = "razred" })
+        @Html.DropDownListFor(m => m.idRazred, new SelectList(ViewBag.razred, "idRazred", "skolaRazred"), "Razred", new { Class = "form-control", Name = "idRazred", Id = "razred" })
         @Html.ValidationMessageFor(m => m.idRazred, "", new { @class = "text-danger" })
 
         <br />
         <div style="display: none " id="unos">
-            @Html.DropDownListFor(m => m.idPredmet, new SelectList(ViewBag.predmet, "idPredmet", "naziv"), "Predmet", new { Class = "form-control", Name = "idPredmet", Id = "predmet" })
+            @Html.DropDownListFor(m => m.idPredmet, new SelectList(ViewBag.predmet, "idPredmet", "naziv"), "Predmet", new { Class = "form-control addMarginBottom", Name = "idPredmet", Id = "predmet" })
             @Html.ValidationMessageFor(m => m.idPredmet, "", new { @class = "text-danger" })
 
-            @Html.DropDownListFor(m => m.idProfesor, new SelectList(ViewBag.profesori, "idOsoba", "oibPrezimeIme"), "Profesor", new { Class = "form-control", Name = "idProfesor" })
+            @Html.DropDownListFor(m => m.idProfesor, new SelectList(ViewBag.profesori, "idOsoba", "oibPrezimeIme"), "Profesor", new { Class = "form-control addMarginBottom", Name = "idProfesor" })
             @Html.ValidationMessageFor(m => m.idProfesor, "", new { @class = "text-danger" })
         </div>
 
@@ -77,7 +77,7 @@
 
                     },
                     error:function (xhr, ajaxOptions, thrownError){
-                        alert('Failed to retrieve states.');
+                        alert('Odaberite razred!');
 
                     }
                 });

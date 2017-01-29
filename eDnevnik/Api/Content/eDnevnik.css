@@ -346,3 +346,20 @@ hr{
     height: 3px;
     background-color: #0D4F8B;
 }
+
+.addMarginTop{
+    margin-top: 70px;
+}
+
+.addMarginBottom{
+    margin-bottom: 20px;
+}
+
+.firstPartInline{
+    display: inline-block;
+}
+
+.secondPartInline{
+    display: inline;
+    margin-left: 50px;
+}

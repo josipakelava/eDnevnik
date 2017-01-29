@@ -10,7 +10,7 @@
 
 <div class="registerContainer">
 
-    <h2 class="loginSubtitle" style="color: orange">Dodaj novi Razred</h2>
+    <h2 class="loginSubtitle" style="color: orange">Dodaj novi razred ili uredi popis učenika za postojeći razred</h2>
 
     @using (Html.BeginForm("NoviRazred", "Administrator", FormMethod.Post, new { name = "formAnswerScheme", id = "form" }))
     {
@@ -23,19 +23,19 @@
             @Html.ValidationSummary()
 
 
-            @Html.DropDownListFor(m => m.idRazrednik, new SelectList(ViewBag.osoba, "idOsoba", "oibPrezimeIme"), "Razrednik", new { Class = "form-control", Name = "idRazrednik" })
+            @Html.DropDownListFor(m => m.idRazrednik, new SelectList(ViewBag.osoba, "idOsoba", "oibPrezimeIme"), "Razrednik", new { Class = "form-control addMarginBottom", Name = "idRazrednik" })
             @Html.ValidationMessageFor(m => m.idRazrednik, "", new { @class = "text-danger" })
         </div>
 
         <input class="formButton" type="submit" value="Dodaj" />
     }
 
-    <div id="accordion" class="positionAccordion" role="tablist" aria-multiselectable="true">
+    <div id="accordion" class="positionAccordion addMarginTop" role="tablist" aria-multiselectable="true" >
         @for (int i = 0; i < ViewBag.skole.Count; i++)
         {
-            <div class="card">
+            <div class="card" style="width: 100%">
                 <a class="collapsed subjectRow" data-toggle="collapse" data-parent="#accordion" href=@string.Format("#{0}", @i) aria-expanded="false" aria-controls="collapseTwo">
-                    <div class="card-header" role="tab" id="headingTwo">
+                    <div class="card-header card-headerOutside" role="tab" id="headingTwo">
                         <h5 class="mb-0">@ViewBag.skole[i].naziv&nbsp;&nbsp;</h5>
 
                     </div>
@@ -44,22 +44,22 @@
                     <div id="accordion" class="positionAccordion" role="tablist" aria-multiselectable="true">
                         @for (int j = 0; j < ViewBag.skole[i].razredi.Count; j++)
                         {
-                            <div class="card">
+                            <div class="card" style="width: 100%">
                                 <div class="card-header">
                                     <a class="collapsed subjectRow col-lg-11" data-toggle="collapse" data-parent="#accordion" href=@string.Format("#{0}{1}", @ViewBag.skole[i].idSkola, @ViewBag.skole[i].razredi[j].idRazred) aria-expanded="false" aria-controls="collapseTwo">
-                                        <div  role="tab" id="headingTwo">
-                                            <h5 class="mb-0">@ViewBag.skole[i].razredi[j].naziv&nbsp;&nbsp;(prof. @ViewBag.skole[i].razredi[j].razrednik.prezime)</h5>
+                                        <div  role="tab" id="headingTwo" class="firstPartInline">
+                                            <h5 class="mb-0 firstPartInline">@ViewBag.skole[i].razredi[j].naziv&nbsp;&nbsp;(prof. @ViewBag.skole[i].razredi[j].razrednik.prezime)</h5>
                                         </div>
                                     </a>
-                                    <input type="submit" value="+" class="btn btn-success dodajUcenika" id=@ViewBag.skole[i].razredi[j].idRazred />
+                                    <input type="submit" value="+" class="btn btn-success dodajUcenika secondPartInline" id=@ViewBag.skole[i].razredi[j].idRazred />
                                 </div>
                                 <div id=@string.Format("{0}{1}", @ViewBag.skole[i].idSkola, @ViewBag.skole[i].razredi[j].idRazred) class="collapse" role="tabpanel" aria-labelledby="headingTwo">
                                     <div id="accordion" class="positionAccordion" role="tablist" aria-multiselectable="true">
                                         @for (int k = 0; k < ViewBag.skole[i].razredi[j].ucenici.Count; k++)
                                         {
-                                            <div id=@string.Format("div_{0}",@ViewBag.skole[i].razredi[j].ucenici[k].idOsoba)>
-                                                <p>@ViewBag.skole[i].razredi[j].ucenici[k].idOsoba, @ViewBag.skole[i].razredi[j].ucenici[k].prezime @ViewBag.skole[i].razredi[j].ucenici[k].ime</p>
-                                                <input type="submit" value="X" class="btn btn-danger ukloniUcenika" id=@ViewBag.skole[i].razredi[j].ucenici[k].idOsoba />
+                                            <div id=@string.Format("div_{0}",@ViewBag.skole[i].razredi[j].ucenici[k].idOsoba) class="firstPartInline">
+                                                <p class="secondPartInline" style="margin-right: 30px">@ViewBag.skole[i].razredi[j].ucenici[k].idOsoba, @ViewBag.skole[i].razredi[j].ucenici[k].prezime @ViewBag.skole[i].razredi[j].ucenici[k].ime</p>
+                                                <input style="margin-top: 5px; margin-bottom: 5px;" type="submit" value="X" class="btn btn-danger ukloniUcenika" id=@ViewBag.skole[i].razredi[j].ucenici[k].idOsoba />
                                             </div>
                                         }
                                     </div>
@@ -78,11 +78,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Odabir učenika</h4>
+                <h3 class="modal-title" id="myModalLabel" style="color: orange">Odabir učenika</h3>
             </div>
             <div class="modal-body">
-                Molimo odaberite željenog učenika:<br />
-                <select id="dropdown"></select>
+                <h4>Molimo odaberite željenog učenika:</h4><br />
+                <select id="dropdown" class="form-control"></select>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary spremiNovogUcenika" data-dismiss="modal">Spremite promjene</button>
@@ -98,7 +98,10 @@
             var razred = 0;
             var idUcenik = 0;
          $("#skola").change(function () {
-                var selectedItem = $(this).val();
+             var selectedItem = $(this).val();
+             var filter = "#unos";
+             var element = document.querySelectorAll(filter)[0];
+             element.style.display = "none";
                 $.ajax({
                     cache: false,
                     type: "GET",
@@ -117,17 +120,18 @@
                             e = new Option(data[i].oibPrezimeIme, data[i].idOsoba);
                             $('#idRazrednik').append(e);
                         }
+                        var filter = "#unos";
+                        var element = document.querySelectorAll(filter)[0];
+                        element.style.display = null;
 
                     },
                     error:function (xhr, ajaxOptions, thrownError){
-                        alert('Failed to retrieve states.');
+                        alert('Odaberite skolu!');
 
                     }
                 });
-                var filter = "#unos";
-                var element = document.querySelectorAll(filter)[0];
-                element.style.display = null;
-         });
+               
+            });
 
             $(".ukloniUcenika").click(function () {
                 var idOsoba = this.id;
