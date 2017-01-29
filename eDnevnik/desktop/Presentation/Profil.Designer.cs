@@ -46,6 +46,7 @@
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnNaslovnica = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -216,11 +217,23 @@
             this.btnNaslovnica.UseVisualStyleBackColor = false;
             this.btnNaslovnica.Click += new System.EventHandler(this.btnNaslovnica_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label3.Location = new System.Drawing.Point(484, 319);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(366, 17);
+            this.label3.TabIndex = 23;
+            this.label3.Text = "U slučaju netočnih podataka kontaktirajte administratora.";
+            // 
             // Profil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(862, 358);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.btnNaslovnica);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.txtEmail);
@@ -270,5 +283,6 @@
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnNaslovnica;
+        private System.Windows.Forms.Label label3;
     }
 }

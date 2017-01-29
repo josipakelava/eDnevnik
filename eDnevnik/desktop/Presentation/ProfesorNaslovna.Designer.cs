@@ -67,7 +67,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1044, 28);
-            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // profilToolStripMenuItem
@@ -100,7 +100,7 @@
             this.panel1.Location = new System.Drawing.Point(13, 32);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1002, 92);
-            this.panel1.TabIndex = 1;
+            this.panel1.TabIndex = 0;
             // 
             // label2
             // 
@@ -109,7 +109,7 @@
             this.label2.Location = new System.Drawing.Point(14, 16);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(171, 20);
-            this.label2.TabIndex = 3;
+            this.label2.TabIndex = 2;
             this.label2.Text = "Odaberite predmet:";
             // 
             // label1
@@ -119,7 +119,7 @@
             this.label1.Location = new System.Drawing.Point(14, 50);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(157, 20);
-            this.label1.TabIndex = 2;
+            this.label1.TabIndex = 3;
             this.label1.Text = "Odaberite razred:";
             // 
             // cbRazred
@@ -149,7 +149,7 @@
             this.label3.Location = new System.Drawing.Point(31, 189);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(182, 30);
-            this.label3.TabIndex = 4;
+            this.label3.TabIndex = 7;
             this.label3.Text = "Učenici";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -161,7 +161,7 @@
             this.btnOdabir.Location = new System.Drawing.Point(31, 144);
             this.btnOdabir.Name = "btnOdabir";
             this.btnOdabir.Size = new System.Drawing.Size(182, 42);
-            this.btnOdabir.TabIndex = 5;
+            this.btnOdabir.TabIndex = 1;
             this.btnOdabir.Text = "Slučajan odabir";
             this.btnOdabir.UseVisualStyleBackColor = false;
             this.btnOdabir.Click += new System.EventHandler(this.btnOdabir_Click);
@@ -176,7 +176,7 @@
             this.panel2.Location = new System.Drawing.Point(264, 144);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(751, 381);
-            this.panel2.TabIndex = 15;
+            this.panel2.TabIndex = 5;
             // 
             // dgvOcjene
             // 
@@ -201,7 +201,7 @@
             this.dgvOcjene.Name = "dgvOcjene";
             this.dgvOcjene.RowTemplate.Height = 24;
             this.dgvOcjene.Size = new System.Drawing.Size(731, 130);
-            this.dgvOcjene.TabIndex = 12;
+            this.dgvOcjene.TabIndex = 0;
             this.dgvOcjene.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.saveChange);
             // 
             // label5
@@ -212,7 +212,7 @@
             this.label5.Location = new System.Drawing.Point(5, 9);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(81, 25);
-            this.label5.TabIndex = 13;
+            this.label5.TabIndex = 2;
             this.label5.Text = "Ocjene";
             // 
             // dgvBiljeske
@@ -237,7 +237,7 @@
             this.dgvBiljeske.Name = "dgvBiljeske";
             this.dgvBiljeske.RowTemplate.Height = 24;
             this.dgvBiljeske.Size = new System.Drawing.Size(731, 152);
-            this.dgvBiljeske.TabIndex = 15;
+            this.dgvBiljeske.TabIndex = 1;
             this.dgvBiljeske.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.HandleBiljeska);
             // 
             // label6
@@ -248,7 +248,7 @@
             this.label6.Location = new System.Drawing.Point(5, 189);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(93, 25);
-            this.label6.TabIndex = 14;
+            this.label6.TabIndex = 3;
             this.label6.Text = "Bilješke ";
             // 
             // lbUcenici
@@ -258,7 +258,7 @@
             this.lbUcenici.Location = new System.Drawing.Point(31, 222);
             this.lbUcenici.Name = "lbUcenici";
             this.lbUcenici.Size = new System.Drawing.Size(182, 180);
-            this.lbUcenici.TabIndex = 16;
+            this.lbUcenici.TabIndex = 2;
             // 
             // button1
             // 
@@ -268,7 +268,7 @@
             this.button1.Location = new System.Drawing.Point(67, 408);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(110, 42);
-            this.button1.TabIndex = 17;
+            this.button1.TabIndex = 3;
             this.button1.Text = "Detalji";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.btnDetalji_Click);
@@ -281,7 +281,7 @@
             this.btnNijePrisutan.Location = new System.Drawing.Point(31, 483);
             this.btnNijePrisutan.Name = "btnNijePrisutan";
             this.btnNijePrisutan.Size = new System.Drawing.Size(182, 42);
-            this.btnNijePrisutan.TabIndex = 18;
+            this.btnNijePrisutan.TabIndex = 4;
             this.btnNijePrisutan.Text = "Nije prisutan";
             this.btnNijePrisutan.UseVisualStyleBackColor = false;
             this.btnNijePrisutan.Click += new System.EventHandler(this.btnNijePrisutan_Click);
@@ -305,7 +305,7 @@
             this.MinimizeBox = false;
             this.Name = "ProfesorNaslovna";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Profesor - Naslovna";
+            this.Text = " ";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);

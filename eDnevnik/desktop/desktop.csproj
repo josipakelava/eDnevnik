@@ -59,7 +59,7 @@
     <Compile Include="Controllers\ProfesorNaslovnaController.cs" />
     <Compile Include="Controllers\UcenikNaslovnaController.cs" />
     <Compile Include="Factory\FormFactory.cs" />
-    <Compile Include="Factory\Globals.cs" />
+    <Compile Include="Controllers\Globals.cs" />
     <Compile Include="Factory\IFormFactory.cs" />
     <Compile Include="Presentation\Izostanci.cs">
       <SubType>Form</SubType>
@@ -67,14 +67,14 @@
     <Compile Include="Presentation\Izostanci.Designer.cs">
       <DependentUpon>Izostanci.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentation\Podaci\Helpers.cs" />
+    <Compile Include="Presentation\Helpers.cs" />
     <Compile Include="Presentation\Home.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Presentation\Home.Designer.cs">
       <DependentUpon>Home.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentation\Podaci\OcjeneImenik.cs" />
+    <Compile Include="Models\OcjeneImenik.cs" />
     <Compile Include="Presentation\ProfesorNaslovna.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,7 +119,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

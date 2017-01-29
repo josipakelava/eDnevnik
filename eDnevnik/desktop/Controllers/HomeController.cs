@@ -39,6 +39,10 @@ namespace Desktop.Controllers
                     ProfesorNaslovna naslovnaProfesor = Globals.GetFactory().CreateProfesorNaslovna((Profesor) korisnik);
                     Globals.MakeActive(naslovnaProfesor, korisnik, uloga);
                     break;
+                case "Administrator":
+                    MessageBox.Show("Desktop aplikacija namjenjena je samo učenicima i profesorima. Molimo Vas koristite web aplikaciju! Hvala.", 
+                        "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    break;
             }
         }
     }

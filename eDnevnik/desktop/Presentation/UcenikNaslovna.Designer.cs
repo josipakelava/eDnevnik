@@ -65,7 +65,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1105, 28);
-            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.TabIndex = 10;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // profilToolStripMenuItem
@@ -96,7 +96,7 @@
             this.label1.Location = new System.Drawing.Point(16, 110);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 20);
-            this.label1.TabIndex = 1;
+            this.label1.TabIndex = 8;
             this.label1.Text = "Razrednik:";
             // 
             // txtRazrednik
@@ -106,7 +106,7 @@
             this.txtRazrednik.Location = new System.Drawing.Point(121, 107);
             this.txtRazrednik.Name = "txtRazrednik";
             this.txtRazrednik.Size = new System.Drawing.Size(182, 26);
-            this.txtRazrednik.TabIndex = 2;
+            this.txtRazrednik.TabIndex = 5;
             // 
             // txtUcenik
             // 
@@ -115,7 +115,7 @@
             this.txtUcenik.Location = new System.Drawing.Point(121, 43);
             this.txtUcenik.Name = "txtUcenik";
             this.txtUcenik.Size = new System.Drawing.Size(182, 26);
-            this.txtUcenik.TabIndex = 5;
+            this.txtUcenik.TabIndex = 3;
             // 
             // label2
             // 
@@ -124,7 +124,7 @@
             this.label2.Location = new System.Drawing.Point(16, 46);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 20);
-            this.label2.TabIndex = 4;
+            this.label2.TabIndex = 6;
             this.label2.Text = "Učenik:";
             // 
             // label3
@@ -135,7 +135,7 @@
             this.label3.Location = new System.Drawing.Point(77, 177);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(141, 25);
-            this.label3.TabIndex = 7;
+            this.label3.TabIndex = 9;
             this.label3.Text = "Moji predmeti";
             // 
             // lbPredmeti
@@ -145,7 +145,7 @@
             this.lbPredmeti.Location = new System.Drawing.Point(32, 217);
             this.lbPredmeti.Name = "lbPredmeti";
             this.lbPredmeti.Size = new System.Drawing.Size(248, 196);
-            this.lbPredmeti.TabIndex = 8;
+            this.lbPredmeti.TabIndex = 0;
             // 
             // btnDetalji
             // 
@@ -155,7 +155,7 @@
             this.btnDetalji.Location = new System.Drawing.Point(82, 431);
             this.btnDetalji.Name = "btnDetalji";
             this.btnDetalji.Size = new System.Drawing.Size(136, 43);
-            this.btnDetalji.TabIndex = 9;
+            this.btnDetalji.TabIndex = 1;
             this.btnDetalji.Text = "Detalji";
             this.btnDetalji.UseVisualStyleBackColor = false;
             this.btnDetalji.Click += new System.EventHandler(this.btnDetalji_Click);
@@ -167,7 +167,7 @@
             this.txtRazred.Location = new System.Drawing.Point(121, 75);
             this.txtRazred.Name = "txtRazred";
             this.txtRazred.Size = new System.Drawing.Size(182, 26);
-            this.txtRazred.TabIndex = 11;
+            this.txtRazred.TabIndex = 4;
             // 
             // label4
             // 
@@ -176,7 +176,7 @@
             this.label4.Location = new System.Drawing.Point(16, 78);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(68, 20);
-            this.label4.TabIndex = 10;
+            this.label4.TabIndex = 7;
             this.label4.Text = "Razred:";
             // 
             // dgvOcjene
@@ -203,7 +203,7 @@
             this.dgvOcjene.ReadOnly = true;
             this.dgvOcjene.RowTemplate.Height = 24;
             this.dgvOcjene.Size = new System.Drawing.Size(731, 150);
-            this.dgvOcjene.TabIndex = 12;
+            this.dgvOcjene.TabIndex = 0;
             // 
             // label5
             // 
@@ -213,7 +213,7 @@
             this.label5.Location = new System.Drawing.Point(5, 9);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(308, 25);
-            this.label5.TabIndex = 13;
+            this.label5.TabIndex = 2;
             this.label5.Text = "Ocjene iz odabranog predmeta";
             // 
             // panel1
@@ -226,7 +226,7 @@
             this.panel1.Location = new System.Drawing.Point(342, 46);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(751, 428);
-            this.panel1.TabIndex = 14;
+            this.panel1.TabIndex = 2;
             // 
             // dgvBiljeske
             // 
@@ -252,7 +252,7 @@
             this.dgvBiljeske.ReadOnly = true;
             this.dgvBiljeske.RowTemplate.Height = 24;
             this.dgvBiljeske.Size = new System.Drawing.Size(731, 153);
-            this.dgvBiljeske.TabIndex = 15;
+            this.dgvBiljeske.TabIndex = 1;
             // 
             // label6
             // 
@@ -262,7 +262,7 @@
             this.label6.Location = new System.Drawing.Point(5, 221);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(314, 25);
-            this.label6.TabIndex = 14;
+            this.label6.TabIndex = 3;
             this.label6.Text = "Bilješke iz odabranog predmeta";
             // 
             // UcenikNaslovna
