@@ -12,15 +12,15 @@ namespace Api.Controllers
 {
     public class AdministratorController : Controller
     {
-        IUlogaRepository _ulogaRepository;
-        IMjestoRepository _mjestoRepository;
-        IOsobaRepository _osobaRepository;
-        IPredmetRepository _predmetRepository;
-        IRazredRepository _razredRepository;
-        ISkolaRepository _skolaRepostiroy;
-        IProfesorRepository _profesorRepository;
-        IEvidencijaNastaveRepository _evidencijaRepository;
-        IUcenikRepository _ucenikRepository;
+        public IUlogaRepository _ulogaRepository;
+        public IMjestoRepository _mjestoRepository;
+        public IOsobaRepository _osobaRepository;
+        public IPredmetRepository _predmetRepository;
+        public IRazredRepository _razredRepository;
+        public ISkolaRepository _skolaRepostiroy;
+        public IProfesorRepository _profesorRepository;
+        public IEvidencijaNastaveRepository _evidencijaRepository;
+        public IUcenikRepository _ucenikRepository;
 
 
         public AdministratorController() : base()

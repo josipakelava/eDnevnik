@@ -53,7 +53,6 @@ namespace Api.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            //int id = int.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value);
             int id = GetCurrentId();
             Profesor profesor = _profesorRepository.Find(id);
 
@@ -72,7 +71,6 @@ namespace Api.Controllers
         [Authorize]
         public ActionResult Predmeti(int idRazred)
         {
-            //int id = int.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value);
             int id = GetCurrentId();
             ViewBag.evidencija = _evidencijaNastaveRepository.GetAllProfesorSubjects(id, idRazred);
             TempData["idRazred"] = idRazred;
@@ -131,29 +129,31 @@ namespace Api.Controllers
         {
             foreach (RazredViewModel ucenik in razred)
             {
-                if(ucenik.novabiljeska != null) {
+                if (ucenik.novabiljeska != null)
+                {
                     _biljeskaRepository.InsertNote(ucenik.idPredmet, ucenik.idUcenik, ucenik.novabiljeska, DateTime.Today);
                 }
-                if(ucenik.izostanak == true)
+                if (ucenik.izostanak == true)
                 {
                     _izostanakRepository.InsertAbsence(ucenik.idPredmet, ucenik.idUcenik, DateTime.Today);
                 }
                 foreach (KategorijaView kategorija in ucenik.kategorije)
                 {
-                    foreach(OcjenaViewModel ovm in kategorija.ocjene)
+                    foreach (OcjenaViewModel ovm in kategorija.ocjene)
                     {
-                        if(ovm.id >= 0 && ovm.ocjena > 0 && ovm.ocjena < 6)
+                        if (ovm.id >= 0 && ovm.ocjena > 0 && ovm.ocjena < 6)
                         {
                             _ocjenaRepository.UpdateGrade(ovm.id, ovm.ocjena);
-                        } else
+                        }
+                        else
                         {
-                            if(ovm.ocjena != 0 && ovm.ocjena > 0 && ovm.ocjena < 6)
+                            if (ovm.ocjena != 0 && ovm.ocjena > 0 && ovm.ocjena < 6)
                             {
                                 _ocjenaRepository.InsertGrade(ovm.ocjena, ucenik.idUcenik, ucenik.idPredmet, kategorija.id, GenerirajDatum(ovm.mjesecUredivanje));
                             }
                         }
                     }
-                }   
+                }
             }
             return RedirectToAction("Popis", new { idPredmet = TempData.Peek("idPredmet"), idRazred = TempData.Peek("idRazred") });
         }
@@ -161,7 +161,7 @@ namespace Api.Controllers
         public DateTime GenerirajDatum(int mjesec)
         {
             int godina = DateTime.Today.Year;
-            if(mjesec >= 9 && DateTime.Today.Month >= 1)
+            if (mjesec >= 9 && DateTime.Today.Month >= 1)
             {
                 godina = DateTime.Today.Year - 1;
             }
