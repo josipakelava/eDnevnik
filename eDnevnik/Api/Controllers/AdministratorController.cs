@@ -4,21 +4,35 @@ using Newtonsoft.Json;
 using Repository;
 using System;
 using System.Collections.Generic;
+using System.Security.Claims;
+using System.Threading;
 using System.Web.Mvc;
 
 namespace Api.Controllers
 {
     public class AdministratorController : Controller
     {
-        IUlogaRepository _ulogaRepository = new UlogaRepository();
-        IMjestoRepository _mjestoRepository = new MjestoRepository();
-        IOsobaRepository _osobaRepository = new OsobaRepository();
-        IPredmetRepository _predmetRepository = new PredmetRepository();
-        IRazredRepository _razredReopsitory = new RazredRepository();
-        ISkolaRepository _skolaRepostiroy = new SkolaRepository();
-        IProfesorRepository _profesorRepository = new ProfesorRepository();
-        IEvidencijaNastaveRepository _evidencijaRepository = new EvidencijaNastaveRepository();
-        IUcenikRepository _ucenikRepository = new UcenikRepository();
+        IUlogaRepository _ulogaRepository;
+        IMjestoRepository _mjestoRepository;
+        IOsobaRepository _osobaRepository;
+        IPredmetRepository _predmetRepository;
+        IRazredRepository _razredRepository;
+        ISkolaRepository _skolaRepostiroy;
+        IProfesorRepository _profesorRepository;
+        IEvidencijaNastaveRepository _evidencijaRepository;
+
+
+        public AdministratorController() : base()
+        {
+            _ulogaRepository = new UlogaRepository();
+            _profesorRepository = new ProfesorRepository();
+            _mjestoRepository = new MjestoRepository();
+            _osobaRepository = new OsobaRepository();
+            _skolaRepostiroy = new SkolaRepository();
+            _predmetRepository = new PredmetRepository();
+            _razredRepository = new RazredRepository();
+            _evidencijaRepository = new EvidencijaNastaveRepository();
+        }
 
         // GET: Administrator
         [Authorize]
@@ -72,7 +86,7 @@ namespace Api.Controllers
         [Authorize]
         public ActionResult EvidencijaNastave()
         {
-            ViewBag.razred = _razredReopsitory.GetAllClasses();
+            ViewBag.razred = _razredRepository.GetAllClasses();
             ViewBag.predmet = _predmetRepository.GetAllSubject();
 
             List<Profesor> profesori =(List<Profesor>) _profesorRepository.GetAll();
@@ -117,8 +131,8 @@ namespace Api.Controllers
         [Authorize]
         public ActionResult NoviRazred(NoviRazredViewModel razred)
         {
-            _razredReopsitory.InsertClass(razred.naziv, razred.idRazrednik, razred.idSkola);
-            List<Razred> razredi = (List<Razred>)_razredReopsitory.GetAllClasses();
+            _razredRepository.InsertClass(razred.naziv, razred.idRazrednik, razred.idSkola);
+            List<Razred> razredi = (List<Razred>)_razredRepository.GetAllClasses();
             razredi = razredi.FindAll(x => x.razrednik.idOsoba == razred.idRazrednik);
             _profesorRepository.UpdateRazrednistvo(razred.idRazrednik, razredi[0].idRazred, razred.idSkola);
             return RedirectToAction("DodajRazred");
@@ -145,7 +159,7 @@ namespace Api.Controllers
         [Authorize]
         public string PromijeniRazred(int id)
         {
-            Razred razred = _razredReopsitory.GetClass(id);
+            Razred razred = _razredRepository.GetClass(id);
             List<Profesor> osoba = (List<Profesor>)_profesorRepository.GetAll();
             osoba = osoba.FindAll(x => x.skola.idSkola == razred.skola.idSkola || x.skola.idSkola == 0);
 
@@ -176,7 +190,7 @@ namespace Api.Controllers
         public JsonResult doesNazivRazredExist(string naziv)
         {
 
-            var razredi = (List<Razred>)_razredReopsitory.GetAllClasses();
+            var razredi = (List<Razred>)_razredRepository.GetAllClasses();
             int skola = (int) TempData.Peek("skolaId");
             var postoji = razredi.Find(x => x.naziv == naziv && x.skola.idSkola == skola);
 
