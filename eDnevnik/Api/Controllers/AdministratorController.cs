@@ -20,6 +20,7 @@ namespace Api.Controllers
         ISkolaRepository _skolaRepostiroy;
         IProfesorRepository _profesorRepository;
         IEvidencijaNastaveRepository _evidencijaRepository;
+        IUcenikRepository _ucenikRepository;
 
 
         public AdministratorController() : base()
@@ -32,6 +33,7 @@ namespace Api.Controllers
             _predmetRepository = new PredmetRepository();
             _razredRepository = new RazredRepository();
             _evidencijaRepository = new EvidencijaNastaveRepository();
+            _ucenikRepository = new UcenikRepository();
         }
 
         // GET: Administrator
@@ -200,7 +202,7 @@ namespace Api.Controllers
         [Authorize]
         public void UkloniUcenika(int id)
         {
-            _razredReopsitory.RemoveStudent(id);
+            _razredRepository.RemoveStudent(id);
         }
 
         [Authorize]
