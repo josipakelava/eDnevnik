@@ -51,7 +51,7 @@ namespace Api.Controllers.Tests
                 idMjesto = 10000,
                 role = "Profesor"
             };
-            
+
             ac.RegistrirajKorisnika(osoba);
 
             osobaRepositoryMock.Verify(r => r.AddProfesor("", "Proba", now, "Proba", "12345678912", "proba@fer.hr", "Proba", 10000), Times.Never());
@@ -203,194 +203,107 @@ namespace Api.Controllers.Tests
             ucenikRepositoryMock.Verify(r => r.NewClass(10, 600), Times.Never());
         }
 
-        //[TestMethod()]
-        //public void PredmetiTest()
-        //{
-        //    var profesorRepositoryMock = new Mock<IEvidencijaNastaveRepository>();
-        //    profesorRepositoryMock.Setup(r => r.GetAllProfesorSubjects(5, 5)).Returns<EvidencijaNastave>(null);
-        //    ProfesorController pc = new ProfesorController(() => 5);
-        //    pc._evidencijaNastaveRepository = profesorRepositoryMock.Object;
+        [TestMethod()]
+        public void EvidencijaNastaveTest()
+        {
+            var predmetRepository = new Mock<IPredmetRepository>();
+            var razredRepository = new Mock<IRazredRepository>();
+            var profesorRepository = new Mock<IProfesorRepository>();
 
-        //    pc.Predmeti(5);
-
-        //    profesorRepositoryMock.Verify(r => r.GetAllProfesorSubjects(5, 5), Times.Exactly(1));
-        //    profesorRepositoryMock.Verify(r => r.GetAllProfesorSubjects(5, 10), Times.Never());
-        //}
-
-        //[TestMethod()]
-        //public void PopisTest()
-        //{
-        //    var profesorRepositoryMock = new Mock<IPredmetRepository>();
-        //    var profesorRepositoryMock2 = new Mock<IRazredRepository>();
-        //    var razredMock = new Mock<Razred>();
-
-        //    profesorRepositoryMock.Setup(r => r.GetSubject(5)).Returns<Predmet>(null);
-
-        //    razredMock.Setup(p => p.ucenici).Returns(new List<Ucenik>());
-        //    profesorRepositoryMock2.Setup(r => r.GetClass(5)).Returns(razredMock.Object);
-        //    ProfesorController pc = new ProfesorController(() => 5);
-        //    pc._predmetRepository = profesorRepositoryMock.Object;
-        //    pc._razredRepository = profesorRepositoryMock2.Object;
+            predmetRepository.Setup(r => r.GetAllSubject()).Returns(new List<Predmet>());
+            razredRepository.Setup(r => r.GetAllClasses()).Returns(new List<Razred>());
+            profesorRepository.Setup(r => r.GetAll()).Returns(new List<Profesor>());
 
 
-        //    pc.Popis(5, 5);
+            AdministratorController pc = new AdministratorController();
+            pc._predmetRepository = predmetRepository.Object;
+            pc._razredRepository = razredRepository.Object;
 
-        //    profesorRepositoryMock.Verify(r => r.GetSubject(5), Times.Exactly(1));
-        //    profesorRepositoryMock.Verify(r => r.GetSubject(10), Times.Never());
+            pc._profesorRepository = profesorRepository.Object;
 
-        //    profesorRepositoryMock2.Verify(r => r.GetClass(5), Times.Exactly(1));
-        //    profesorRepositoryMock2.Verify(r => r.GetClass(10), Times.Never());
+            pc.EvidencijaNastave();
 
-        //    razredMock.Verify(p => p.ucenici, Times.AtLeastOnce());
-        //}
+            predmetRepository.Verify(r => r.GetAllSubject(), Times.Exactly(1));
+            razredRepository.Verify(r => r.GetAllClasses(), Times.Exactly(1));
+            profesorRepository.Verify(r => r.GetAll(), Times.Exactly(1));
 
-        //[TestMethod()]
-        //public void ProfilTest()
-        //{
-        //    var profesorRepositoryMock = new Mock<IProfesorRepository>();
-        //    profesorRepositoryMock.Setup(r => r.Find(5)).Returns<Profesor>(null);
-        //    ProfesorController pc = new ProfesorController(() => 5);
-        //    pc._profesorRepository = profesorRepositoryMock.Object;
+        }
+        [TestMethod()]
+        public void NovaEviNdencijaNastaveTest()
+        {
+            var evidencijaRepositoryMock = new Mock<IEvidencijaNastaveRepository>();
 
-        //    pc.Profil();
+            AdministratorController pc = new AdministratorController();
+            pc._evidencijaRepository = evidencijaRepositoryMock.Object;
 
-        //    profesorRepositoryMock.Verify(r => r.Find(5), Times.Exactly(1));
-        //    profesorRepositoryMock.Verify(r => r.Find(10), Times.Never());
-        //}
+            pc.NovaEvidencija(new EvidencijaViewModel()
+            {
+                idPredmet = 5,
+                idRazred = 5,
+                idProfesor = 5
+            });
 
-        //[TestMethod()]
-        //public void IzostanciTest()
-        //{
-        //    var profesorRepositoryMock = new Mock<IProfesorRepository>();
-        //    var listaMock = new List<Izostanak>();
+            evidencijaRepositoryMock.Verify(r => r.InsertNew(5, 5, 5), Times.Exactly(1));
+            evidencijaRepositoryMock.Verify(r => r.InsertNew(10, 2, 3), Times.Never());
 
-        //    profesorRepositoryMock.Setup(r => r.GetAllAbsencesOfClass(5)).Returns(listaMock);
-        //    ProfesorController pc = new ProfesorController(() => 5);
-        //    pc._profesorRepository = profesorRepositoryMock.Object;
+        }
+        [TestMethod()]
+        public void DodajRazredTest()
+        {
+            var skolaRepostiroyMock = new Mock<ISkolaRepository>();
+            var profesorRepositoryMock = new Mock<IProfesorRepository>();
 
-        //    pc.Izostanci();
+            var razredMock = new Mock<Razred>();
+            List<Profesor> osoba = new List<Profesor>();
 
-        //    profesorRepositoryMock.Verify(r => r.GetAllAbsencesOfClass(5), Times.Exactly(1));
-        //    profesorRepositoryMock.Verify(r => r.GetAllAbsencesOfClass(10), Times.Never());
-        //}
-
-        //[TestMethod()]
-        //public void MojRazredTest()
-        //{
-        //    var profesorRepositoryMock = new Mock<IProfesorRepository>();
-        //    var razredRepositoryMock = new Mock<IRazredRepository>();
-        //    var evidencijaRepositoryMock = new Mock<IEvidencijaNastaveRepository>();
-
-        //    var razredMock = new Mock<Razred>();
-        //    var profesorMock = new Mock<Profesor>();
-
-        //    profesorMock.Setup(p => p.razrednistvo.idRazred).Returns(0);
-        //    profesorRepositoryMock.Setup(r => r.Find(5)).Returns(profesorMock.Object);
-
-        //    razredMock.Setup(p => p.idRazred).Returns(0);
-        //    razredMock.Setup(p => p.ucenici).Returns(new List<Ucenik>());
-
-        //    razredRepositoryMock.Setup(r => r.GetClass(0)).Returns(razredMock.Object);
-        //    evidencijaRepositoryMock.Setup(r => r.GetAllClassSubjects(5)).Returns<IList<EvidencijaNastave>>(null);
-
-        //    ProfesorController pc = new ProfesorController(() => 5);
-        //    pc._profesorRepository = profesorRepositoryMock.Object;
-        //    pc._razredRepository = razredRepositoryMock.Object;
-        //    pc._evidencijaNastaveRepository = evidencijaRepositoryMock.Object;
+            skolaRepostiroyMock.Setup(r => r.GetAllSchool()).Returns(new List<Skola>());
+            profesorRepositoryMock.Setup(r => r.GetAll()).Returns(osoba);
 
 
-        //    pc.MojRazred();
+            AdministratorController pc = new AdministratorController();
+            pc._skolaRepostiroy = skolaRepostiroyMock.Object;
+            pc._profesorRepository = profesorRepositoryMock.Object;
+            pc.DodajRazred();
 
-        //    profesorRepositoryMock.Verify(r => r.Find(5), Times.Exactly(1));
-        //    profesorRepositoryMock.Verify(r => r.Find(10), Times.Never());
+            skolaRepostiroyMock.Verify(r => r.GetAllSchool(), Times.Exactly(2));
 
-        //    razredRepositoryMock.Verify(r => r.GetClass(0), Times.Exactly(1));
-        //    razredRepositoryMock.Verify(r => r.GetClass(10), Times.Never());
+            profesorRepositoryMock.Verify(r => r.GetAll(), Times.Exactly(1));
 
-        //    evidencijaRepositoryMock.Verify(r => r.GetAllClassSubjects(0), Times.Exactly(1));
-        //    evidencijaRepositoryMock.Verify(r => r.GetAllClassSubjects(10), Times.Never());
+        }
 
+        [TestMethod()]
+        public void NoviRazredTest()
+        {
+            var razredRepostiroyMock = new Mock<IRazredRepository>();
+            var profesorRepositoryMock = new Mock<IProfesorRepository>();
 
-        //    razredMock.Verify(p => p.ucenici, Times.AtLeastOnce());
-        //}
+            NoviRazredViewModel razred = new NoviRazredViewModel()
+            {
+                naziv = "razred",
+                idRazrednik = 0,
+                idSkola = 0
+            };
+            var razredMock = new Mock<Razred>();
+            razredMock.Setup(p => p.idRazred).Returns(0);
 
-        //[TestMethod()]
-        //public void SpremiIzostankeTest()
-        //{
-        //    var izostanakRepositoryMock = new Mock<IIzostanakRepository>();
-        //    ProfesorController pc = new ProfesorController(() => 5);
-        //    pc._izostanakRepository = izostanakRepositoryMock.Object;
-        //    List<IzostanakViewModel> izostanakLista = new List<IzostanakViewModel>();
+            razredMock.Setup(p => p.razrednik.idOsoba).Returns(0);
 
-        //    izostanakLista.Add(new IzostanakViewModel()
-        //    {
-        //        id = 5,
-        //        opravdanost = false,
-        //        razlog = "test"
+            List<Razred> lista = new List<Razred>();
+            lista.Add(razredMock.Object);
 
-        //    });
-        //    pc.SpremiIzostanke(izostanakLista);
+            razredRepostiroyMock.Setup(r => r.GetAllClasses()).Returns(lista);
+            AdministratorController pc = new AdministratorController();
+            pc._razredRepository = razredRepostiroyMock.Object;
+            pc._profesorRepository = profesorRepositoryMock.Object;
+            pc.NoviRazred(razred);
 
-        //    izostanakRepositoryMock.Verify(r => r.UpdateIzostanak(5, false, "test"), Times.Exactly(1));
-        //    izostanakRepositoryMock.Verify(r => r.UpdateIzostanak(10, false, "test"), Times.Never());
+            razredRepostiroyMock.Verify(r => r.GetAllClasses(), Times.Exactly(1));
+            razredRepostiroyMock.Verify(r => r.InsertClass("razred", 0,0 ),Times.Exactly(1));
+            razredRepostiroyMock.Verify(r => r.InsertClass("razred", 5, 5), Times.Never());
 
-        //}
+            profesorRepositoryMock.Verify(r => r.UpdateRazrednistvo(0, 0, 0), Times.Exactly(1));
+            profesorRepositoryMock.Verify(r => r.UpdateRazrednistvo(5, 5, 5), Times.Never());
 
-        //[TestMethod()]
-        //public void SpremiRazredTest()
-        //{
-        //    var biljeskaRepositoryMock = new Mock<IBiljeskaRepository>();
-        //    var ocjenaRepositoryMock = new Mock<IOcjenaRepository>();
-        //    var izostanakRepositoryMock = new Mock<IIzostanakRepository>();
-
-        //    List<OcjenaViewModel> ocjene = new List<OcjenaViewModel>();
-        //    ocjene.Add(new OcjenaViewModel()
-        //    {
-        //        id = 2,
-        //        ocjena = 3
-        //    });
-        //    ocjene.Add(new OcjenaViewModel()
-        //    {
-        //        id = -1,
-        //        ocjena = 5,
-        //        mjesecUredivanje = 1
-        //    });
-        //    List<KategorijaView> kategorije = new List<KategorijaView>();
-        //    kategorije.Add(new KategorijaView()
-        //    {
-        //        id = 0,
-        //        ocjene = ocjene
-        //    });
-
-        //    List<RazredViewModel> razred = new List<RazredViewModel>();
-        //    razred.Add(new RazredViewModel()
-        //    {
-        //        idPredmet = 0,
-        //        idUcenik = 0,
-        //        izostanak = true,
-        //        novabiljeska = "biljeskaTest",
-        //        kategorije = kategorije
-
-        //    });
-        //    ProfesorController pc = new ProfesorController(() => 5);
-        //    pc._biljeskaRepository = biljeskaRepositoryMock.Object;
-        //    pc._ocjenaRepository = ocjenaRepositoryMock.Object;
-        //    pc._izostanakRepository = izostanakRepositoryMock.Object;
-
-        //    pc.SpremiRazred(razred);
-
-        //    biljeskaRepositoryMock.Verify(r => r.InsertNote(0, 0, "biljeskaTest", DateTime.Today), Times.Exactly(1));
-        //    biljeskaRepositoryMock.Verify(r => r.InsertNote(10, 5, "biljeskaTest", DateTime.Today), Times.Never());
-
-        //    ocjenaRepositoryMock.Verify(r => r.UpdateGrade(2, 3), Times.Exactly(1));
-        //    ocjenaRepositoryMock.Verify(r => r.UpdateGrade(10, 8), Times.Never());
-
-        //    ocjenaRepositoryMock.Verify(r => r.InsertGrade(5, 0, 0, 0, Convert.ToDateTime("15.1.2017")), Times.Exactly(1));
-        //    ocjenaRepositoryMock.Verify(r => r.InsertGrade(3, 4, 5, 2, Convert.ToDateTime("15.1.2017")), Times.Never());
-
-        //    izostanakRepositoryMock.Verify(r => r.InsertAbsence(0, 0, DateTime.Today), Times.Exactly(1));
-        //    izostanakRepositoryMock.Verify(r => r.InsertAbsence(10, 4, DateTime.Today), Times.Never());
-        //}
-
+        }
     }
 }
