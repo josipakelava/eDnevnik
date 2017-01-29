@@ -67,7 +67,7 @@ namespace Api.Controllers
 
         public ActionResult EvidencijaNastave()
         {
-            ViewBag.razred = _razredRepository.GetAllClasses();
+            ViewBag.razred = NoviRazredViewModel.toList(_razredRepository.GetAllClasses());
             ViewBag.predmet = _predmetRepository.GetAllSubject();
 
             List<Profesor> profesori =(List<Profesor>) _profesorRepository.GetAll();
@@ -78,7 +78,8 @@ namespace Api.Controllers
         [HttpPost]
         public ActionResult NovaEvidencija(EvidencijaViewModel evidencija)
         {
-            _evidencijaRepository.InsertNew(evidencija.idRazred, evidencija.idPredmet, evidencija.idProfesor);
+            if(evidencija.idRazred != 0 &&  evidencija.idPredmet != 0 && evidencija.idProfesor != 0)
+                _evidencijaRepository.InsertNew(evidencija.idRazred, evidencija.idPredmet, evidencija.idProfesor);
             return RedirectToAction("EvidencijaNastave");
         }
 

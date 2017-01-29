@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domena;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -18,7 +19,34 @@ namespace Api.Models
 
         [Required(ErrorMessage = "Obavezno polje")]
         public int idRazrednik { get; set; }
+        public int idRazred { get; set; }
+
+        public string nazivSkola { get; set; }
+
+        public string skolaRazred
+        {
+            get
+            {
+                return nazivSkola + ", " + naziv;
+            }
+        }
+
+        public static List<NoviRazredViewModel> toList(IList<Razred> razredi)
+        {
+            List<NoviRazredViewModel> lista = new List<NoviRazredViewModel>();
+            foreach (Razred razred in razredi)
+            {
+                NoviRazredViewModel novi = new NoviRazredViewModel();
+
+                novi.naziv = razred.naziv;
+                novi.idRazred = razred.idRazred;
+                novi.nazivSkola = razred.skola.naziv;
+                novi.idSkola = razred.skola.idSkola;
 
 
+                lista.Add(novi);
+            }
+            return lista;
+        }
     }
 }

@@ -14,7 +14,7 @@
 
     @using (Html.BeginForm("NovaEvidencija", "Administrator", FormMethod.Post, new { name = "formAnswerScheme", id = "form" }))
     {
-        @Html.DropDownListFor(m => m.idRazred, new SelectList(ViewBag.razred, "idRazred", "naziv"), "Razred", new { Class = "form-control", Name = "idRazred", Id = "razred" })
+        @Html.DropDownListFor(m => m.idRazred, new SelectList(ViewBag.razred, "idRazred", "skolaRazred"), "Razred", new { Class = "form-control", Name = "idRazred", Id = "razred" })
         @Html.ValidationMessageFor(m => m.idRazred, "", new { @class = "text-danger" })
 
         <br />
@@ -77,7 +77,7 @@
 
                     },
                     error:function (xhr, ajaxOptions, thrownError){
-                        alert('Failed to retrieve states.');
+                        alert('Odaberite razred!');
 
                     }
                 });

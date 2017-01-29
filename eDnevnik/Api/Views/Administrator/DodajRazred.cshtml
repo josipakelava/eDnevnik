@@ -38,7 +38,10 @@
     <script type="text/javascript">
      $(function() {
          $("#skola").change(function () {
-                var selectedItem = $(this).val();
+             var selectedItem = $(this).val();
+             var filter = "#unos";
+             var element = document.querySelectorAll(filter)[0];
+             element.style.display = "none";
                 $.ajax({
                     cache: false,
                     type: "GET",
@@ -57,16 +60,17 @@
                             e = new Option(data[i].oibPrezimeIme, data[i].idOsoba);
                             $('#idRazrednik').append(e);
                         }
+                        var filter = "#unos";
+                        var element = document.querySelectorAll(filter)[0];
+                        element.style.display = null;
 
                     },
                     error:function (xhr, ajaxOptions, thrownError){
-                        alert('Failed to retrieve states.');
+                        alert('Odaberite skolu!');
 
                     }
                 });
-                var filter = "#unos";
-                var element = document.querySelectorAll(filter)[0];
-                element.style.display = null;
+               
             });
 
         });
