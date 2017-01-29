@@ -135,7 +135,7 @@ namespace Api.Controllers
                 }
                 if (ucenik.izostanak == true)
                 {
-                    _izostanakRepository.InsertAbsence(ucenik.idPredmet, ucenik.idUcenik, DateTime.Today);
+                    _izostanakRepository.InsertAbsence(ucenik.idPredmet, ucenik.idUcenik, "",DateTime.Today);
                 }
                 foreach (KategorijaView kategorija in ucenik.kategorije)
                 {

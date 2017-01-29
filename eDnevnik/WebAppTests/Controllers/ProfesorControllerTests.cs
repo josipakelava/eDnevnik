@@ -220,8 +220,8 @@ namespace Api.Controllers.Tests
             ocjenaRepositoryMock.Verify(r => r.InsertGrade(5, 0, 0, 0, Convert.ToDateTime("15.1.2017")), Times.Exactly(1));
             ocjenaRepositoryMock.Verify(r => r.InsertGrade(3, 4, 5, 2, Convert.ToDateTime("15.1.2017")), Times.Never());
 
-            izostanakRepositoryMock.Verify(r => r.InsertAbsence(0, 0, DateTime.Today), Times.Exactly(1));
-            izostanakRepositoryMock.Verify(r => r.InsertAbsence(10, 4, DateTime.Today), Times.Never());
+            izostanakRepositoryMock.Verify(r => r.InsertAbsence(0, 0, "",DateTime.Today), Times.Exactly(1));
+            izostanakRepositoryMock.Verify(r => r.InsertAbsence(10, 4, "",DateTime.Today), Times.Never());
         }
 
     }

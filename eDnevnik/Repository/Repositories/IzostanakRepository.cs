@@ -28,7 +28,7 @@ namespace Repository
         }
 
 
-        public void InsertAbsence(int idPredmet, int idUcenik, DateTime datum)
+        public void InsertAbsence(int idPredmet, int idUcenik, string razlog, DateTime datum)
         {
             using (var transaction = _session.BeginTransaction())
             {
@@ -37,6 +37,7 @@ namespace Repository
                 novaiIzostanak.predmet = _session.Load<Predmet>(idPredmet);
                 novaiIzostanak.ucenik = _session.Load<Ucenik>(idUcenik);
                 novaiIzostanak.datum = datum;
+                novaiIzostanak.razlog = razlog;
 
                 _session.Save(novaiIzostanak);
 

@@ -51,7 +51,7 @@ namespace Desktop.Controllers
 
         public void Nedostaje(int idPredmet, int idOsoba, DateTime date)
         {
-            _izostanakRepository.InsertAbsence(idPredmet, idOsoba, date);
+            _izostanakRepository.InsertAbsence(idPredmet, idOsoba, "",date);
         }
     }
 }

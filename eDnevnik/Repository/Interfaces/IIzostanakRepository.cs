@@ -10,7 +10,7 @@ namespace Repository
     public interface IIzostanakRepository
     {
         void UpdateIzostanak(int id, bool opravdanost, string razlog);
-        void InsertAbsence(int idPredmet, int idUcenik, DateTime datum);
+        void InsertAbsence(int idPredmet, int idUcenik, string razlog, DateTime datum);
 
        
     }

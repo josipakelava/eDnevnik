@@ -18,6 +18,8 @@ namespace RESTApi.Controllers
         private IProfesorRepository _profesorRepository = new ProfesorRepository();
         private IEvidencijaNastaveRepository _evidencijaRepository = new EvidencijaNastaveRepository();
         private IRazredRepository _razredRepository = new RazredRepository();
+        private IBiljeskaRepository _biljeskaRepository = new BiljeskaRepository();
+        private IIzostanakRepository _izostanakRepository = new IzostanakRepository();
 
         [Autorizacija]
         [HttpGet]
@@ -106,5 +108,20 @@ namespace RESTApi.Controllers
             return JsonConvert.SerializeObject(new Cmn(ocjene, biljeske, kategorije));
         }
 
+        [Autorizacija]
+        [HttpPost]
+        public bool AddNote(String Studentid, String SubjectId, String Date, String Note)
+        {
+            _biljeskaRepository.InsertNote(Int32.Parse(SubjectId), Int32.Parse(Studentid), Note, Convert.ToDateTime(Date));
+            return true;
+        }
+
+        [Autorizacija]
+        [HttpPost]
+        public bool AddAbsence(String Studentid, String SubjectId, String Date, String Reason)
+        {
+            _izostanakRepository.InsertAbsence(Int32.Parse(SubjectId), Int32.Parse(Studentid), Reason, Convert.ToDateTime(Date));
+            return true;
+        }
     }
 }
