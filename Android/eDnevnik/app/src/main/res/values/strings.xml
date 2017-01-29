@@ -1,0 +1,95 @@
+<resources>
+    <string name="app_name">eDnevnik</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="welcome_to">Dobrodošli u</string>
+    <string name="username_text">Korisničko ime</string>
+    <string name="password_text">Lozinka</string>
+    <string name="login_text">Prijava</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string-array name="role_arrays">
+        <item>Učenik</item>
+        <item>Profesor</item>
+    </string-array>
+
+    <string-array name="marks_arrays">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="month_arrays">
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="profil">Osobni podaci</string>
+    <string name="subjects">Predmeti</string>
+    <string name="absences">Izostanci</string>
+    <string name="logOff">Odjava</string>
+
+    <string name="student_name">Ime Prezime</string>
+    <string name="school">Škola</string>
+    <string name="student_first_name">Ime: </string>
+    <string name="student_last_name">Prezime:</string>
+    <string name="address">Adresa:</string>
+    <string name="student_birth_date">Datum rođenja:</string>
+    <string name="student_oib">OIB:</string>
+    <string name="student_city">Mjesto:</string>
+    <string name="student_mail">Mail:</string>
+    <string name="date">Datum</string>
+    <string name="subject">Predmet</string>
+    <string name="reason">Razlog</string>
+    <string name="validity">Opravdano</string>
+    <string name="category">Kategorija</string>
+    <string name="ix">IX.</string>
+    <string name="x">X.</string>
+    <string name="xi">XI.</string>
+    <string name="xii">XII.</string>
+    <string name="i">I.</string>
+    <string name="ii">II.</string>
+    <string name="iii">III.</string>
+    <string name="iv">IV.</string>
+    <string name="v">V.</string>
+    <string name="vi">VI.</string>
+    <string name="notes">Bilješke</string>
+    <string name="note">Bilješka</string>
+    <string name="all_grades">Svi razredi</string>
+    <string name="my_grade">Moj razred</string>
+    <string name="mark">Ocjena</string>
+    <string name="absence">Izostanak</string>
+    <string name="add_new">Dodaj</string>
+    <string name="new_mark">Nova ocjena</string>
+    <string name="ok">Uredu</string>
+    <string name="cancel">Odustani</string>
+    <string name="month">Mjesec</string>
+    <string name="yes">Da</string>
+    <string name="no">Ne</string>
+
+</resources>
