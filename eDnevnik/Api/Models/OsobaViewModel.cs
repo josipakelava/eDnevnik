@@ -74,7 +74,7 @@ namespace Api.Models
             foreach (Profesor o in osobe)
             {
                 OsobaViewModel ovm = new OsobaViewModel();
-                ovm.idSkola = o.skola.idSkola;
+                if (o.skola!=null) ovm.idSkola = o.skola.idSkola;
                 ovm.idOsoba = o.idOsoba;
                 ovm.ime = o.ime;
                 ovm.prezime = o.prezime;
@@ -85,6 +85,27 @@ namespace Api.Models
                 ovm.password = o.password;
                 ovm.repeatedPassword = o.password;
                 ovm.idMjesto = o.mjesto.idMjesto;
+                lista.Add(ovm);
+            }
+            return lista;
+        }
+
+        public static IList<OsobaViewModel> toListUcenik(IList<Ucenik> ucenici)
+        {
+            IList<OsobaViewModel> lista = new List<OsobaViewModel>();
+            foreach (Ucenik u in ucenici)
+            {
+                OsobaViewModel ovm = new OsobaViewModel();
+                ovm.idOsoba = u.idOsoba;
+                ovm.ime = u.ime;
+                ovm.prezime = u.prezime;
+                ovm.datumRodjenja = u.datumRodjenja;
+                ovm.adresa = u.adresa;
+                ovm.OIB = u.OIB;
+                ovm.email = u.email;
+                ovm.password = u.password;
+                ovm.repeatedPassword = u.password;
+                ovm.idMjesto = u.mjesto.idMjesto;
                 lista.Add(ovm);
             }
             return lista;

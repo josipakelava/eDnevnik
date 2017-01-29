@@ -36,6 +36,18 @@ namespace Repository
                 transaction.Commit();
             }
         }
+
+        public void RemoveStudent(int idOsoba)
+        {
+            using (var transaction = _session.BeginTransaction())
+            {
+                Ucenik ucenik = _session.QueryOver<Ucenik>().Where(u => u.idOsoba == idOsoba).List()[0];
+                ucenik.razred = null;
+
+                _session.Update(ucenik);
+                transaction.Commit();
+            }
+        }
     }
     
 }

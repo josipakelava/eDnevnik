@@ -13,5 +13,7 @@ namespace Repository
         IList<Razred> GetAllClasses();
 
         void InsertClass(string naziv, int idRazrednik, int idSkola);
+
+        void RemoveStudent(int idOsoba);
     }
 }
