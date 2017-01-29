@@ -21,7 +21,7 @@ namespace RESTApi.Controllers
         public string Profil()
         {
             int id = int.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value);
-            return JsonConvert.SerializeObject(new Ucenik(_ucenikRepository.Find(id)));
+            return JsonConvert.SerializeObject(new Osoba(_ucenikRepository.Find(id)));
         }
 
         [Autorizacija]
@@ -34,6 +34,7 @@ namespace RESTApi.Controllers
 
         [Autorizacija]
         [HttpGet]
+        //[Route("api/Ucenik/Subject/{subjectId}/Cmn")]
         public string Cmn()
         {
             int id = int.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value);

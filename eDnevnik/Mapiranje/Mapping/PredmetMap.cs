@@ -10,7 +10,7 @@ namespace Mapiranje
         public PredmetMap()
         {
 
-            Id(x => x.idPredmet).GeneratedBy.Assigned();
+            Id(x => x.idPredmet).GeneratedBy.Increment();
             Map(x => x.naziv).Not.Nullable();
             HasManyToMany(x => x.kategorije).Not.LazyLoad();
 

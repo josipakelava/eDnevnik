@@ -4,22 +4,40 @@ using Newtonsoft.Json;
 using Repository;
 using System;
 using System.Collections.Generic;
+using System.Security.Claims;
+using System.Threading;
 using System.Web.Mvc;
 
 namespace Api.Controllers
 {
     public class AdministratorController : Controller
     {
-        IUlogaRepository _ulogaRepository = new UlogaRepository();
-        IMjestoRepository _mjestoRepository = new MjestoRepository();
-        IOsobaRepository _osobaRepository = new OsobaRepository();
-        IPredmetRepository _predmetRepository = new PredmetRepository();
-        IRazredRepository _razredReopsitory = new RazredRepository();
-        ISkolaRepository _skolaRepostiroy = new SkolaRepository();
-        IProfesorRepository _profesorRepository = new ProfesorRepository();
-        IEvidencijaNastaveRepository _evidencijaRepository = new EvidencijaNastaveRepository();
+        IUlogaRepository _ulogaRepository;
+        IMjestoRepository _mjestoRepository;
+        IOsobaRepository _osobaRepository;
+        IPredmetRepository _predmetRepository;
+        IRazredRepository _razredRepository;
+        ISkolaRepository _skolaRepostiroy;
+        IProfesorRepository _profesorRepository;
+        IEvidencijaNastaveRepository _evidencijaRepository;
+        IUcenikRepository _ucenikRepository;
+
+
+        public AdministratorController() : base()
+        {
+            _ulogaRepository = new UlogaRepository();
+            _profesorRepository = new ProfesorRepository();
+            _mjestoRepository = new MjestoRepository();
+            _osobaRepository = new OsobaRepository();
+            _skolaRepostiroy = new SkolaRepository();
+            _predmetRepository = new PredmetRepository();
+            _razredRepository = new RazredRepository();
+            _evidencijaRepository = new EvidencijaNastaveRepository();
+            _ucenikRepository = new UcenikRepository();
+        }
 
         // GET: Administrator
+        [Authorize]
         public ActionResult Index()
         {
             ViewBag.uloga = _ulogaRepository.GetAllToCreate();
@@ -29,6 +47,7 @@ namespace Api.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult RegistrirajKorisnika(OsobaViewModel model)
         {
             ViewBag.uloga = _ulogaRepository.GetAllToCreate();
@@ -37,12 +56,13 @@ namespace Api.Controllers
             if (ModelState.IsValid)
             {
                 if (model.role.Equals("Ucenik")) _osobaRepository.AddUcenik(model.ime, model.prezime, model.datumRodjenja, model.adresa, model.OIB, model.email, model.password, model.idMjesto);
-                    else _osobaRepository.AddProfesor(model.ime, model.prezime, model.datumRodjenja, model.adresa, model.OIB, model.email, model.password, model.idMjesto);
+                else _osobaRepository.AddProfesor(model.ime, model.prezime, model.datumRodjenja, model.adresa, model.OIB, model.email, model.password, model.idMjesto);
                 return RedirectToAction("Index");
             }
             return View(model);
         }
 
+        [Authorize]
         public ActionResult UrediOsobne()
         {
             ViewBag.osobe = OsobaViewModel.toList(_osobaRepository.GetAll());
@@ -50,35 +70,60 @@ namespace Api.Controllers
             return View();
         }
 
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult UrediOsobne(OsobaViewModel model)
+        {
+            ViewBag.mjesta = _mjestoRepository.GetAll();
+            if (ModelState.IsValid)
+            {
+                _osobaRepository.Update(model.idOsoba, model.ime, model.prezime, model.datumRodjenja, model.adresa, model.OIB, model.email, model.password, model.idMjesto);
+                ViewBag.osobe = OsobaViewModel.toList(_osobaRepository.GetAll());
+                return View(model);
+            }
+            return View(model);
+        }
+
+        [Authorize]
         public ActionResult EvidencijaNastave()
         {
-            ViewBag.razred = _razredReopsitory.GetAllClasses();
+            ViewBag.razred = NoviRazredViewModel.toList(_razredRepository.GetAllClasses());
             ViewBag.predmet = _predmetRepository.GetAllSubject();
+
+            List<Profesor> profesori =(List<Profesor>) _profesorRepository.GetAll();
             ViewBag.profesori = OsobaViewModel.toListProfesor(_profesorRepository.GetAll());
             return View(new EvidencijaViewModel());
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult NovaEvidencija(EvidencijaViewModel evidencija)
         {
-            _evidencijaRepository.InsertNew(evidencija.idRazred, evidencija.idPredmet, evidencija.idProfesor);
+            if(evidencija.idRazred != 0 &&  evidencija.idPredmet != 0 && evidencija.idProfesor != 0)
+                _evidencijaRepository.InsertNew(evidencija.idRazred, evidencija.idPredmet, evidencija.idProfesor);
             return RedirectToAction("EvidencijaNastave");
         }
 
+        [Authorize]
         public ActionResult DodajPredmet()
         {
             return View(new PredmetViewModel());
         }
+
+        [Authorize]
         public ActionResult DodajRazred()
         {
             ViewBag.skola = _skolaRepostiroy.GetAllSchool();
             List<Profesor> osoba =(List<Profesor>) _profesorRepository.GetAll();
             osoba = osoba.FindAll(x => x.razrednistvo == null);
             ViewBag.osoba = OsobaViewModel.toListProfesor(osoba);
-
+            ViewBag.skole = _skolaRepostiroy.GetAllSchool();
             return View(new NoviRazredViewModel());
         }
+
         [HttpPost]
+        [Authorize]
         public ActionResult NoviPredmet(PredmetViewModel predmet)
         {
             _predmetRepository.InsertSubject(predmet.naziv);
@@ -86,34 +131,38 @@ namespace Api.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult NoviRazred(NoviRazredViewModel razred)
         {
-            _razredReopsitory.InsertClass(razred.naziv, razred.idRazrednik, razred.idSkola);
-            List<Razred> razredi = (List<Razred>)_razredReopsitory.GetAllClasses();
+            _razredRepository.InsertClass(razred.naziv, razred.idRazrednik, razred.idSkola);
+            List<Razred> razredi = (List<Razred>)_razredRepository.GetAllClasses();
             razredi = razredi.FindAll(x => x.razrednik.idOsoba == razred.idRazrednik);
             _profesorRepository.UpdateRazrednistvo(razred.idRazrednik, razredi[0].idRazred, razred.idSkola);
             return RedirectToAction("DodajRazred");
         }
 
+        [AllowAnonymous]
         public String DohvatiOsobu(int id)
         {
             Osoba osoba = _osobaRepository.Get(id);
             return JsonConvert.SerializeObject(OsobaViewModel.toModel(osoba));
         }
 
+        [Authorize]
         public string PromijeniSkolu(int id)
         {
             TempData["skolaId"] = id;
             List<Profesor> osoba = (List<Profesor>)_profesorRepository.GetAll();
             osoba = osoba.FindAll(x => x.razrednistvo == null);
-            osoba = osoba.FindAll(x => x.skola.idSkola == id || x.skola.idSkola == 0);
+            osoba = osoba.FindAll(x => x.skola == null || x.skola.idSkola == id);
 
             return JsonConvert.SerializeObject(OsobaViewModel.toListProfesor(osoba));
         }
 
+        [Authorize]
         public string PromijeniRazred(int id)
         {
-            Razred razred = _razredReopsitory.GetClass(id);
+            Razred razred = _razredRepository.GetClass(id);
             List<Profesor> osoba = (List<Profesor>)_profesorRepository.GetAll();
             osoba = osoba.FindAll(x => x.skola.idSkola == razred.skola.idSkola || x.skola.idSkola == 0);
 
@@ -144,11 +193,31 @@ namespace Api.Controllers
         public JsonResult doesNazivRazredExist(string naziv)
         {
 
-            var razredi = (List<Razred>)_razredReopsitory.GetAllClasses();
+            var razredi = (List<Razred>)_razredRepository.GetAllClasses();
             int skola = (int) TempData.Peek("skolaId");
             var postoji = razredi.Find(x => x.naziv == naziv && x.skola.idSkola == skola);
 
             return Json(postoji == null);
+        }
+
+        [Authorize]
+        public void UkloniUcenika(int id)
+        {
+            _razredRepository.RemoveStudent(id);
+        }
+
+        [Authorize]
+        public String DohvatiSlobodneUcenike()
+        {
+            return JsonConvert.SerializeObject(OsobaViewModel.toListUcenik(_ucenikRepository.GetAllStudentsWithoutClass()));
+        }
+
+        [Authorize]
+        [HttpPost]
+        public string NoviUcenik(int idOsoba, int idRazred)
+        {
+            _ucenikRepository.NewClass(idOsoba, idRazred);
+            return "DodajRazred";
         }
     }
 }

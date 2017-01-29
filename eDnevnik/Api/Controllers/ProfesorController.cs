@@ -15,19 +15,46 @@ namespace Api.Controllers
     [Authorize(Roles = "Profesor, Administrator")]
     public class ProfesorController : Controller
     {
-        private IProfesorRepository _profesorRepository = new ProfesorRepository();
-        private IBiljeskaRepository _biljeskaRepository = new BiljeskaRepository();
-        private IIzostanakRepository _izostanakRepository = new IzostanakRepository();
-        private IOcjenaRepository _ocjenaRepository = new OcjenaRepository();
-        private IPredmetRepository _predmetRepository = new PredmetRepository();
-        private IRazredRepository _razredRepository = new RazredRepository();
-        private IEvidencijaNastaveRepository _evidencijaNastaveRepository = new EvidencijaNastaveRepository();
+        public IProfesorRepository _profesorRepository { get; set; }
+        public IBiljeskaRepository _biljeskaRepository { get; set; }
+        public IIzostanakRepository _izostanakRepository { get; set; }
+        public IOcjenaRepository _ocjenaRepository { get; set; }
+        public IPredmetRepository _predmetRepository { get; set; }
+        public IRazredRepository _razredRepository { get; set; }
+        public IEvidencijaNastaveRepository _evidencijaNastaveRepository { get; set; }
+
+        private Func<int> _currentId;
+
+        public ProfesorController() : base()
+        {
+            _profesorRepository = new ProfesorRepository();
+            _biljeskaRepository = new BiljeskaRepository();
+            _izostanakRepository = new IzostanakRepository();
+            _ocjenaRepository = new OcjenaRepository();
+            _predmetRepository = new PredmetRepository();
+            _razredRepository = new RazredRepository();
+            _evidencijaNastaveRepository = new EvidencijaNastaveRepository();
+
+            _currentId = () => int.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value);
+        }
+
+        // Used for dependency injection in tests
+        public ProfesorController(Func<int> getId) : base()
+        {
+            _currentId = getId;
+        }
+
+        public int GetCurrentId()
+        {
+            return _currentId();
+        }
 
         // GET: Profesor
         [Authorize]
         public ActionResult Index()
         {
-            int id = int.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value);
+            //int id = int.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value);
+            int id = GetCurrentId();
             Profesor profesor = _profesorRepository.Find(id);
 
             if (profesor.razrednistvo == null)
@@ -35,7 +62,7 @@ namespace Api.Controllers
                 TempData["razrednistvo"] = 0;
             }
             else TempData["razrednistvo"] = 1;
-            profesor.evidencijaNastave = profesor.evidencijaNastave.OrderBy(o => o.razred.naziv).ToList();
+            profesor.evidencijaNastave = profesor.evidencijaNastave.OrderBy(o => o.razred.naziv).Distinct().ToList();
             ViewBag.profesor = profesor;
 
             return View();
@@ -45,47 +72,49 @@ namespace Api.Controllers
         [Authorize]
         public ActionResult Predmeti(int idRazred)
         {
-            int id = int.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value);
+            //int id = int.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value);
+            int id = GetCurrentId();
             ViewBag.evidencija = _evidencijaNastaveRepository.GetAllProfesorSubjects(id, idRazred);
             TempData["idRazred"] = idRazred;
             return View();
         }
 
         // GET: Profesor/Ucenici
+        [Authorize]
         public ActionResult Popis(int idPredmet, int idRazred)
         {
-            int id = int.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value);
+            int id = GetCurrentId();
             TempData["idPredmet"] = idPredmet;
             Predmet predmet = _predmetRepository.GetSubject(idPredmet);
             Razred razred = _razredRepository.GetClass(idRazred);
             List<RazredViewModel> rvm = RazredViewModel.toList(razred, predmet);
             return View(rvm);
         }
-
+        [Authorize]
         public ActionResult Profil()
         {
-            int id = int.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value);
+            int id = GetCurrentId();
             ViewBag.profesor = _profesorRepository.Find(id);
             return View();
         }
-
+        [Authorize]
         public ActionResult Izostanci()
         {
-            int id = int.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value);
+            int id = GetCurrentId();
             List<IzostanakViewModel> izostanci = IzostanakViewModel.toList(_profesorRepository.GetAllAbsencesOfClass(id));
             return View(izostanci);
         }
-
+        [Authorize]
         public ActionResult MojRazred()
         {
-            int id = Int32.Parse(((ClaimsPrincipal)Thread.CurrentPrincipal).Identities.ElementAt(0).Claims.ElementAt(0).Value);
+            int id = GetCurrentId();
             Profesor profesor = _profesorRepository.Find(id);
             Razred razred = _razredRepository.GetClass(profesor.razrednistvo.idRazred);
             IList<EvidencijaNastave> evidencija = _evidencijaNastaveRepository.GetAllClassSubjects(razred.idRazred);
             List<MojRazredViewModel> podaciRazreda = MojRazredViewModel.toList(razred, evidencija);
             return View(podaciRazreda);
         }
-
+        [Authorize]
         [HttpPost]
         public ActionResult SpremiIzostanke(List<IzostanakViewModel> izostanci)
         {
@@ -96,7 +125,7 @@ namespace Api.Controllers
             return RedirectToAction("Izostanci");
         }
 
-
+        [Authorize]
         [HttpPost]
         public ActionResult SpremiRazred(List<RazredViewModel> razred)
         {
@@ -128,7 +157,7 @@ namespace Api.Controllers
             }
             return RedirectToAction("Popis", new { idPredmet = TempData.Peek("idPredmet"), idRazred = TempData.Peek("idRazred") });
         }
-
+        [Authorize]
         public DateTime GenerirajDatum(int mjesec)
         {
             int godina = DateTime.Today.Year;

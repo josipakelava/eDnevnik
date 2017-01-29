@@ -10,35 +10,98 @@
 
 <div class="registerContainer">
 
-    <h2 class="loginSubtitle" style="color: orange">Dodaj novi Razred</h2>
+    <h2 class="loginSubtitle" style="color: orange">Dodaj novi razred ili uredi popis učenika za postojeći razred</h2>
 
     @using (Html.BeginForm("NoviRazred", "Administrator", FormMethod.Post, new { name = "formAnswerScheme", id = "form" }))
     {
-        @Html.DropDownListFor(m => m.idSkola, new SelectList(ViewBag.skola, "idSkola", "naziv"), "Skola", new { Class = "form-control", Name = "idSkola", Id="skola"})
+        @Html.DropDownListFor(m => m.idSkola, new SelectList(ViewBag.skola, "idSkola", "naziv"), "Skola", new { Class = "form-control", Name = "idSkola", Id = "skola" })
         @Html.ValidationMessageFor(m => m.idSkola, "", new { @class = "text-danger" })
 
-        <br/>
+        <br />
         <div style="display: none " id="unos">
             @Html.TextBoxFor(m => m.naziv, new { Class = "formInput", Name = "Naziv", Type = "text", Placeholder = "Naziv" })
-            @Html.ValidationSummary();
+            @Html.ValidationSummary()
 
 
-            @Html.DropDownListFor(m => m.idRazrednik, new SelectList(ViewBag.osoba, "idOsoba", "oibPrezimeIme"), "Razrednik", new { Class = "form-control", Name = "idRazrednik" })
+            @Html.DropDownListFor(m => m.idRazrednik, new SelectList(ViewBag.osoba, "idOsoba", "oibPrezimeIme"), "Razrednik", new { Class = "form-control addMarginBottom", Name = "idRazrednik" })
             @Html.ValidationMessageFor(m => m.idRazrednik, "", new { @class = "text-danger" })
         </div>
 
         <input class="formButton" type="submit" value="Dodaj" />
     }
 
+    <div id="accordion" class="positionAccordion addMarginTop" role="tablist" aria-multiselectable="true" >
+        @for (int i = 0; i < ViewBag.skole.Count; i++)
+        {
+            <div class="card" style="width: 100%">
+                <a class="collapsed subjectRow" data-toggle="collapse" data-parent="#accordion" href=@string.Format("#{0}", @i) aria-expanded="false" aria-controls="collapseTwo">
+                    <div class="card-header card-headerOutside" role="tab" id="headingTwo">
+                        <h5 class="mb-0">@ViewBag.skole[i].naziv&nbsp;&nbsp;</h5>
 
+                    </div>
+                </a>
+                <div id=@i class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div id="accordion" class="positionAccordion" role="tablist" aria-multiselectable="true">
+                        @for (int j = 0; j < ViewBag.skole[i].razredi.Count; j++)
+                        {
+                            <div class="card" style="width: 100%">
+                                <div class="card-header">
+                                    <a class="collapsed subjectRow col-lg-11" data-toggle="collapse" data-parent="#accordion" href=@string.Format("#{0}{1}", @ViewBag.skole[i].idSkola, @ViewBag.skole[i].razredi[j].idRazred) aria-expanded="false" aria-controls="collapseTwo">
+                                        <div  role="tab" id="headingTwo" class="firstPartInline">
+                                            <h5 class="mb-0 firstPartInline">@ViewBag.skole[i].razredi[j].naziv&nbsp;&nbsp;(prof. @ViewBag.skole[i].razredi[j].razrednik.prezime)</h5>
+                                        </div>
+                                    </a>
+                                    <input type="submit" value="+" class="btn btn-success dodajUcenika secondPartInline" id=@ViewBag.skole[i].razredi[j].idRazred />
+                                </div>
+                                <div id=@string.Format("{0}{1}", @ViewBag.skole[i].idSkola, @ViewBag.skole[i].razredi[j].idRazred) class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                    <div id="accordion" class="positionAccordion" role="tablist" aria-multiselectable="true">
+                                        @for (int k = 0; k < ViewBag.skole[i].razredi[j].ucenici.Count; k++)
+                                        {
+                                            <div id=@string.Format("div_{0}",@ViewBag.skole[i].razredi[j].ucenici[k].idOsoba) class="firstPartInline">
+                                                <p class="secondPartInline" style="margin-right: 30px">@ViewBag.skole[i].razredi[j].ucenici[k].idOsoba, @ViewBag.skole[i].razredi[j].ucenici[k].prezime @ViewBag.skole[i].razredi[j].ucenici[k].ime</p>
+                                                <input style="margin-top: 5px; margin-bottom: 5px;" type="submit" value="X" class="btn btn-danger ukloniUcenika" id=@ViewBag.skole[i].razredi[j].ucenici[k].idOsoba />
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title" id="myModalLabel" style="color: orange">Odabir učenika</h3>
+            </div>
+            <div class="modal-body">
+                <h4>Molimo odaberite željenog učenika:</h4><br />
+                <select id="dropdown" class="form-control"></select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary spremiNovogUcenika" data-dismiss="modal">Spremite promjene</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts
 {
     <script type="text/javascript">
-     $(function() {
+        $(function() {
+            var razred = 0;
+            var idUcenik = 0;
          $("#skola").change(function () {
-                var selectedItem = $(this).val();
+             var selectedItem = $(this).val();
+             var filter = "#unos";
+             var element = document.querySelectorAll(filter)[0];
+             element.style.display = "none";
                 $.ajax({
                     cache: false,
                     type: "GET",
@@ -57,6 +120,28 @@
                             e = new Option(data[i].oibPrezimeIme, data[i].idOsoba);
                             $('#idRazrednik').append(e);
                         }
+                        var filter = "#unos";
+                        var element = document.querySelectorAll(filter)[0];
+                        element.style.display = null;
+
+                    },
+                    error:function (xhr, ajaxOptions, thrownError){
+                        alert('Odaberite skolu!');
+
+                    }
+                });
+               
+            });
+
+            $(".ukloniUcenika").click(function () {
+                var idOsoba = this.id;
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: "@(Url.Action("UkloniUcenika", "Administrator"))",
+                    data: { "id": idOsoba},
+                    success: function (data) {
+                        $("#div_" + idOsoba).remove();
 
                     },
                     error:function (xhr, ajaxOptions, thrownError){
@@ -64,11 +149,57 @@
 
                     }
                 });
-                var filter = "#unos";
-                var element = document.querySelectorAll(filter)[0];
-                element.style.display = null;
             });
 
+            $(".dodajUcenika").click(function () {
+                razred = this.id;
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: "@(Url.Action("DohvatiSlobodneUcenike", "Administrator"))",
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        $("#dropdown").html("");
+                        var optionhtml1 = '<option value="' +0 + '">' + "" + '</option>';
+                        $("#dropdown").append(optionhtml1);
+
+                        $.each(data, function (i) {
+
+                            var optionhtml = '<option value="' +
+                        data[i].idOsoba + '">' + data[i].oibPrezimeIme + '</option>';
+                            $("#dropdown").append(optionhtml);
+
+                            $('#myModal').modal('show');
+
+                        });
+                    },
+                    error:function (xhr, ajaxOptions, thrownError){
+                        alert('Failed to retrieve states.');
+
+                    }
+            });
+            });
+
+            $("#dropdown").change(function () {
+                idUcenik = $(this).val();
+            });
+
+            $(".spremiNovogUcenika").click(function () {
+                if (idUcenik == 0) return;
+                $.ajax({
+                    cache: false,
+                    type: "POST",
+                    url: "@(Url.Action("NoviUcenik", "Administrator"))",
+                    data: { "idOsoba": idUcenik, "idRazred":razred},
+                success: function (data) {
+                    window.location = data;
+                },
+                error:function (xhr, ajaxOptions, thrownError){
+                    alert('Failed to retrieve states.');
+
+                }
+                });
+            });
         });
     </script>
 }

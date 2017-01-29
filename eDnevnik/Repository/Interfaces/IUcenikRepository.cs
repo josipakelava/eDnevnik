@@ -16,5 +16,7 @@ namespace Repository
          IList<Biljeska> GetAllNotes(int id);
          IList<Ocjena> GetAllGradesForSubject(int idOsoba, int idPredmet);
          IList<Biljeska> GetAllNotesForSubject(int idOsoba, int idPredmet);
+         IList<Ucenik> GetAllStudentsWithoutClass();
+         void NewClass(int idOsoba, int idRazred);
     }
 }

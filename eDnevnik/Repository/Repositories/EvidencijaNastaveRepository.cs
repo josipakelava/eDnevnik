@@ -26,12 +26,14 @@ namespace Repository
             using (var transaction = _session.BeginTransaction())
             {
                 EvidencijaNastave evidencija = new EvidencijaNastave();
-                
-                evidencija.predmet = _session.Load<Predmet>(idPredmet);
-                evidencija.profesor = _session.Load<Profesor>(idProfesor);
-                evidencija.razred = _session.Load<Razred>(idRazred); ;
 
-                _session.Save(evidencija);
+                //evidencija.predmet = _session.Load<Predmet>(idPredmet);
+                //evidencija.profesor = _session.Load<Profesor>(idProfesor);
+                //evidencija.razred = _session.Load<Razred>(idRazred); 
+
+               var query =  _session.CreateSQLQuery(@"insert into EvidencijaNastave (idProfesor, idRazred,  idPredmet) values (" + idProfesor + "," + idRazred + "," + idPredmet + ")");
+                query.ExecuteUpdate();
+                //_session.Save(evidencija);
 
                 transaction.Commit();
             }

@@ -7,7 +7,7 @@ namespace Mapiranje
     {
         public RazredMap()
         {
-            Id(x => x.idRazred).GeneratedBy.Assigned();
+            Id(x => x.idRazred).GeneratedBy.Increment();
             Map(x => x.naziv).Not.Nullable();
             References(x => x.razrednik).Column("idRazrednik").Not.Nullable();
             References(x => x.skola).Column("idSkola").Not.Nullable();

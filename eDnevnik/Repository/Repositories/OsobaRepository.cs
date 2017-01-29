@@ -66,5 +66,25 @@ namespace Repository
         {
             return _session.QueryOver<Osoba>().TransformUsing(Transformers.DistinctRootEntity).List();
         }
+
+        public void Update(int idOsoba, string ime, string prezime, DateTime? datumRodjenja, string adresa, string oib, string email, string password, int idMjesto)
+        {
+            using (var transaction = _session.BeginTransaction())
+            {
+                Osoba osoba = _session.QueryOver<Osoba>().Where(u => u.idOsoba == idOsoba).List()[0];
+                osoba.ime = ime;
+                osoba.prezime = prezime;
+                osoba.datumRodjenja = (DateTime)datumRodjenja;
+                osoba.adresa = adresa;
+                osoba.OIB = oib;
+                osoba.email = email;
+                osoba.password = password;
+                osoba.mjesto = _session.Load<Mjesto>(idMjesto);
+
+                _session.Update(osoba);
+                transaction.Commit();
+            }
+
+        }
     }
 }
