@@ -5,7 +5,7 @@
 
 <div class="classContainer">
 
-    @if (ViewBag.profesor.evidencijaNastave.Count == 0)
+    @if (ViewBag.razredi.Count == 0)
     {
         <h1> Nažalost nemate ni jedan razred. Obratite se administrator! </h1>
         <a href="/Autorizacija/Logout">
@@ -13,12 +13,12 @@
         </a>
     }
 
-    @for (int i = 0; i < ViewBag.profesor.evidencijaNastave.Count; i++)
+    @for (int i = 0; i < ViewBag.razredi.Count; i++)
             {
 
 
-        <a href="@Url.Action("Predmeti", "Profesor", new { idRazred = @ViewBag.profesor.evidencijaNastave[i].razred.idRazred })">
-            <div class="classItem">@ViewBag.profesor.evidencijaNastave[i].razred.naziv</div>
+        <a href="@Url.Action("Predmeti", "Profesor", new { idRazred = @ViewBag.razredi[i].idRazred })">
+            <div class="classItem">@ViewBag.razredi[i].naziv</div>
         </a>
 
     }

@@ -62,7 +62,11 @@ namespace Api.Controllers
             }
             else TempData["razrednistvo"] = 1;
             profesor.evidencijaNastave = profesor.evidencijaNastave.OrderBy(o => o.razred.naziv).Distinct().ToList();
-            ViewBag.profesor = profesor;
+            var razredi = new HashSet<Razred>();
+            foreach(var i in profesor.evidencijaNastave) {
+                razredi.Add(i.razred);
+            }
+            ViewBag.razredi = razredi.ToList();
 
             return View();
         }
