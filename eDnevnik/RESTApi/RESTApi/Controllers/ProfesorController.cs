@@ -20,6 +20,7 @@ namespace RESTApi.Controllers
         private IRazredRepository _razredRepository = new RazredRepository();
         private IBiljeskaRepository _biljeskaRepository = new BiljeskaRepository();
         private IIzostanakRepository _izostanakRepository = new IzostanakRepository();
+        private IOcjenaRepository _ocjenaRepository = new OcjenaRepository();
 
         [Autorizacija]
         [HttpGet]
@@ -122,6 +123,38 @@ namespace RESTApi.Controllers
         {
             _izostanakRepository.InsertAbsence(Int32.Parse(SubjectId), Int32.Parse(Studentid), Reason, Convert.ToDateTime(Date));
             return true;
+        }
+
+        [Autorizacija]
+        [HttpPost]
+        public bool AddMark(String Studentid, String SubjectId, String CategoryId, String Mark, String Month)
+        {
+            _ocjenaRepository.InsertGrade(Int32.Parse(Mark), Int32.Parse(Studentid), Int32.Parse(SubjectId), Int32.Parse(CategoryId), GenerirajDatum(Int32.Parse(Month)));
+            return true;
+        }
+
+        public DateTime GenerirajDatum(int mjesec)
+        {
+            int godina = DateTime.Today.Year;
+            if (mjesec >= 9 && DateTime.Today.Month >= 1)
+            {
+                godina = DateTime.Today.Year - 1;
+            }
+            else if (mjesec >= 9 && DateTime.Today.Month >= 9)
+            {
+                godina = DateTime.Today.Year;
+            }
+            else if (mjesec <= 6 && DateTime.Today.Month >= 9)
+            {
+                godina = DateTime.Today.Year - 1;
+            }
+            else if (mjesec <= 6 && DateTime.Today.Month >= 1)
+            {
+                godina = DateTime.Today.Year;
+            }
+
+            DateTime datum = new DateTime(godina, mjesec, 15);
+            return datum;
         }
     }
 }
