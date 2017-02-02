@@ -1,6 +1,5 @@
 package hr.fer.oo.ednevnik;
 
-import java.util.Date;
 import java.util.List;
 
 import hr.fer.oo.ednevnik.model.Absence;
@@ -36,11 +35,11 @@ public interface RestApi {
 
     @FormUrlEncoded
     @POST("api/Profesor/AddNote")
-    Call<Boolean> addNote(@Field("StudentId") String studentId, @Field("SubjectId") String subjectId, @Field("Date") Date date, @Field("Note") String note);
+    Call<Boolean> addNote(@Field("StudentId") String studentId, @Field("SubjectId") String subjectId, @Field("Date") String date, @Field("Note") String note);
 
     @FormUrlEncoded
     @POST("api/Profesor/AddAbsence")
-    Call<Boolean> addAbsence(@Field("Studentid")String studentid, @Field("SubjectId")String subjectId, @Field("Date")Date date, @Field("Reason")String reason);
+    Call<Boolean> addAbsence(@Field("Studentid")String studentid, @Field("SubjectId")String subjectId, @Field("Date")String date, @Field("Reason")String reason);
 
     @GET("api/Ucenik/Profil")
     Call<User> getProfile(@Header("Authorization") String token);

@@ -144,8 +144,11 @@ public class MarksProfActivity extends AppCompatActivity {
                                 progressDialog.show();
 
                                 Date date = new Date();
+                                SimpleDateFormat postFormater = new SimpleDateFormat("dd.MM.yyyy");
+                                String dateStr = postFormater.format(date);
+
                                 String reason = "";
-                                Call<Boolean> call = Utils.getRestApi().addAbsence(studentid, subjectId, date, reason);
+                                Call<Boolean> call = Utils.getRestApi().addAbsence(studentid, subjectId, dateStr, reason);
                                 call.enqueue(new Callback<Boolean>() {
                                     @Override
                                     public void onResponse(Call<Boolean> call, Response<Boolean> response) {

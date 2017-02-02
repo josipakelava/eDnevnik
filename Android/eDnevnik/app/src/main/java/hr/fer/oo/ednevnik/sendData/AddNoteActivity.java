@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import butterknife.BindView;
@@ -57,7 +58,10 @@ public class AddNoteActivity extends AppCompatActivity {
                 String note = noteET.getText().toString();
                 Date date = new Date();
 
-                Call<Boolean> call = Utils.getRestApi().addNote(studentid, subjectId, date, note);
+                SimpleDateFormat postFormater = new SimpleDateFormat("dd.MM.yyyy");
+                String dateStr = postFormater.format(date);
+
+                Call<Boolean> call = Utils.getRestApi().addNote(studentid, subjectId, dateStr, note);
                 call.enqueue(new Callback<Boolean>() {
                     @Override
                     public void onResponse(Call<Boolean> call, Response<Boolean> response) {
